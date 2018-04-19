@@ -17,7 +17,6 @@ public class Game {
 
         for (int x = 0; x < max; x++) {
             for (int y = 0; y < max; y++) {
-                
                 SpriteVisual test2 = new SpriteVisual(Math.random()<0.5f?"assets\\img\\map\\edge.png":"assets\\img\\map\\side.png");
                 test2.setZIndex(x*y);
                 test2.setScale(scale);
@@ -31,7 +30,6 @@ public class Game {
         System.out.println(1/delta);
         
         float speed = 3;
-        
         if(Gdx.input.isKeyPressed(Keys.W))
             GAMESCREEN_SINGLETON.camera.position.add(0, speed, 0);
         if(Gdx.input.isKeyPressed(Keys.A))
