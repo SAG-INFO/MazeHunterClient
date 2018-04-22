@@ -1,3 +1,3 @@
 # MazeHunterClient
 
-less cool version, but at least it works
+Gradle-less version, runs everywhere even on our school net. Using most up to date version of libgdx, but asset directory is a little messed up...
