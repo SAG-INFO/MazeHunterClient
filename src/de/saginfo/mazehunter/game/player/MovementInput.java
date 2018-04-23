@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game;
+package de.saginfo.mazehunter.game.player;
 
 import com.badlogic.gdx.InputAdapter;
+import de.saginfo.mazehunter.game.GameScreen;
 
 /**
  *

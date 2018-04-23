@@ -17,9 +17,7 @@ public class World {
        
    }
    
-   public int getPosition(Block) {
-       
-   }
-    
-    
+//   public int getPosition(Block) {
+//       
+//   }
 }
