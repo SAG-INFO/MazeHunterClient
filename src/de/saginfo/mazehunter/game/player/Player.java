@@ -10,5 +10,4 @@ package de.saginfo.mazehunter.game.player;
  * @author s.reiser
  */
 public class Player {
-    
 }
