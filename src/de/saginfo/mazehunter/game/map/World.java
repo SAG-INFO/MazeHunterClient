@@ -11,7 +11,15 @@ package de.saginfo.mazehunter.game.map;
  */
 public class World {
     
-    Block[][] blocklist;
+   private Block[][] blocklist;
+   
+   public World() {
+       
+   }
+   
+   public int getPosition(Block) {
+       
+   }
     
     
 }

@@ -14,4 +14,8 @@ public class Tile {
     
     boolean open;
     //Graphic image;
+    
+    public Tile() {
+        
+    }
 }
