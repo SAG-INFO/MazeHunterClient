@@ -7,14 +7,8 @@ package de.saginfo.mazehunter.game.map;
 
 /**
  *
- * @author julian.mittermeier
+ * @author paul.kuschfeldt
  */
+public class Path extends Tile{
 
-public class Tile {
-    
-    boolean open;
-    private int width;
-    private int length;
-    
-    //Graphic image;
 }
