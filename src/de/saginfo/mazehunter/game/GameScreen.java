@@ -1,11 +1,13 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import de.saginfo.mazehunter.grafik.RenderSystem;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import de.saginfo.mazehunter.client.GameClient;
 
 /**
  * Manages the main game (calles update, close, etc, ...)
@@ -20,9 +22,17 @@ public class GameScreen extends ScreenAdapter {
     
     public OrthographicCamera camera;
     public Viewport viewport;
+    
+    public GameClient client;
+    
+    public InputMultiplexer inputMultiplexer;
 
     /**kann verwendet werden um von beliebiger Stelle auf z.B. das RenderSystem zuzugreifen*/
     public static GameScreen GAMESCREEN_SINGLETON;
+
+    public GameScreen(GameClient client) {
+        this.client = client;
+    }
 
     @Override
     public void show() {
@@ -34,6 +44,9 @@ public class GameScreen extends ScreenAdapter {
 
         viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         viewport.apply();
+        
+        inputMultiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(inputMultiplexer);
         
         game = new Game();
     }

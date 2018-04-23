@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.LabyRindMain;
+import de.saginfo.mazehunter.client.GameClient;
 import de.saginfo.mazehunter.client.networkData.ConnectResponse;
 import de.saginfo.mazehunter.game.GameScreen;
 
@@ -13,7 +14,10 @@ import de.saginfo.mazehunter.game.GameScreen;
  */
 public class ConnectSystem extends Listener {
 
-    public ConnectSystem() {
+    private GameClient client;
+    
+    public ConnectSystem(GameClient client) {
+        this.client = client;
     }
     
     @Override
@@ -21,7 +25,7 @@ public class ConnectSystem extends Listener {
         if (object instanceof ConnectResponse) {
             Gdx.app.postRunnable(new Runnable() {
                 public void run() {
-                    LabyRindMain.GAME_SINGLETON.setScreen(new GameScreen());
+                    LabyRindMain.GAME_SINGLETON.setScreen(new GameScreen(client));
                 }
             });
         }

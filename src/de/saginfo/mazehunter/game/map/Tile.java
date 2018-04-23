@@ -17,4 +17,8 @@ public class Tile {
     private int length;
     
     //Graphic image;
+    
+    public Tile() {
+        
+    }
 }
