@@ -1,4 +1,4 @@
-package de.saginfo.mazehunter.desktop;
+package de.saginfo.mazehunter;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
