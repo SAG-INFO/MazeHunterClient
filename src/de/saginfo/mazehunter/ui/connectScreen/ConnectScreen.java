@@ -43,7 +43,7 @@ public class ConnectScreen extends ScreenAdapter {
         this.createUI();
 
         this.client = new GameClient();
-        this.client.addListener(new ConnectSystem());
+        this.client.addListener(new ConnectSystem(client));
 
         connect();
     }
