@@ -9,6 +9,10 @@ package de.saginfo.mazehunter.game.map;
  *
  * @author paul.kuschfeldt
  */
-public class Centre extends Tile{
-
+public class PathSide extends Tile{
+    
+    public PathSide () {
+        width = 3;
+        length = 2;
+    }    
 }
