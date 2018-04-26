@@ -7,18 +7,8 @@ package de.saginfo.mazehunter.game.map;
 
 /**
  *
- * @author julian.mittermeier
+ * @author paul.kuschfeldt
  */
-
-public class Tile {
+public class Corner extends Tile{
     
-    boolean open;
-    private int width;
-    private int length;
-    
-    //Graphic image;
-    
-    public Tile() {
-        
-    }
 }
