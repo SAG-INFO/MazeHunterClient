@@ -9,11 +9,10 @@ package de.saginfo.mazehunter.game.map;
  *
  * @author paul.kuschfeldt
  */
-public class Corner extends Tile{
- 
-    public Corner () {
-        width = 2;
+public class PathUp extends Tile{
+
+    public PathUp () {
+        width = 3;
         length = 2;
-        open = false;
     }    
 }

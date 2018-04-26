@@ -12,8 +12,17 @@ package de.saginfo.mazehunter.game.map;
 public class World {
     
    private Block[][] blocklist;
+   private int breite;
    
-   public World() {
+   public World(int größe) {
+       breite = größe;
+       blocklist = new Block[breite][breite];
+       for (int i = 0; i < breite - 1; i++) {
+           for (int j = 0; j < breite - 1; j++) {
+                blocklist[i][j] = new Block(true, true, true, true);
+           }
+
+       }
        
    }
    
