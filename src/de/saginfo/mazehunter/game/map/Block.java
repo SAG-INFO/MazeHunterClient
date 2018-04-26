@@ -24,32 +24,14 @@ public class Block {
         left = l;
         tilelist = new Tile[3][3];
         tilelist[0][0] = new Corner();
-        tilelist[1][0] = new PathUp();
+        tilelist[1][0] = new PathUp(d);
         tilelist[2][0] = new Corner();
-        tilelist[0][1] = new PathSide();
+        tilelist[0][1] = new PathSide(l);
         tilelist[1][1] = new Center();
-        tilelist[2][1] = new PathSide();
+        tilelist[2][1] = new PathSide(r);
         tilelist[0][2] = new Corner();
-        tilelist[1][2] = new PathUp();
+        tilelist[1][2] = new PathUp(u);
         tilelist[2][2] = new Corner();
-        
-        if (up) {
-            tilelist[2][1].setOpen();
-        } else {
-            tilelist[2][1].setClose();
-        } if (right) {
-            tilelist[1][2].setOpen();
-        } else {
-            tilelist[1][2].setClose();
-        } if (down){
-            tilelist[1][0].setOpen();
-        } else {
-            tilelist[1][0].setClose();
-        } if (left) {
-            tilelist[0][1].setOpen();
-        } else {
-            tilelist[0][1].setClose();
-        }
         
     }
     

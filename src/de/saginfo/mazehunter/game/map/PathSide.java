@@ -11,8 +11,9 @@ package de.saginfo.mazehunter.game.map;
  */
 public class PathSide extends Tile{
     
-    public PathSide () {
+    public PathSide (boolean b) {
         width = 3;
         length = 2;
+        open = b;
     }    
 }
