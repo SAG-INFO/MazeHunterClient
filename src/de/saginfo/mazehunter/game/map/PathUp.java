@@ -11,8 +11,9 @@ package de.saginfo.mazehunter.game.map;
  */
 public class PathUp extends Tile{
 
-    public PathUp () {
+    public PathUp (boolean b) {
         width = 3;
         length = 2;
+        open = b;
     }    
 }
