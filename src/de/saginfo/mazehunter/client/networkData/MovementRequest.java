@@ -10,6 +10,6 @@ package de.saginfo.mazehunter.client.networkData;
  * @author karl.huber
  */
 public class MovementRequest {
-    float angle;
+    int angle;
     boolean movement;
 }
