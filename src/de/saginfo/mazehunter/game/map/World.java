@@ -18,6 +18,7 @@ public class World {
        
    }
    
+
    //position -1 means not found
    public int getPositionX(Block block) {
        for (int i = 0; i < breite; i++) {
@@ -45,5 +46,6 @@ public class World {
        }
        return -1;
    }
+
 
 }

@@ -13,9 +13,9 @@ public class Block {
     
     private Tile [][] tilelist;
     boolean up;
+    boolean right;
     boolean down;
     boolean left;
-    boolean right;
     
     public Block() {
         
