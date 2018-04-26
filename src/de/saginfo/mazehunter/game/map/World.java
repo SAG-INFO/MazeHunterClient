@@ -26,7 +26,34 @@ public class World {
        
    }
    
-//   public int getPosition(Block) {
-//       
-//   }
+
+   //position -1 means not found
+   public int getPositionX(Block block) {
+       for (int i = 0; i < breite; i++) {
+           for (int j = 0; j < breite; j++) {
+               if (blocklist[j][i] == block) {
+               return j;
+               }
+               
+               
+           }
+       }
+       return -1;
+   }
+    
+    //position -1 means not found
+   public int getPositionY(Block block) {
+       for (int j = 0; j < breite; j++) {
+           for (int i = 0; i < breite; i++) {
+               if (blocklist[j][i] == block) {
+               return i;
+               }
+               
+               
+           }
+       }
+       return -1;
+   }
+
+
 }

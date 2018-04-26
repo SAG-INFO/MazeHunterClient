@@ -8,7 +8,6 @@ package de.saginfo.mazehunter.client;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import de.saginfo.mazehunter.client.networkData.ConnectResponse;
-import de.saginfo.mazehunter.client.networkData.MovementInfo;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,6 +34,5 @@ public class GameClient extends Client {
         getKryo().register(Vector2.class);
         getKryo().register(ArrayList.class);
         getKryo().register(ConnectResponse.class);
-        getKryo().register(MovementInfo.class);
     }
 }

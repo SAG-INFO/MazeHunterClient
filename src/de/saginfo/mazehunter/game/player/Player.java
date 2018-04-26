@@ -5,9 +5,18 @@
  */
 package de.saginfo.mazehunter.game.player;
 
-/**
- *
- * @author s.reiser
- */
+import com.badlogic.gdx.math.Vector2;
 public class Player {
+
+        
+    public PlayerVisual visual;
+    
+    public Vector2 position;
+    public Vector2 velocity;
+
+    public Player(Vector2 position) {
+        this.position = position;
+        velocity = new Vector2();
+        visual = new PlayerVisual();
+    }
 }
