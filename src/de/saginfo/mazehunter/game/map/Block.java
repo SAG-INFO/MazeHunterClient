@@ -23,6 +23,15 @@ public class Block {
         down = d;
         left = l;
         tilelist = new Tile[3][3];
+        tilelist[0][0] = new Corner();
+        tilelist[1][0] = new PathUp();
+        tilelist[2][0] = new Corner();
+        tilelist[0][1] = new PathSide();
+        tilelist[1][1] = new Center();
+        tilelist[2][1] = new PathSide();
+        tilelist[0][2] = new Corner();
+        tilelist[1][2] = new PathUp();
+        tilelist[2][2] = new Corner();
         
         if (up) {
             tilelist[2][1].setOpen();
@@ -43,4 +52,32 @@ public class Block {
         }
         
     }
+    
+    //position -1 means not found
+   public int getPositionX(Tile tile) {
+       for (int i = 0; i < 3; i++) {
+           for (int j = 0; j < 3; j++) {
+               if (tilelist[j][i] == tile) {
+               return j;
+               }
+               
+               
+           }
+       }
+       return -1;
+   }
+   
+   //position -1 means not found
+   public int getPositionY(Tile tile) {
+       for (int j = 0; j < 3; j++) {
+           for (int i = 0; i < 3; i++) {
+               if (tilelist[j][i] == tile) {
+               return i;
+               }
+               
+               
+           }
+       }
+       return -1;
+   }
 }
