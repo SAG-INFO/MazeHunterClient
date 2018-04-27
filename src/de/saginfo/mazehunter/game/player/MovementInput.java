@@ -50,13 +50,13 @@ public class MovementInput extends InputAdapter {
             }
         }
         if (!Gdx.input.isKeyPressed(Keys.D)) {
-            if (requestVector.y != 1) {
+            if (requestVector.y == 1) {
                 requestVector.y = 0;
                 sendMovementRequest(requestVector, true);
             }
         }
         if (!Gdx.input.isKeyPressed(Keys.A)) {
-            if (requestVector.y != -1) {
+            if (requestVector.y == -1) {
                 requestVector.y = 0;
                 sendMovementRequest(requestVector, true);
             }
