@@ -14,13 +14,13 @@ import de.saginfo.mazehunter.game.GameScreen;
 
 /**
  *
- * @author karl.huber
+ * @author Karl Huber
  */
 public class MovementInput extends InputAdapter {
 
     private Vector2 requestVector = new Vector2(0, 0);
 
-    public void update(float delta) {
+    public void update() {
         if (Gdx.input.isKeyJustPressed(Keys.W)) {
             requestVector.y = 1;
             sendMovementRequest(requestVector, true);
