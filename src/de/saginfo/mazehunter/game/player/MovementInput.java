@@ -37,41 +37,33 @@ public class MovementInput extends InputAdapter {
             requestVector.x = -1;
             sendMovementRequest(requestVector, true);
         }
-        if (!Gdx.input.isKeyPressed(Keys.W)) {
-            if (requestVector.y == 1) {
+        if (!Gdx.input.isKeyPressed(Keys.W) && requestVector.y == 1) {
                 requestVector.y = 0;
                 sendMovementRequest(requestVector, true);
-            }
         }
-        if (!Gdx.input.isKeyPressed(Keys.S)) {
-            if (requestVector.y == -1) {
+        if (!Gdx.input.isKeyPressed(Keys.S) && requestVector.y == -1) {
                 requestVector.y = 0;
                 sendMovementRequest(requestVector, true);
-            }
         }
-        if (!Gdx.input.isKeyPressed(Keys.D)) {
-            if (requestVector.y == 1) {
-                requestVector.y = 0;
+        if (!Gdx.input.isKeyPressed(Keys.D) && requestVector.x == 1) {
+                requestVector.x = 0;
                 sendMovementRequest(requestVector, true);
-            }
         }
-        if (!Gdx.input.isKeyPressed(Keys.A)) {
-            if (requestVector.y == -1) {
-                requestVector.y = 0;
+        if (!Gdx.input.isKeyPressed(Keys.A) && requestVector.x == -1) {
+                requestVector.x = 0;
                 sendMovementRequest(requestVector, true);
-            }
         }
         if (requestVector.isZero()) {
-            sendMovementRequest(null, false);
+            sendMovementRequest(requestVector, false);
         }
     }
     
     public void sendMovementRequest(Vector2 requestedVector, boolean movement) {
         MovementRequest movementRequest = new MovementRequest((int)requestedVector.angle(), movement);
+        //TODO senden
     }
-    //TODO send
+    
     public MovementInput() {
         GameScreen.GAMESCREEN_SINGLETON.inputMultiplexer.addProcessor(this);
     }
 }
-
