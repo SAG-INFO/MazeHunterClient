@@ -12,4 +12,10 @@ package de.saginfo.mazehunter.client.networkData;
 public class MovementRequest {
     int angle;
     boolean movement;
+
+    public MovementRequest(int angle, boolean movement) {
+        this.angle = angle;
+        this.movement = movement;
+    }
+    
 }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
+import de.saginfo.mazehunter.client.networkData.MovementRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 
 /**
@@ -25,7 +26,7 @@ public class MovementInput extends InputAdapter {
             sendMovementRequest(requestVector, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.S)) {
-            requestVector.y = 1;
+            requestVector.y = -1;
             sendMovementRequest(requestVector, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)) {
@@ -33,7 +34,7 @@ public class MovementInput extends InputAdapter {
             sendMovementRequest(requestVector, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)) {
-            requestVector.x = 1;
+            requestVector.x = -1;
             sendMovementRequest(requestVector, true);
         }
         if (!Gdx.input.isKeyPressed(Keys.W)) {
@@ -66,10 +67,11 @@ public class MovementInput extends InputAdapter {
     }
     
     public void sendMovementRequest(Vector2 requestedVector, boolean movement) {
-        
+        MovementRequest movementRequest = new MovementRequest((int)requestedVector.angle(), movement);
     }
     //TODO send
     public MovementInput() {
         GameScreen.GAMESCREEN_SINGLETON.inputMultiplexer.addProcessor(this);
     }
 }
+
