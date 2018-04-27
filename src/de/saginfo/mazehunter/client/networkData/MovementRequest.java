@@ -17,5 +17,4 @@ public class MovementRequest {
         this.angle = angle;
         this.movement = movement;
     }
-    
 }

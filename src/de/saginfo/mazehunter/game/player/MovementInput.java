@@ -18,43 +18,43 @@ import de.saginfo.mazehunter.game.GameScreen;
  */
 public class MovementInput extends InputAdapter {
 
-    private Vector2 requestVector = new Vector2(0, 0);
+    private Vector2 direction = new Vector2(0, 0);
 
     public void update() {
         if (Gdx.input.isKeyJustPressed(Keys.W)) {
-            requestVector.y = 1;
-            sendMovementRequest(requestVector, true);
+            direction.y = 1;
+            sendMovementRequest(direction, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.S)) {
-            requestVector.y = -1;
-            sendMovementRequest(requestVector, true);
+            direction.y = -1;
+            sendMovementRequest(direction, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)) {
-            requestVector.x = 1;
-            sendMovementRequest(requestVector, true);
+            direction.x = 1;
+            sendMovementRequest(direction, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)) {
-            requestVector.x = -1;
-            sendMovementRequest(requestVector, true);
+            direction.x = -1;
+            sendMovementRequest(direction, true);
         }
-        if (!Gdx.input.isKeyPressed(Keys.W) && requestVector.y == 1) {
-                requestVector.y = 0;
-                sendMovementRequest(requestVector, true);
+        if (!Gdx.input.isKeyPressed(Keys.W) && direction.y == 1) {
+                direction.y = 0;
+                sendMovementRequest(direction, true);
         }
-        if (!Gdx.input.isKeyPressed(Keys.S) && requestVector.y == -1) {
-                requestVector.y = 0;
-                sendMovementRequest(requestVector, true);
+        if (!Gdx.input.isKeyPressed(Keys.S) && direction.y == -1) {
+                direction.y = 0;
+                sendMovementRequest(direction, true);
         }
-        if (!Gdx.input.isKeyPressed(Keys.D) && requestVector.x == 1) {
-                requestVector.x = 0;
-                sendMovementRequest(requestVector, true);
+        if (!Gdx.input.isKeyPressed(Keys.D) && direction.x == 1) {
+                direction.x = 0;
+                sendMovementRequest(direction, true);
         }
-        if (!Gdx.input.isKeyPressed(Keys.A) && requestVector.x == -1) {
-                requestVector.x = 0;
-                sendMovementRequest(requestVector, true);
+        if (!Gdx.input.isKeyPressed(Keys.A) && direction.x == -1) {
+                direction.x = 0;
+                sendMovementRequest(direction, true);
         }
-        if (requestVector.isZero()) {
-            sendMovementRequest(requestVector, false);
+        if (direction.isZero()) {
+            sendMovementRequest(direction, false);
         }
     }
     
