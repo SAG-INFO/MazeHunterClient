@@ -17,62 +17,57 @@ import de.saginfo.mazehunter.game.GameScreen;
  */
 public class MovementInput extends InputAdapter {
 
-    private Vector2 requestedVector = new Vector2(0, 0);
+    private Vector2 requestVector = new Vector2(0, 0);
 
     public void update(float delta) {
-        boolean changesWereMade = false;
         if (Gdx.input.isKeyJustPressed(Keys.W)) {
-            requestedVector.y += 1;
-            changesWereMade = true;
+            requestVector.y = 1;
+            sendMovementRequest(requestVector, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.S)) {
-            requestedVector.y -= 1;
-            changesWereMade = true;
+            requestVector.y = 1;
+            sendMovementRequest(requestVector, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.D)) {
-            requestedVector.x += 1;
-            changesWereMade = true;
+            requestVector.x = 1;
+            sendMovementRequest(requestVector, true);
         }
         if (Gdx.input.isKeyJustPressed(Keys.A)) {
-            requestedVector.x -= 1;
-            changesWereMade = true;
+            requestVector.x = 1;
+            sendMovementRequest(requestVector, true);
         }
         if (!Gdx.input.isKeyPressed(Keys.W)) {
-            requestedVector.y = 0;
+            if (requestVector.y == 1) {
+                requestVector.y = 0;
+                sendMovementRequest(requestVector, true);
+            }
         }
         if (!Gdx.input.isKeyPressed(Keys.S)) {
-            requestedVector.y = 0;
+            if (requestVector.y == -1) {
+                requestVector.y = 0;
+                sendMovementRequest(requestVector, true);
+            }
         }
         if (!Gdx.input.isKeyPressed(Keys.D)) {
-            requestedVector.x = 0;
+            if (requestVector.y != 1) {
+                requestVector.y = 0;
+                sendMovementRequest(requestVector, true);
+            }
         }
         if (!Gdx.input.isKeyPressed(Keys.A)) {
-            requestedVector.x = 0;
+            if (requestVector.y != -1) {
+                requestVector.y = 0;
+                sendMovementRequest(requestVector, true);
+            }
         }
+        if (requestVector.isZero()) {
+            sendMovementRequest(null, false);
+        }
+    }
+    
+    public void sendMovementRequest(Vector2 requestedVector, boolean movement) {
         
     }
-    
-
-    
-    
-
-    @Override
-    public boolean keyUp(int keycode) {
-        if (keycode == Keys.W) {
-
-        }
-        if (keycode == Keys.A) {
-
-        }
-        if (keycode == Keys.S) {
-
-        }
-        if (keycode == Keys.D) {
-
-        }
-        return false;
-    }
-
     //TODO send
     public MovementInput() {
         GameScreen.GAMESCREEN_SINGLETON.inputMultiplexer.addProcessor(this);
