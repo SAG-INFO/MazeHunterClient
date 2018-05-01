@@ -6,4 +6,5 @@ package de.saginfo.mazehunter.client.networkData;
  */
 public class ConnectResponse {
     public boolean connectionAccepted;
+    public String msg;
 }

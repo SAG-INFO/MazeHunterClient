@@ -16,8 +16,10 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import de.saginfo.mazehunter.MazeHunterMain;
 import de.saginfo.mazehunter.client.GameClient;
 import de.saginfo.mazehunter.ui.Menu;
+import de.saginfo.mazehunter.ui.enterIpScreen.EnterIpScreen;
 import java.io.IOException;
 
 /**
@@ -29,22 +31,22 @@ public class ConnectScreen extends ScreenAdapter {
     private Stage stage;
     private Viewport viewport;
 
-    private GameClient client;
+    public final GameClient client;
     private String ip;
 
+    private Label label;
+    
     public ConnectScreen(String ip) {
         this.ip = ip.trim().toLowerCase();
+        this.client = new GameClient();
     }
 
     @Override
     public void show() {
         super.show();
-
         this.createUI();
 
-        this.client = new GameClient();
-        this.client.addListener(new ConnectSystem(client));
-
+        this.client.addListener(new ConnectSystem(this));
         connect();
     }
     
@@ -59,10 +61,22 @@ public class ConnectScreen extends ScreenAdapter {
         root.setFillParent(true);
         stage.addActor(root);
 
-        Label label = new Label("Connecting to " + ip + "...", new Label.LabelStyle(Menu.fancyFont, Color.BLACK));
+        label = new Label("Connecting to " + ip + "...", new Label.LabelStyle(Menu.fancyFont, Color.BLACK));
         root.add(label);
     }
 
+    public void displayError(String msg){
+        label.setText(msg);
+        
+        Timer t = new Timer();
+        t.scheduleTask(new Task() {
+            @Override
+            public void run() {
+                client.close();
+                MazeHunterMain.MAIN_SINGLETON.setScreen(new EnterIpScreen());
+            }
+        }, 4);
+    }
 
     public void connect() {
         Timer timer = new Timer();

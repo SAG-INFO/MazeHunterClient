@@ -6,17 +6,25 @@
 package de.saginfo.mazehunter.game.player;
 
 import com.badlogic.gdx.math.Vector2;
+
 public class Player {
-
-        
-    public PlayerVisual visual;
+    public int id;
+    public String name;
     
-    public Vector2 position;
-    public Vector2 velocity;
+    public final PlayerVisual visual;
+    
+    public final Vector2 position;
+    public final Vector2 velocity;
 
-    public Player(Vector2 position) {
-        this.position = position;
-        velocity = new Vector2();
+    public Player() {
+        this.position = new Vector2();
+        this.velocity = new Vector2();
         visual = new PlayerVisual();
+    }
+    
+    private final Vector2 tmp = new Vector2();
+    public void update(float delta){
+        this.position.add(tmp.set(velocity).scl(delta));
+        visual.lerpPosition(position.x, position.y);
     }
 }

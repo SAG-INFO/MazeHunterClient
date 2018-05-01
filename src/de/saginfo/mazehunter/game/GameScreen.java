@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.client.GameClient;
+import de.saginfo.mazehunter.client.networkData.PlayerLobby;
+import java.util.ArrayList;
 
 /**
  * Manages the main game (calles update, close, etc, ...)
@@ -17,7 +19,7 @@ import de.saginfo.mazehunter.client.GameClient;
  */
 public class GameScreen extends ScreenAdapter {
 
-    public Game game;
+    public final Game game;
     public RenderSystem renderSystem;
     
     public OrthographicCamera camera;
@@ -32,6 +34,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(GameClient client) {
         this.client = client;
+        game = new Game();
     }
 
     @Override
@@ -47,8 +50,6 @@ public class GameScreen extends ScreenAdapter {
         
         inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(inputMultiplexer);
-        
-        game = new Game();
     }
 
     @Override

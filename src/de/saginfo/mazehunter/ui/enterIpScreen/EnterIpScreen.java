@@ -1,5 +1,6 @@
 package de.saginfo.mazehunter.ui.enterIpScreen;
 
+import de.saginfo.mazehunter.ui.MenuButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -21,7 +22,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import de.saginfo.mazehunter.LabyRindMain;
+import de.saginfo.mazehunter.MazeHunterMain;
 import de.saginfo.mazehunter.ui.connectScreen.ConnectScreen;
 
 /**
@@ -70,7 +71,7 @@ public class EnterIpScreen extends ScreenAdapter{
     }
     
     private void connect(){
-        LabyRindMain.GAME_SINGLETON.setScreen(new ConnectScreen(field.getText()));
+        MazeHunterMain.MAIN_SINGLETON.setScreen(new ConnectScreen(field.getText()));
     }
 
     @Override
