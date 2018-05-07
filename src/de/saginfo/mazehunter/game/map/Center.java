@@ -14,6 +14,6 @@ public class Center extends Tile{
     public Center () {
         width = 3;
         length = 3;
-        open = false;
+        open = true;
     }
 }
