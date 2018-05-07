@@ -68,5 +68,9 @@ public class World {
         }
         return -1;
     }
+    
+    public boolean isTileOpen (int blockX, int blockY, int tileX, int tileY) {
+        return blocklist[blockX][blockY].tilelist[tileX][tileY].getOpen();
+    }
 
 }
