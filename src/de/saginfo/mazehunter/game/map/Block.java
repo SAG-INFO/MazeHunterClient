@@ -11,7 +11,7 @@ package de.saginfo.mazehunter.game.map;
  */
 public class Block {
     
-    private Tile [][] tilelist;
+    public Tile [][] tilelist;
     boolean up;
     boolean right;
     boolean down;
