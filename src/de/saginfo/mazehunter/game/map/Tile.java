@@ -32,4 +32,8 @@ public class Tile {
     public void setClose() {
         open = false;
     }
+    
+    public boolean getOpen() {
+        return open;
+    }
 }
