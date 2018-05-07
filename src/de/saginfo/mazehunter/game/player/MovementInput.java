@@ -20,47 +20,59 @@ public class MovementInput extends InputAdapter {
 
     private Vector2 direction = new Vector2(0, 0);
 
-    public void update() {
-        if (Gdx.input.isKeyJustPressed(Keys.W)) {
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Keys.W) {
             direction.y = 1;
-            sendMovementRequest(direction, true);
+            sendMovementRequest(direction);
         }
-        if (Gdx.input.isKeyJustPressed(Keys.S)) {
+        if (keycode == Keys.S) {
             direction.y = -1;
-            sendMovementRequest(direction, true);
+            sendMovementRequest(direction);
         }
-        if (Gdx.input.isKeyJustPressed(Keys.D)) {
+        if (keycode == Keys.D) {
             direction.x = 1;
-            sendMovementRequest(direction, true);
+            sendMovementRequest(direction);
         }
-        if (Gdx.input.isKeyJustPressed(Keys.A)) {
+        if (keycode == Keys.A) {
             direction.x = -1;
-            sendMovementRequest(direction, true);
+            sendMovementRequest(direction);
         }
-        if (!Gdx.input.isKeyPressed(Keys.W) && direction.y == 1) {
-                direction.y = 0;
-                sendMovementRequest(direction, true);
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        if (keycode == Keys.W) {
+                direction.y -= 1;
+                sendMovementRequest(direction);
         }
-        if (!Gdx.input.isKeyPressed(Keys.S) && direction.y == -1) {
-                direction.y = 0;
-                sendMovementRequest(direction, true);
+        if (keycode == Keys.S) {
+                direction.y += 1;
+                sendMovementRequest(direction);
         }
-        if (!Gdx.input.isKeyPressed(Keys.D) && direction.x == 1) {
-                direction.x = 0;
-                sendMovementRequest(direction, true);
+        if (keycode == Keys.D) {
+                direction.x -= 1;
+                sendMovementRequest(direction);
         }
-        if (!Gdx.input.isKeyPressed(Keys.A) && direction.x == -1) {
-                direction.x = 0;
-                sendMovementRequest(direction, true);
+        if (keycode == Keys.A) {
+                direction.x += 1;
+                sendMovementRequest(direction);
         }
-        if (direction.isZero()) {
-            sendMovementRequest(direction, false);
-        }
+        return false;
     }
     
-    public void sendMovementRequest(Vector2 requestedVector, boolean movement) {
+    public void sendMovementRequest(Vector2 requestedVector) {
+        boolean movement;
+        if (direction.isZero()) {
+            movement = false;
+        } else {
+            movement = true;
+        }
         MovementRequest movementRequest = new MovementRequest((int)requestedVector.angle(), movement);
         //TODO senden
+        
+        GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(movementRequest);
     }
     
     public MovementInput() {
