@@ -28,12 +28,12 @@ public class World {
 
     public World(boolean... b) {
         if (b.length / 4 == 1 || b.length / 4 == 2 || b.length / 4 == 3 || b.length / 4 == 4 || b.length / 4 == 5 || b.length / 4 == 6 || b.length / 4 == 7 || b.length / 4 == 8 || b.length / 4 == 9 || b.length / 4 == 10) {
-            breite = b.length;
-            for (int h = 0; h < b.length / 4; h++) {
+            breite = b.length / 4;
+            for (int h = 0; h < breite; h = h + 4) {
                 blocklist = new Block[breite][breite];
-                for (int i = 0; i < breite - 1; i++) {
-                    for (int j = 0; j < breite - 1; j++) {
-                        blocklist[i][j] = new Block(b[h], b[h+1], b[h+2], b[h+3]);
+                for (int i = 0; i < breite; i++) {
+                    for (int j = 0; j < breite; j++) {
+                        blocklist[i][j] = new Block(b[h], b[h + 1], b[h + 2], b[h + 3]);
                     }
 
                 }
