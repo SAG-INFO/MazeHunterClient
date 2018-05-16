@@ -31,8 +31,6 @@ public class SpriteVisual extends Sprite implements Visual{
         super(sprite);
     }
     
-    
-    
     @Override
     public void draw(SpriteBatch batch, float delta) {
         super.draw(batch);
