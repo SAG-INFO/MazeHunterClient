@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player;
+package de.saginfo.mazehunter.game.player.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -15,6 +15,8 @@ import de.saginfo.mazehunter.game.GameScreen;
 /**
  *
  * @author Karl Huber
+ * 
+ * Detects movement related inputs and sends them to the server.
  */
 public class MovementInput extends InputAdapter {
 
