@@ -24,12 +24,15 @@ public class Corner extends Tile {
 
     private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
 
-    public Corner(int x, int y) {
+    public Corner(int xBlock, int yBlock, int xTile, int yTile) {
         open = false;
-        blockPositionX = x;
-        blockPositionY = y;
+        blockPositionX = xBlock;
+        blockPositionY = yTile;
+        tilePositionX = this.translateTileToCoordinate(xTile)+ blockPositionX ;
+        tilePositionY = this.translateTileToCoordinate(yTile) + blockPositionY;
 
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+         visual.setPosition(tilePositionX*5, tilePositionY*5);
     }
 }

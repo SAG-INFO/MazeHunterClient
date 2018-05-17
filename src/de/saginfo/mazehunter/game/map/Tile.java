@@ -11,9 +11,11 @@ package de.saginfo.mazehunter.game.map;
  */
 public class Tile {
 
-    boolean open;
-    int blockPositionX;
-    int blockPositionY;
+    public boolean open;
+    public int blockPositionX;
+    public int blockPositionY;
+    public int tilePositionX;
+    public int tilePositionY;
 
     //Graphic image;
     public Tile() {
@@ -35,8 +37,19 @@ public class Tile {
     public boolean getOpen() {
         return open;
     }
-    
-    
+
+    public int translateTileToCoordinate(int k) {
+        if (k == 0) {
+            return 0;
+        } else if (k == 1) {
+            return World.ecke;
+        } else if (k == 2) {
+            return World.ecke + World.center;
+        } else {
+            return -1;
+        }
+    }
+
 //    public int getPositionX() {
 //        Block.getPositionTileX(this) = r;
 //        for (int i = 0; i < Block.getPositionTileX(this) ; i++) {
@@ -45,5 +58,4 @@ public class Tile {
 //        }
 //                
 //    }
-    
 }

@@ -25,12 +25,15 @@ public class Center extends Tile {
 
     private SpriteVisual visual;
     
-    public Center(int x, int y) {
+    public Center(int xBlock, int yBlock, int xTile, int yTile) {
         open = true;
-        blockPositionX = x;
-        blockPositionY = y;
+        blockPositionX = xBlock;
+        blockPositionY = yTile;
+        tilePositionX = this.translateTileToCoordinate(xTile)+ blockPositionX ;
+        tilePositionY = this.translateTileToCoordinate(yTile) + blockPositionY;
         
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+        visual.setPosition(tilePositionX*5, tilePositionY*5);
     }
 }

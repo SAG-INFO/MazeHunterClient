@@ -17,16 +17,7 @@ public class World {
     public static int center;
     public static int blockbreite;
 
-    public World(int größe) {
-        breite = größe;
-        blocklist = new Block[breite][breite];
-        for (int i = 0; i < breite - 1; i++) {
-            for (int j = 0; j < breite - 1; j++) {
-                blocklist[i][j] = new Block(true, true, true, true);
-            }
-
-        }
-
+    public World() {
     }
 
     /**
@@ -38,7 +29,7 @@ public class World {
      * @param e = größe der ecke
      * @param c = größe des centers
      */
-    public World(int e, int c, boolean... b) {
+    public void makeMap(int e, int c, boolean... b) {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
             breite = (int) Math.sqrt(b.length / 4);
             blocklist = new Block[breite][breite];
@@ -59,6 +50,17 @@ public class World {
         }
     }
 
+    public void makeTestMap(int größe) {
+        breite = größe;
+        blocklist = new Block[breite][breite];
+        for (int i = 0; i < breite - 1; i++) {
+            for (int j = 0; j < breite - 1; j++) {
+                blocklist[i][j] = new Block(true, true, true, true);
+            }
+
+        }
+    }
+
     //position -1 means not found
     public int getPositionBlockXinBlock(Block block) {
         for (int i = 0; i < breite; i++) {
@@ -71,7 +73,7 @@ public class World {
         }
         return -1;
     }
-    
+
     //position -1 means not found
     public int getPositionBlockXinCoordinate(Block block) {
         int k = -1;

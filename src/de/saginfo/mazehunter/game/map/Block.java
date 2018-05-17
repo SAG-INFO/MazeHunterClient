@@ -22,23 +22,25 @@ public class Block {
     int BlockPositionY;
 
     public Block(boolean u, boolean r, boolean d, boolean l) {
+        System.out.println(GAMESCREEN_SINGLETON.game);
+        System.out.println(GAMESCREEN_SINGLETON.game.world);
         BlockPositionX = GAMESCREEN_SINGLETON.game.world.getPositionBlockXinCoordinate(this);
         BlockPositionY = GAMESCREEN_SINGLETON.game.world.getPositionBlockYinCoordinate(this);
-        
+
         up = u;
         right = r;
         down = d;
         left = l;
         tilelist = new Tile[3][3];
-        tilelist[0][0] = new Corner(BlockPositionX, BlockPositionY);
-        tilelist[1][0] = new PathUp(d, BlockPositionX, BlockPositionY);
-        tilelist[2][0] = new Corner(BlockPositionX, BlockPositionY);
-        tilelist[0][1] = new PathSide(l, BlockPositionX, BlockPositionY);
-        tilelist[1][1] = new Center(BlockPositionX, BlockPositionY);
-        tilelist[2][1] = new PathSide(r, BlockPositionX, BlockPositionY);
-        tilelist[0][2] = new Corner(BlockPositionX, BlockPositionY);
-        tilelist[1][2] = new PathUp(u, BlockPositionX, BlockPositionY);
-        tilelist[2][2] = new Corner(BlockPositionX, BlockPositionY);
+        tilelist[0][0] = new Corner(BlockPositionX, BlockPositionY, 0, 0);
+        tilelist[1][0] = new PathUp(d, BlockPositionX, BlockPositionY, 1, 0);
+        tilelist[2][0] = new Corner(BlockPositionX, BlockPositionY, 2, 0);
+        tilelist[0][1] = new PathSide(l, BlockPositionX, BlockPositionY, 0, 1);
+        tilelist[1][1] = new Center(BlockPositionX, BlockPositionY, 1, 1);
+        tilelist[2][1] = new PathSide(r, BlockPositionX, BlockPositionY, 2, 1);
+        tilelist[0][2] = new Corner(BlockPositionX, BlockPositionY, 0, 2);
+        tilelist[1][2] = new PathUp(u, BlockPositionX, BlockPositionY, 1, 2);
+        tilelist[2][2] = new Corner(BlockPositionX, BlockPositionY, 2, 2);
 
         Corner.width = World.ecke;
         Corner.height = World.ecke;
@@ -106,5 +108,5 @@ public class Block {
             return -1;
         }
     }
-    
+
 }
