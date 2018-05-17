@@ -15,7 +15,8 @@ public class World {
     public int breite;
     public static int ecke;
     public static int center;
-    
+    public static int blockbreite;
+
     public World(int größe) {
         breite = größe;
         blocklist = new Block[breite][breite];
@@ -51,15 +52,7 @@ public class World {
             }
             ecke = e;
             center = c;
-            
-            Corner.width = e;
-            Corner.height = e;
-            Center.width = c;
-            Center.height = c;
-            PathUp.height = e;
-            PathUp.width = c;
-            PathSide.height = c;
-            PathSide.width = e;
+            blockbreite = c + 2 * e;
 
         } else {
             return;
@@ -67,7 +60,7 @@ public class World {
     }
 
     //position -1 means not found
-    public int getPositionBlockX(Block block) {
+    public int getPositionBlockXinBlock(Block block) {
         for (int i = 0; i < breite; i++) {
             for (int j = 0; j < breite; j++) {
                 if (blocklist[j][i] == block) {
@@ -78,9 +71,20 @@ public class World {
         }
         return -1;
     }
+    
+    //position -1 means not found
+    public int getPositionBlockXinCoordinate(Block block) {
+        int k = -1;
+        k = this.getPositionBlockXinBlock(block);
+        if (k >= 0) {
+            return k * blockbreite;
+        } else {
+            return -1;
+        }
+    }
 
     //position -1 means not found
-    public int getPositionBlockY(Block block) {
+    public int getPositionBlockYinBlock(Block block) {
         for (int j = 0; j < breite; j++) {
             for (int i = 0; i < breite; i++) {
                 if (blocklist[j][i] == block) {
@@ -90,6 +94,17 @@ public class World {
             }
         }
         return -1;
+    }
+
+    //position -1 means not found
+    public int getPositionBlockYinCoordinate(Block block) {
+        int k = -1;
+        k = this.getPositionBlockYinBlock(block);
+        if (k >= 0) {
+            return k * blockbreite;
+        } else {
+            return -1;
+        }
     }
 
     public boolean isTileOpen(int blockX, int blockY, int tileX, int tileY) {

@@ -5,66 +5,106 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+
 /**
  *
  * @author julian.mittermeier
  */
 public class Block {
-    
-    public Tile [][] tilelist;
+
+    public Tile[][] tilelist;
     boolean up;
     boolean right;
     boolean down;
     boolean left;
-    
+    int BlockPositionX;
+    int BlockPositionY;
+
     public Block(boolean u, boolean r, boolean d, boolean l) {
+        BlockPositionX = GAMESCREEN_SINGLETON.game.world.getPositionBlockXinCoordinate(this);
+        BlockPositionY = GAMESCREEN_SINGLETON.game.world.getPositionBlockYinCoordinate(this);
+        
         up = u;
         right = r;
         down = d;
         left = l;
         tilelist = new Tile[3][3];
-        tilelist[0][0] = new Corner();
-        tilelist[1][0] = new PathUp(d);
-        tilelist[2][0] = new Corner();
-        tilelist[0][1] = new PathSide(l);
-        tilelist[1][1] = new Center();
-        tilelist[2][1] = new PathSide(r);
-        tilelist[0][2] = new Corner();
-        tilelist[1][2] = new PathUp(u);
-        tilelist[2][2] = new Corner();
-        
+        tilelist[0][0] = new Corner(BlockPositionX, BlockPositionY);
+        tilelist[1][0] = new PathUp(d, BlockPositionX, BlockPositionY);
+        tilelist[2][0] = new Corner(BlockPositionX, BlockPositionY);
+        tilelist[0][1] = new PathSide(l, BlockPositionX, BlockPositionY);
+        tilelist[1][1] = new Center(BlockPositionX, BlockPositionY);
+        tilelist[2][1] = new PathSide(r, BlockPositionX, BlockPositionY);
+        tilelist[0][2] = new Corner(BlockPositionX, BlockPositionY);
+        tilelist[1][2] = new PathUp(u, BlockPositionX, BlockPositionY);
+        tilelist[2][2] = new Corner(BlockPositionX, BlockPositionY);
+
+        Corner.width = World.ecke;
+        Corner.height = World.ecke;
+        Center.width = World.center;
+        Center.height = World.center;
+        PathUp.height = World.ecke;
+        PathUp.width = World.center;
+        PathSide.height = World.center;
+        PathSide.width = World.ecke;
+
+    }
+
+    //position -1 means not found
+    public int getPositionTileXinTile(Tile tile) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tilelist[j][i] == tile) {
+                    return j;
+                }
+
+            }
+        }
+        return -1;
+    }
+
+    //position -1 means not found
+    public int getPositionTileYintTile(Tile tile) {
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++) {
+                if (tilelist[j][i] == tile) {
+                    return i;
+                }
+
+            }
+        }
+        return -1;
+    }
+
+    //position -1 means not found
+    public int getPostitionTileXinCoordinate(Tile tile) {
+        int k = -1;
+        k = this.getPositionTileXinTile(tile);
+        if (k == 0) {
+            return 0;
+        } else if (k == 1) {
+            return World.ecke;
+        } else if (k == 2) {
+            return World.ecke + World.center;
+        } else {
+            return -1;
+        }
+    }
+
+    //position -1 means not found
+    public int getPostitionTileYinCoordinate(Tile tile) {
+        int k = -1;
+        k = this.getPositionTileYintTile(tile);
+        if (k == 0) {
+            return 0;
+        } else if (k == 1) {
+            return World.ecke;
+        } else if (k == 2) {
+            return World.ecke + World.center;
+        } else {
+            return -1;
+        }
     }
     
-    //position -1 means not found
-   public int getPositionTileX(Tile tile) {
-       for (int i = 0; i < 3; i++) {
-           for (int j = 0; j < 3; j++) {
-               if (tilelist[j][i] == tile) {
-               return j;
-               }
-               
-               
-           }
-       }
-       return -1;
-   }
-   
-   //position -1 means not found
-   public int getPositionTileY(Tile tile) {
-       for (int j = 0; j < 3; j++) {
-           for (int i = 0; i < 3; i++) {
-               if (tilelist[j][i] == tile) {
-               return i;
-               }
-               
-               
-           }
-       }
-       return -1;
-   }
-   
-   public static int getBreite() {
-       return World.ecke*2 + World.center;
-   }
-   
 }

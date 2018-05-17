@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -24,8 +25,10 @@ public class Center extends Tile {
 
     private SpriteVisual visual;
     
-    public Center() {
+    public Center(int x, int y) {
         open = true;
+        blockPositionX = x;
+        blockPositionY = y;
         
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);

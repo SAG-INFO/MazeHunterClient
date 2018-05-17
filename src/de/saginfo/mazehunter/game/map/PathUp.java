@@ -19,21 +19,23 @@ public class PathUp extends Tile {
 
     public static int width;
     public static int height;
-    
+
     private SpriteVisual visual;
 
     private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
     private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
 
-    public PathUp(boolean b) {
+    public PathUp(boolean b, int x, int y) {
         open = b;
-        
+        blockPositionX = x;
+        blockPositionY = y;
+
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         } else {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        }        
+        }
     }
 }

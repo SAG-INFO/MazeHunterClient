@@ -12,6 +12,8 @@ package de.saginfo.mazehunter.game.map;
 public class Tile {
 
     boolean open;
+    int blockPositionX;
+    int blockPositionY;
 
     //Graphic image;
     public Tile() {

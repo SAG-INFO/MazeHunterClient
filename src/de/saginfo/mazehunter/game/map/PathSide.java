@@ -25,8 +25,10 @@ public class PathSide extends Tile {
     private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
     private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
 
-    public PathSide(boolean b) {
+    public PathSide(boolean b, int x, int y) {
         open = b;
+        blockPositionX = x;
+        blockPositionY = y;
 
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));

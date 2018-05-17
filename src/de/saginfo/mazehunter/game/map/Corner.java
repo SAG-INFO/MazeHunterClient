@@ -15,18 +15,21 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  *
  * @author paul.kuschfeldt
  */
-public class Corner extends Tile{
-    
+public class Corner extends Tile {
+
     public static int width;
     public static int height;
-    
+
     private SpriteVisual visual;
-    
+
     private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
-    
-    public Corner () {
+
+    public Corner(int x, int y) {
         open = false;
+        blockPositionX = x;
+        blockPositionY = y;
+
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-    }    
+    }
 }
