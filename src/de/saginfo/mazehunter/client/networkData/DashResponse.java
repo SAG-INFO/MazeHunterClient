@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 /**
  *
  * @author karl.huber
+ * 
+ * The Dashrequest that gets send to the server.
  */
 public class DashResponse {
     public Vector2 position;

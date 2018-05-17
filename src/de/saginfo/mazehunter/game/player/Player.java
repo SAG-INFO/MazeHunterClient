@@ -7,6 +7,12 @@ package de.saginfo.mazehunter.game.player;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * 
+ * @author karl.huber
+ * 
+ * parent class of Hunter and Runner holding the basic attributes.
+ */
 public class Player {
     public int id;
     public String name;

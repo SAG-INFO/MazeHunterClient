@@ -13,6 +13,8 @@ import de.saginfo.mazehunter.game.GameScreen;
 /**
  *
  * @author Karl Huber
+ * 
+ * Checks if the Client pressed space and sends a dashrequest if done so.
  */
 public class DashInput extends InputAdapter {
 
