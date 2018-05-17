@@ -23,19 +23,19 @@ public class MovementInput extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Keys.W) {
-            direction.y = 1;
+            direction.y += 1;
             sendMovementRequest(direction);
         }
         if (keycode == Keys.S) {
-            direction.y = -1;
+            direction.y += -1;
             sendMovementRequest(direction);
         }
         if (keycode == Keys.D) {
-            direction.x = 1;
+            direction.x += 1;
             sendMovementRequest(direction);
         }
         if (keycode == Keys.A) {
-            direction.x = -1;
+            direction.x += -1;
             sendMovementRequest(direction);
         }
         return false;
@@ -71,7 +71,6 @@ public class MovementInput extends InputAdapter {
         }
         MovementRequest movementRequest = new MovementRequest((int)requestedVector.angle(), movement);
         
-        System.out.println(movementRequest);
         GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(movementRequest);
     }
     
