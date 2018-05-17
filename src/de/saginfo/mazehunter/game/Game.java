@@ -3,6 +3,7 @@ package de.saginfo.mazehunter.game;
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.World;
 import de.saginfo.mazehunter.game.player.MovementInput;
+import de.saginfo.mazehunter.game.player.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Game {
 
     public void startGame(){
         MovementInput movementInput = new MovementInput();
+        MovementListener l = new MovementListener();
     }
     
     /**
