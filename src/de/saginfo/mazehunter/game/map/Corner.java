@@ -5,17 +5,28 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.grafik.SpriteVisual;
+
 /**
  *
  * @author paul.kuschfeldt
  */
 public class Corner extends Tile{
- 
+    
     public static int width;
     public static int height;
     
+    private SpriteVisual visual;
+    
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
+    
     public Corner () {
-
         open = false;
+        visual = new SpriteVisual(new Sprite(TEX));
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
     }    
 }

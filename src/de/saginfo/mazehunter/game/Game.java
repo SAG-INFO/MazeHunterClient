@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class Game {
 
     public final ArrayList<Player> players;
-
+    public World world;
+    
     public Game() {
-        players = new ArrayList<>();
+    players = new ArrayList<>();
+    world = new World(6);
     }
 
     public void startGame(){

@@ -5,16 +5,29 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.grafik.SpriteVisual;
+
 /**
  *
  * @author paul.kuschfeldt
  */
-public class Center extends Tile{
-    
+public class Center extends Tile {
+
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+
     public static int width;
-    public static int height;    
+    public static int height;
+
+    private SpriteVisual visual;
     
-    public Center () {
+    public Center() {
         open = true;
+        
+        visual = new SpriteVisual(new Sprite(TEX));
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
     }
 }

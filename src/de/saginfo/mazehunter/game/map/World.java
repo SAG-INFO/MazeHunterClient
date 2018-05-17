@@ -30,6 +30,7 @@ public class World {
      * World generiert die Map. Die Booleanwerte werden im Uhrzeigersinn,
      * beginnend oben eingetragen. Anschließend werden zuerst die Zeilen und
      * dann die Spalten generiert, beginnend neim Ursprung (0|0).
+     *
      * @param b = größe der welt
      * @ param e = größe der ecke
      * @param c = größe des centers
@@ -54,7 +55,7 @@ public class World {
             PathUp.width = c;
             PathSide.height = c;
             PathSide.width = e;
-            
+
         } else {
             return;
         }
