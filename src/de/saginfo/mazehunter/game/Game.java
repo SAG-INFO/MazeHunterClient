@@ -2,6 +2,7 @@ package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.World;
+import de.saginfo.mazehunter.game.player.MovementInput;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class Game {
         players = new ArrayList<>();
     }
 
+    public void startGame(){
+        MovementInput movementInput = new MovementInput();
+    }
+    
     /**
      * this method is right now beeing called from
      * {@link LobbyListener#createPlayers()} dunno if this is the best place to
