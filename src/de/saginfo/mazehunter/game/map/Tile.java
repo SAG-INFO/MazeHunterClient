@@ -33,4 +33,15 @@ public class Tile {
     public boolean getOpen() {
         return open;
     }
+    
+    
+//    public int getPositionX() {
+//        Block.getPositionTileX(this) = r;
+//        for (int i = 0; i < Block.getPositionTileX(this) ; i++) {
+//            
+//            
+//        }
+//                
+//    }
+    
 }

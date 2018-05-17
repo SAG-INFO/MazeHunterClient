@@ -13,7 +13,9 @@ public class World {
 
     private Block[][] blocklist;
     public int breite;
-
+    public static int ecke;
+    public static int center;
+    
     public World(int größe) {
         breite = größe;
         blocklist = new Block[breite][breite];
@@ -32,7 +34,7 @@ public class World {
      * dann die Spalten generiert, beginnend neim Ursprung (0|0).
      *
      * @param b = größe der welt
-     * @ param e = größe der ecke
+     * @param e = größe der ecke
      * @param c = größe des centers
      */
     public World(int e, int c, boolean... b) {
@@ -47,6 +49,9 @@ public class World {
 
                 }
             }
+            ecke = e;
+            center = c;
+            
             Corner.width = e;
             Corner.height = e;
             Center.width = c;
@@ -62,7 +67,7 @@ public class World {
     }
 
     //position -1 means not found
-    public int getPositionX(Block block) {
+    public int getPositionBlockX(Block block) {
         for (int i = 0; i < breite; i++) {
             for (int j = 0; j < breite; j++) {
                 if (blocklist[j][i] == block) {
@@ -75,7 +80,7 @@ public class World {
     }
 
     //position -1 means not found
-    public int getPositionY(Block block) {
+    public int getPositionBlockY(Block block) {
         for (int j = 0; j < breite; j++) {
             for (int i = 0; i < breite; i++) {
                 if (blocklist[j][i] == block) {

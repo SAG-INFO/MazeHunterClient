@@ -36,7 +36,7 @@ public class Block {
     }
     
     //position -1 means not found
-   public int getPositionX(Tile tile) {
+   public int getPositionTileX(Tile tile) {
        for (int i = 0; i < 3; i++) {
            for (int j = 0; j < 3; j++) {
                if (tilelist[j][i] == tile) {
@@ -50,7 +50,7 @@ public class Block {
    }
    
    //position -1 means not found
-   public int getPositionY(Tile tile) {
+   public int getPositionTileY(Tile tile) {
        for (int j = 0; j < 3; j++) {
            for (int i = 0; i < 3; i++) {
                if (tilelist[j][i] == tile) {
@@ -61,6 +61,10 @@ public class Block {
            }
        }
        return -1;
+   }
+   
+   public static int getBreite() {
+       return World.ecke*2 + World.center;
    }
    
 }

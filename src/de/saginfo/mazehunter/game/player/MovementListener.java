@@ -13,6 +13,8 @@ import de.saginfo.mazehunter.game.GameScreen;
 /**
  *
  * @author karl.huber
+ * 
+ * Listens for movementresponses from the server and updates the position and the velocity.
  */
 public class MovementListener extends Listener{
     @Override
