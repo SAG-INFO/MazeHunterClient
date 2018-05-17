@@ -36,4 +36,10 @@ public class Tile {
     public boolean getOpen() {
         return open;
     }
+    
+//    
+//    public int getPositionX() {
+//        
+//    }
+//    
 }
