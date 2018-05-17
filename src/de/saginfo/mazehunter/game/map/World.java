@@ -13,7 +13,9 @@ public class World {
 
     private Block[][] blocklist;
     public int breite;
-
+    public static int ecke;
+    public static int center;
+    
     public World(int größe) {
         breite = größe;
         blocklist = new Block[breite][breite];
@@ -31,7 +33,7 @@ public class World {
      * beginnend oben eingetragen. Anschließend werden zuerst die Zeilen und
      * dann die Spalten generiert, beginnend neim Ursprung (0|0).
      * @param b = größe der welt
-     * @ param e = größe der ecke
+     * @param e = größe der ecke
      * @param c = größe des centers
      */
     public World(int e, int c, boolean... b) {
@@ -46,6 +48,9 @@ public class World {
 
                 }
             }
+            ecke = e;
+            center = c;
+            
             Corner.width = e;
             Corner.height = e;
             Center.width = c;

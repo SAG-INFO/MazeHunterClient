@@ -63,4 +63,8 @@ public class Block {
        return -1;
    }
    
+   public static int getBreite() {
+       return World.ecke*2 + World.center;
+   }
+   
 }
