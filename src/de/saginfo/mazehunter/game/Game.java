@@ -15,11 +15,19 @@ import java.util.ArrayList;
 public class Game {
 
     public final ArrayList<Player> players;
+    //public final AbilityConfig abilityConfig;
     
     public Game() {
-    players = new ArrayList<>();
+        players = new ArrayList<>();    
+        //abilityConfig = requestAbilityConfig();
     }
 
+    /*
+    public AbilityConfig requestAbilityConfig() {
+        return null; //TODO Config vom Server holen
+    }
+    */
+    
     public void startGame(){
         // Movement
         MovementInput movementInput = new MovementInput();

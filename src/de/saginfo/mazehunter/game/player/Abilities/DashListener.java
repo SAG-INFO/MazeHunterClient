@@ -17,7 +17,7 @@ import de.saginfo.mazehunter.game.player.Player;
  * 
  * Listens for the serverresponse to the dashrequest to then render the dash animation and update the position.
  */
-public class DashListener extends Listener{
+public class DashListener extends Ability{
     
     @Override
     public void received(Connection connection, Object object) {
@@ -30,6 +30,7 @@ public class DashListener extends Listener{
             Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((DashResponse) object).id);
             player.position.set(((DashResponse) object).position);
             player.velocity.set(((DashResponse) object).velocity);
+            
         }
     }
 
