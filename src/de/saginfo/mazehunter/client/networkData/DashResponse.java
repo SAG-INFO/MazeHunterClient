@@ -13,9 +13,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class DashResponse {
     public Vector2 position;
+    public int id;
 
-    public DashResponse(Vector2 position) {
+    public DashResponse(Vector2 position, int id) {
         this.position = position;
+        this.id = id;
     }
 
     public DashResponse() {

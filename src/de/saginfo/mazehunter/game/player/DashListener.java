@@ -21,9 +21,8 @@ public class DashListener extends Listener{
         
         if(object instanceof DashResponse){
             
-            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((MovementResponse) object).id);
-            player.position.set(((MovementResponse) object).position);
-            player.velocity.set(((MovementResponse) object).velocity);
+            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((DashResponse) object).id);
+            player.position.set(((DashResponse) object).position);
         }
     }
 
