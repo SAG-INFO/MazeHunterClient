@@ -21,12 +21,15 @@ public class Block {
     int BlockPositionX;
     int BlockPositionY;
 
-    public Block(boolean u, boolean r, boolean d, boolean l) {
+    public Block(boolean u, boolean r, boolean d, boolean l, int blockx, int blocky) {
         System.out.println(GAMESCREEN_SINGLETON.game);
         System.out.println(GAMESCREEN_SINGLETON.game.world);
-        BlockPositionX = GAMESCREEN_SINGLETON.game.world.getPositionBlockXinCoordinate(this);
-        BlockPositionY = GAMESCREEN_SINGLETON.game.world.getPositionBlockYinCoordinate(this);
+        
+        BlockPositionX = blockx;
+        BlockPositionY = blocky;
 
+        
+        System.out.println(GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(2) + "LOLLOL");
         up = u;
         right = r;
         down = d;

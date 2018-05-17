@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -29,8 +30,10 @@ public class PathUp extends Tile {
         open = b;
         blockPositionX = xBlock;
         blockPositionY = yTile;
-        tilePositionX = this.translateTileToCoordinate(xTile)+ blockPositionX ;
-        tilePositionY = this.translateTileToCoordinate(yTile) + blockPositionY;
+        tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
+        tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
+        System.out.println("PathUpX" + tilePositionX);
+        System.out.println("PathUpY" + tilePositionY);
 
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));
@@ -38,7 +41,7 @@ public class PathUp extends Tile {
         } else {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(tilePositionX*5, tilePositionY*5);
         }
+        visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
     }
 }

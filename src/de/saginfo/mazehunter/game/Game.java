@@ -1,10 +1,14 @@
 package de.saginfo.mazehunter.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.World;
 import de.saginfo.mazehunter.game.player.MovementInput;
 import de.saginfo.mazehunter.game.player.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
 
@@ -15,6 +19,11 @@ public class Game {
 
     public final ArrayList<Player> players;
     
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+    private SpriteVisual visual;
+    
+    public World world;
+    
     public Game() {
     players = new ArrayList<>();
     }
@@ -22,6 +31,11 @@ public class Game {
     public void startGame(){
         MovementInput movementInput = new MovementInput();
         MovementListener l = new MovementListener();
+        
+        
+        visual = new SpriteVisual(new Sprite(TEX));
+        world = new World((int)visual.getWidth(), (int)visual.getHeight());
+        world.makeMap(true, true, true, false, true, true, true, false, true, true, true, false, true, true, true, false);
     }
     
     /**

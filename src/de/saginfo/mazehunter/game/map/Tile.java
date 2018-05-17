@@ -38,17 +38,6 @@ public class Tile {
         return open;
     }
 
-    public int translateTileToCoordinate(int k) {
-        if (k == 0) {
-            return 0;
-        } else if (k == 1) {
-            return World.ecke;
-        } else if (k == 2) {
-            return World.ecke + World.center;
-        } else {
-            return -1;
-        }
-    }
 
 //    public int getPositionX() {
 //        Block.getPositionTileX(this) = r;
