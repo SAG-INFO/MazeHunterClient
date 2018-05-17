@@ -50,6 +50,8 @@ public class GameScreen extends ScreenAdapter {
         
         inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(inputMultiplexer);
+        
+        game.startGame();
     }
 
     @Override
