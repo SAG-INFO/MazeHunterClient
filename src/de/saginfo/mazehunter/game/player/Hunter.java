@@ -11,5 +11,4 @@ package de.saginfo.mazehunter.game.player;
  */
 public class Hunter extends Player {
     
-    
 }
