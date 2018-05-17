@@ -11,9 +11,10 @@ package de.saginfo.mazehunter.game.map;
  */
 public class Center extends Tile{
     
+    public static int width;
+    public static int height;    
+    
     public Center () {
-        width = 3;
-        length = 3;
         open = true;
     }
 }
