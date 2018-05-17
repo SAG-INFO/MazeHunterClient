@@ -13,8 +13,6 @@ package de.saginfo.mazehunter.game.map;
 public class Tile {
     
     boolean open;
-    protected int width;
-    protected int length;
     
     //Graphic image;
     public Tile() {

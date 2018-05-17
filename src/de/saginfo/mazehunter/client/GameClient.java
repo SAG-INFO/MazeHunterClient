@@ -47,5 +47,7 @@ public class GameClient extends Client {
         //GameStuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
+        getKryo().register(DashRequest.class);
+        getKryo().register(DashResponse.class);
     }
 }

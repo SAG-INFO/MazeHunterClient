@@ -30,8 +30,11 @@ public class World {
      * World generiert die Map. Die Booleanwerte werden im Uhrzeigersinn,
      * beginnend oben eingetragen. Anschließend werden zuerst die Zeilen und
      * dann die Spalten generiert, beginnend neim Ursprung (0|0).
+     * @param b = größe der welt
+     * @ param e = größe der ecke
+     * @param c = größe des centers
      */
-    public World(boolean... b) {
+    public World(int e, int c, boolean... b) {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
             breite = (int) Math.sqrt(b.length / 4);
             blocklist = new Block[breite][breite];
@@ -43,6 +46,15 @@ public class World {
 
                 }
             }
+            Corner.width = e;
+            Corner.height = e;
+            Center.width = c;
+            Center.height = c;
+            PathUp.height = e;
+            PathUp.width = c;
+            PathSide.height = c;
+            PathSide.width = e;
+            
         } else {
             return;
         }
