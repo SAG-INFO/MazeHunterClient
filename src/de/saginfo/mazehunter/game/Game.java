@@ -1,9 +1,10 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
-import de.saginfo.mazehunter.game.map.World;
-import de.saginfo.mazehunter.game.player.MovementInput;
-import de.saginfo.mazehunter.game.player.MovementListener;
+import de.saginfo.mazehunter.game.player.Abilities.DashInput;
+import de.saginfo.mazehunter.game.player.Abilities.DashListener;
+import de.saginfo.mazehunter.game.player.movement.MovementInput;
+import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -20,8 +21,13 @@ public class Game {
     }
 
     public void startGame(){
+        // Movement
         MovementInput movementInput = new MovementInput();
-        MovementListener l = new MovementListener();
+        MovementListener movementListener = new MovementListener();
+        
+        //Abilities
+        DashInput dashInput = new DashInput();
+        DashListener dashListener = new DashListener();
     }
     
     /**
