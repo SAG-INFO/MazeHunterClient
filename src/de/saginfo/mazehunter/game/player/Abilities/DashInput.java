@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player;
+package de.saginfo.mazehunter.game.player.Abilities;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -20,14 +20,10 @@ public class DashInput extends InputAdapter {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Keys.SPACE) {
+        if (keycode == Keys.SHIFT_LEFT) {
             sendDashRequest();
+            System.out.println("keydown");
         }
-        return false;
-    }
-    
-    @Override
-    public boolean keyUp(int keycode) {
         return false;
     }
     
