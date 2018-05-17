@@ -34,7 +34,6 @@ public class DashInput extends InputAdapter {
                         canuse = true;
                     }
                 }, cooldown);
-                
         }
         return false;
     }
