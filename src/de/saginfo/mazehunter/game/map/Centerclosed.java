@@ -14,12 +14,11 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
  *
- * @author paul.kuschfeldt
+ * @author Admin
  */
-public class Center extends Tile {
-
-    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
+public class Centerclosed extends Tile{
+    
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
 
     public static int width;
     public static int height;
@@ -27,14 +26,14 @@ public class Center extends Tile {
 
     private SpriteVisual visual;
     
-    public Center(int xBlock, int yBlock, int xTile, int yTile) {
-        open = true;
+    public Centerclosed(int xBlock, int yBlock, int xTile, int yTile) {
+        open = false;
         blockPositionX = xBlock;
         blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
         tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
         
-        visual = new SpriteVisual(new Sprite(TEXwhite));
+        visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
     }
