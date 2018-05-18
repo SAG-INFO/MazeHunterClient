@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -25,17 +26,21 @@ public class PathSide extends Tile {
     private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
     private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
 
-    public PathSide(boolean b, int x, int y) {
+    public PathSide(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
         open = b;
-        blockPositionX = x;
-        blockPositionY = y;
+        blockPositionX = xBlock;
+        blockPositionY = yBlock;
+        tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
+        tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
 
         if (open) {
+            
             visual = new SpriteVisual(new Sprite(TEXwhite));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         } else {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         }
+        visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
     }
 }

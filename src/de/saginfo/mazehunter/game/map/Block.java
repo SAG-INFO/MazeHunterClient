@@ -21,24 +21,24 @@ public class Block {
     int BlockPositionX;
     int BlockPositionY;
 
-    public Block(boolean u, boolean r, boolean d, boolean l) {
-        BlockPositionX = GAMESCREEN_SINGLETON.game.world.getPositionBlockXinCoordinate(this);
-        BlockPositionY = GAMESCREEN_SINGLETON.game.world.getPositionBlockYinCoordinate(this);
-        
+    public Block(boolean u, boolean r, boolean d, boolean l, int blockx, int blocky) {
+      
         up = u;
         right = r;
         down = d;
         left = l;
+        
+        
         tilelist = new Tile[3][3];
-        tilelist[0][0] = new Corner(BlockPositionX, BlockPositionY);
-        tilelist[1][0] = new PathUp(d, BlockPositionX, BlockPositionY);
-        tilelist[2][0] = new Corner(BlockPositionX, BlockPositionY);
-        tilelist[0][1] = new PathSide(l, BlockPositionX, BlockPositionY);
-        tilelist[1][1] = new Center(BlockPositionX, BlockPositionY);
-        tilelist[2][1] = new PathSide(r, BlockPositionX, BlockPositionY);
-        tilelist[0][2] = new Corner(BlockPositionX, BlockPositionY);
-        tilelist[1][2] = new PathUp(u, BlockPositionX, BlockPositionY);
-        tilelist[2][2] = new Corner(BlockPositionX, BlockPositionY);
+        tilelist[0][0] = new Corner(blockx, blocky, 0, 0);
+        tilelist[1][0] = new PathUp(d, blockx, blocky, 1, 0);
+        tilelist[2][0] = new Corner(blockx, blocky, 2, 0);
+        tilelist[0][1] = new PathSide(l, blockx, blocky, 0, 1);
+        tilelist[1][1] = new Center(blockx, blocky, 1, 1);
+        tilelist[2][1] = new PathSide(r, blockx, blocky, 2, 1);
+        tilelist[0][2] = new Corner(blockx, blocky, 0, 2);
+        tilelist[1][2] = new PathUp(u, blockx, blocky, 1, 2);
+        tilelist[2][2] = new Corner(blockx, blocky, 2, 2);
 
         Corner.width = World.ecke;
         Corner.height = World.ecke;
@@ -48,6 +48,9 @@ public class Block {
         PathUp.width = World.center;
         PathSide.height = World.center;
         PathSide.width = World.ecke;
+        
+        BlockPositionX = blockx;
+        BlockPositionY = blocky;
 
     }
 
@@ -106,5 +109,5 @@ public class Block {
             return -1;
         }
     }
-    
+
 }

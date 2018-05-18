@@ -11,9 +11,11 @@ package de.saginfo.mazehunter.game.map;
  */
 public class Tile {
 
-    boolean open;
-    int blockPositionX;
-    int blockPositionY;
+    public boolean open;
+    public int blockPositionX;
+    public int blockPositionY;
+    public int tilePositionX;
+    public int tilePositionY;
 
     //Graphic image;
     public Tile() {
@@ -35,8 +37,8 @@ public class Tile {
     public boolean getOpen() {
         return open;
     }
-    
-    
+
+
 //    public int getPositionX() {
 //        Block.getPositionTileX(this) = r;
 //        for (int i = 0; i < Block.getPositionTileX(this) ; i++) {
@@ -45,5 +47,4 @@ public class Tile {
 //        }
 //                
 //    }
-    
 }
