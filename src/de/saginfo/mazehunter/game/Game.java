@@ -18,26 +18,24 @@ import java.util.ArrayList;
 public class Game {
 
     public final ArrayList<Player> players;
-    
-    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+
     private SpriteVisual visual;
-    
+
     public World world;
-    
+
     public Game() {
-    players = new ArrayList<>();
+        players = new ArrayList<>();
     }
 
-    public void startGame(){
+    public void startGame() {
         MovementInput movementInput = new MovementInput();
         MovementListener l = new MovementListener();
+
         
-        
-        visual = new SpriteVisual(new Sprite(TEX));
-        world = new World(50, 50);
+        world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
-    
+
     /**
      * this method is right now beeing called from
      * {@link LobbyListener#createPlayers()} dunno if this is the best place to

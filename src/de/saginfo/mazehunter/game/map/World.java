@@ -5,6 +5,9 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  *
  * @author julian.mittermeier
@@ -17,6 +20,12 @@ public class World {
     public static int center;
     public static int blockbreite;
 
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+    
+    public World(){
+        this(TEX.getWidth(), TEX.getWidth());
+    }
+    
     public World(int e, int c) {
         ecke = e;
         center = c;
@@ -50,7 +59,6 @@ public class World {
         for (int j = 0; j < breite; j++) {
             for (int i = 0; i < breite; i++) {
                 blocklist[j][i] = new Block(true, true, true, true, this.translateBlockToCoordinate(j), this.translateBlockToCoordinate(i));
-                System.out.println("BLOCKPOSITION " + j + " " + i);
             }
 
         }
@@ -115,7 +123,6 @@ public class World {
             for (int y = 0; y < this.breite; y++) {
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        System.out.println(this.isTileOpen(y, x, j, i));
                     }
                 }
             }
