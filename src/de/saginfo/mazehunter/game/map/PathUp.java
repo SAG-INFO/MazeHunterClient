@@ -29,11 +29,9 @@ public class PathUp extends Tile {
     public PathUp(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
         open = b;
         blockPositionX = xBlock;
-        blockPositionY = yTile;
+        blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
         tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
-        System.out.println("PathUpX" + tilePositionX);
-        System.out.println("PathUpY" + tilePositionY);
 
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));

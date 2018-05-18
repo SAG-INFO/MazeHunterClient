@@ -39,12 +39,8 @@ public class World {
                 for (int i = 0; i < breite; i++) {
                     blocklist[i][j] = new Block(b[h], b[h + 1], b[h + 2], b[h + 3], this.translateBlockToCoordinate(i), this.translateBlockToCoordinate(j));
                     h = h + 4;
-
                 }
             }
-
-        } else {
-            return;
         }
     }
 
@@ -128,19 +124,20 @@ public class World {
     }
 
     public int translateTileToCoordinate(int k) {
-        if (k == 0) {
-            return 0;
-        } else if (k == 1) {
-            return World.ecke;
-        } else if (k == 2) {
-            return World.ecke + World.center;
-        } else {
-            return -1;
+        switch (k) {
+            case 0:
+                return 0;
+            case 1:
+                return World.ecke;
+            case 2:
+                return World.ecke + World.center;
+            default:
+                return -1;
         }
     }
-    
+
     public int translateBlockToCoordinate(int k) {
-        return k*blockbreite;
+        return (k * blockbreite);
     }
 
 }

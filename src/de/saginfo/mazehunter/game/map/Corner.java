@@ -28,14 +28,12 @@ public class Corner extends Tile {
     public Corner(int xBlock, int yBlock, int xTile, int yTile) {
         open = false;
         blockPositionX = xBlock;
-        blockPositionY = yTile;
+        blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
         tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
-        System.out.println("CornerX" + tilePositionX);
-        System.out.println("CornerY" + tilePositionY);
 
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
+        visual.setPosition((tilePositionX+ blockPositionX), (tilePositionY+blockPositionY));
     }
 }

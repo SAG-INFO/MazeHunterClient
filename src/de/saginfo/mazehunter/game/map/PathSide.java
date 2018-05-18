@@ -29,11 +29,9 @@ public class PathSide extends Tile {
     public PathSide(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
         open = b;
         blockPositionX = xBlock;
-        blockPositionY = yTile;
+        blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
         tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
-        System.out.println("PathSideX" + tilePositionX);
-        System.out.println("PathSideY" + tilePositionY);
 
         if (open) {
             

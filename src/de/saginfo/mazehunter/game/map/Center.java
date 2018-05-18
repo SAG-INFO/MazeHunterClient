@@ -29,11 +29,9 @@ public class Center extends Tile {
     public Center(int xBlock, int yBlock, int xTile, int yTile) {
         open = true;
         blockPositionX = xBlock;
-        blockPositionY = yTile;
+        blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
         tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
-        System.out.println("CenterX" + tilePositionX);
-        System.out.println("CenterY" + tilePositionY);
         
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);

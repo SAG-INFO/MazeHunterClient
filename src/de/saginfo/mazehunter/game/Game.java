@@ -34,8 +34,8 @@ public class Game {
         
         
         visual = new SpriteVisual(new Sprite(TEX));
-        world = new World((int)visual.getWidth(), (int)visual.getHeight());
-        world.makeMap(true, true, true, false, true, true, true, false, true, true, true, false, true, true, true, false);
+        world = new World(50, 50);
+        world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
     
     /**
