@@ -1,13 +1,14 @@
 package de.saginfo.mazehunter.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import de.saginfo.mazehunter.client.networkData.AbilityConfigRequest;
 import de.saginfo.mazehunter.game.map.World;
-import de.saginfo.mazehunter.game.player.MovementInput;
-import de.saginfo.mazehunter.game.player.MovementListener;
+import de.saginfo.mazehunter.game.player.abilities.DashInput;
+import de.saginfo.mazehunter.game.player.abilities.DashListener;
+import de.saginfo.mazehunter.game.player.movement.MovementInput;
+import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.game.player.abilities.AbilityConfigListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -30,10 +31,19 @@ public class Game {
     public void startGame() {
         MovementInput movementInput = new MovementInput();
         MovementListener l = new MovementListener();
+        DashInput dashInput = new DashInput();
+        DashListener dashListener = new DashListener();
+        AbilityConfigListener acListener = new AbilityConfigListener();
+        //requestAbilityConfig(); disconnects the client from the host for some reason ... therefore in a comment atm (Karl Huber) @samuel @samuel @samuel
+        
 
         
         world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
+    }
+    
+    public void requestAbilityConfig() {
+        GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new AbilityConfigRequest());
     }
 
     /**

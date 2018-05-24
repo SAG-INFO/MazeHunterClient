@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.client.GameClient;
-import de.saginfo.mazehunter.client.networkData.PlayerLobby;
-import java.util.ArrayList;
+import de.saginfo.mazehunter.game.player.abilities.AbilityConfig;
 
 /**
  * Manages the main game (calles update, close, etc, ...)
@@ -28,6 +27,8 @@ public class GameScreen extends ScreenAdapter {
     public GameClient client;
     
     public InputMultiplexer inputMultiplexer;
+    
+    public AbilityConfig abiliyConfig;
 
     /**kann verwendet werden um von beliebiger Stelle auf z.B. das RenderSystem zuzugreifen*/
     public static GameScreen GAMESCREEN_SINGLETON;

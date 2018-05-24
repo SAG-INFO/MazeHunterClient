@@ -3,25 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player;
+package de.saginfo.mazehunter.game.player.abilities;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import de.saginfo.mazehunter.client.networkData.DashRequest;
 import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.game.player.Status;
+import static java.lang.Thread.sleep;
 
 /**
  *
  * @author Karl Huber
  * 
- * Checks if the Client pressed space and sends a dashrequest if done so.
+ * Checks if the user pressed space as well as if the player is currently effected by cc Abilities and sends a dashrequest if needed.
  */
 public class DashInput extends InputAdapter {
+    
+    boolean cooldownUp = true;
+    boolean cancel;
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Keys.SPACE) {
-            sendDashRequest();
+        if (keycode == Keys.SHIFT_LEFT) {
+            if (cooldownUp && Status.canMove == 0 && Status.canUseAbilities == 0) {
+                sendDashRequest();
+            }
         }
         return false;
     }
@@ -32,8 +39,7 @@ public class DashInput extends InputAdapter {
     }
     
     public void sendDashRequest() {
-        DashRequest dashRequest = new DashRequest();
-        GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(dashRequest);
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new DashRequest());
     }
     
     public DashInput() {

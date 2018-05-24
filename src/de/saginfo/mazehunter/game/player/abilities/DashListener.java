@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player;
+package de.saginfo.mazehunter.game.player.abilities;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.DashResponse;
 import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.game.player.Player;
 
 /**
  *
@@ -27,6 +28,7 @@ public class DashListener extends Listener{
             
             Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((DashResponse) object).id);
             player.position.set(((DashResponse) object).position);
+            player.velocity.set(((DashResponse) object).velocity);
         }
     }
 
