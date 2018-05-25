@@ -1,7 +1,6 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
-import de.saginfo.mazehunter.client.networkData.AbilityConfigRequest;
 import de.saginfo.mazehunter.game.map.World;
 import de.saginfo.mazehunter.game.player.abilities.DashInput;
 import de.saginfo.mazehunter.game.player.abilities.DashListener;
@@ -36,18 +35,13 @@ public class Game {
         DashListener dashListener = new DashListener();
         AbilityConfigListener acListener = new AbilityConfigListener();
         
-        //requestAbilityConfig(); disconnects the client from the host for some reason ... therefore in a comment atm (Karl Huber) @samuel @samuel @samuel
-        
         //Testing
-        CCTestInput test = new CCTestInput();
+        // CCTestInput test = new CCTestInput();
         
         world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
     
-    public void requestAbilityConfig() {
-        GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new AbilityConfigRequest());
-    }
 
     /**
      * this method is right now beeing called from

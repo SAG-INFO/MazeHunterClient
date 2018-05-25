@@ -50,7 +50,6 @@ public class GameClient extends Client {
         getKryo().register(MovementSpeedRequest.class);
         
         //Abilities Stuff
-        getKryo().register(AbilityConfigRequest.class);
         getKryo().register(AbilityConfigResponse.class);
         getKryo().register(DashRequest.class);
         getKryo().register(DashResponse.class);
