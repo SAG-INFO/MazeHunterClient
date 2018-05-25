@@ -11,6 +11,7 @@ import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.game.player.abilities.AbilityConfigListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
+import de.saginfo.mazehunter.util.CCTestInput;
 import java.util.ArrayList;
 
 /**
@@ -34,9 +35,11 @@ public class Game {
         DashInput dashInput = new DashInput();
         DashListener dashListener = new DashListener();
         AbilityConfigListener acListener = new AbilityConfigListener();
+        
         //requestAbilityConfig(); disconnects the client from the host for some reason ... therefore in a comment atm (Karl Huber) @samuel @samuel @samuel
         
-
+        //Testing
+        CCTestInput test = new CCTestInput();
         
         world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);

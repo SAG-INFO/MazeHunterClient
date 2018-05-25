@@ -44,11 +44,12 @@ public class GameClient extends Client {
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
         
-        //GameStuff
+        //Movement Stuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
+        getKryo().register(MovementSpeedRequest.class);
         
-        //Abilities
+        //Abilities Stuff
         getKryo().register(AbilityConfigRequest.class);
         getKryo().register(AbilityConfigResponse.class);
         getKryo().register(DashRequest.class);

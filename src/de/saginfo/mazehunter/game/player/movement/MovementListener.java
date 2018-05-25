@@ -21,7 +21,7 @@ public class MovementListener extends Listener{
     @Override
     public void received(Connection connection, Object object) {
         
-        if(object instanceof MovementResponse){
+        if(object instanceof MovementResponse) {
             
             Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((MovementResponse) object).id);
             player.position.set(((MovementResponse) object).position);

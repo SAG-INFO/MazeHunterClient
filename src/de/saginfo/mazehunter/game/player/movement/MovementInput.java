@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Timer;
 import de.saginfo.mazehunter.client.networkData.MovementRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
-import static de.saginfo.mazehunter.game.player.Status.canUseAbilities;
 
 /**
  *

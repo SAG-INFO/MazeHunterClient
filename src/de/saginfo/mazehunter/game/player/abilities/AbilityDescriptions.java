@@ -15,9 +15,12 @@ package de.saginfo.mazehunter.game.player.abilities;
  * type = "utility" eg. heal/trap keybind is SPACE 
  * type = "skillshot" eg. damage projectile keybind is leftmouse
  * type = "mobility" eg. dash keybind is SHIFT_LEFT
+ * 
+ * IF YOU HAVE AN IDEA FOR AN ABILITY, ADD IT HERE 
  */
 public class AbilityDescriptions {
+    
     public static String DASH_TYPE = "mobility";
     public static String DASH_DESCRIPTION = "Teleports the player a short distance in the direction he is currently walking.";
-    
+
 }

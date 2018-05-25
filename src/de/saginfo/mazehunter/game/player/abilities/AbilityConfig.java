@@ -12,8 +12,8 @@ package de.saginfo.mazehunter.game.player.abilities;
 public class AbilityConfig {
     
     //cooldown in seconds
-    public static int DASH_COOLDOWN;
-    public static int DASH_RANGE;
+    public int DASH_COOLDOWN;
+    public int DASH_RANGE;
 
     public AbilityConfig() {
     }
