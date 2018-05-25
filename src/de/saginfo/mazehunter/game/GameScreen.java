@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.client.GameClient;
-import de.saginfo.mazehunter.game.player.abilities.AbilityConfig;
+import de.saginfo.mazehunter.game.player.abilities.AbilityConfigs.BlizzardConfig;
+import de.saginfo.mazehunter.game.player.abilities.AbilityConfigs.DashConfig;
+import de.saginfo.mazehunter.game.player.abilities.AbilityConfigs.StandardHealConfig;
 
 /**
  * Manages the main game (calles update, close, etc, ...)
@@ -28,7 +30,9 @@ public class GameScreen extends ScreenAdapter {
     
     public InputMultiplexer inputMultiplexer;
     
-    public AbilityConfig abiliyConfig;
+    public DashConfig dashConfig;
+    public StandardHealConfig standardHealConfig;
+    public BlizzardConfig blizzardConfig;
 
     /**kann verwendet werden um von beliebiger Stelle auf z.B. das RenderSystem zuzugreifen*/
     public static GameScreen GAMESCREEN_SINGLETON;

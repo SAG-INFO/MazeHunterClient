@@ -2,12 +2,11 @@ package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.World;
-import de.saginfo.mazehunter.game.player.abilities.DashInput;
-import de.saginfo.mazehunter.game.player.abilities.DashListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.game.player.abilities.AbilityConfigListener;
+import de.saginfo.mazehunter.game.player.abilities.ChooseAbilities;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import de.saginfo.mazehunter.util.CCTestInput;
@@ -31,9 +30,13 @@ public class Game {
     public void startGame() {
         MovementInput movementInput = new MovementInput();
         MovementListener l = new MovementListener();
-        DashInput dashInput = new DashInput();
-        DashListener dashListener = new DashListener();
+        
         AbilityConfigListener acListener = new AbilityConfigListener();
+        
+        //temporary creation of the ability Listeners and stuff until we have a working menu to choose abilities manually.
+        ChooseAbilities.chooseDash();
+        ChooseAbilities.chooseBlizzard();
+        ChooseAbilities.chooseStandardHeal();
         
         //Testing
         // CCTestInput test = new CCTestInput();
@@ -41,6 +44,7 @@ public class Game {
         world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
+    
     
 
     /**
@@ -54,6 +58,8 @@ public class Game {
         player.name = name;
         player.position.set(position);
         players.add(player);
+        player.maxHealth = 100; //TODO: get the Config from the server
+        player.health = player.maxHealth;
     }
 
     public void update(float delta) {

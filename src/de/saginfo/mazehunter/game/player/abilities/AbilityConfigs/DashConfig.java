@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities;
+package de.saginfo.mazehunter.game.player.abilities.AbilityConfigs;
 
 /**
  *
  * @author Karl Huber
  */
-public class AbilityConfig {
+public class DashConfig {
     
     //cooldown in seconds
-    public int DASH_COOLDOWN;
-    public int DASH_RANGE;
+    public static int DASH_COOLDOWN = 6;
+    public static int DASH_RANGE;
 
-    public AbilityConfig() {
+    public DashConfig() {
     }
 }
