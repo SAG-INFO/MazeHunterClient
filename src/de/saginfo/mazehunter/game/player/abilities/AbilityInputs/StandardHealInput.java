@@ -8,7 +8,7 @@ package de.saginfo.mazehunter.game.player.abilities.AbilityInputs;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.Timer;
-import de.saginfo.mazehunter.client.networkData.abilities.standardHeal.StandardHealRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.StandardHealRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
 
@@ -39,7 +39,7 @@ public class StandardHealInput extends InputAdapter {
             public void run() {
                 cooldownUp = true;
             }
-        }, GameScreen.GAMESCREEN_SINGLETON.standardHealConfig.COOLDOWN);
+        }, GameScreen.GAMESCREEN_SINGLETON.config.STANDARDHEAL_COOLDOWN);
     }
     
     public void sendHealRequest() {

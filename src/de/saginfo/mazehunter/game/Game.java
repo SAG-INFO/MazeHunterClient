@@ -5,7 +5,6 @@ import de.saginfo.mazehunter.game.map.World;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
-import de.saginfo.mazehunter.game.player.abilities.AbilityConfigListener;
 import de.saginfo.mazehunter.game.player.abilities.ChooseAbilities;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
@@ -31,7 +30,7 @@ public class Game {
         MovementInput movementInput = new MovementInput();
         MovementListener l = new MovementListener();
         
-        AbilityConfigListener acListener = new AbilityConfigListener();
+        ConfigListener cL = new ConfigListener();
         
         //temporary creation of the ability Listeners and stuff until we have a working menu to choose abilities manually.
         ChooseAbilities.chooseDash();

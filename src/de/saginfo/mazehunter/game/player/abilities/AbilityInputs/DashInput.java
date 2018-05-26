@@ -8,7 +8,7 @@ package de.saginfo.mazehunter.game.player.abilities.AbilityInputs;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.Timer;
-import de.saginfo.mazehunter.client.networkData.abilities.dash.DashRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.DashRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
 
@@ -46,7 +46,7 @@ public class DashInput extends InputAdapter {
             public void run() {
                 cooldownUp = true;
             }
-        }, GameScreen.GAMESCREEN_SINGLETON.dashConfig.DASH_COOLDOWN);
+        }, GameScreen.GAMESCREEN_SINGLETON.config.DASH_COOLDOWN);
     }
     
     public void sendDashRequest() {

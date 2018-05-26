@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.client.networkData.abilities.blizzard;
+package de.saginfo.mazehunter.client.networkData.abilities;
 
 /**
  *
- * @author Karl Huber
+ * @author karl.huber
  */
-public class BlizzardConfigRequest {
+public class DashRequest {
 
-    public BlizzardConfigRequest() {
+    public DashRequest() {
     }
 }
