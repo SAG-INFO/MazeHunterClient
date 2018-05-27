@@ -23,7 +23,7 @@ public class StandardHealInput extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.F) {
-            if (cooldownUp && Status.canMove == 0 && Status.canUseAbilities == 0) {
+            if (cooldownUp && Status.canMove == 0 && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON != null) {
                 sendHealRequest();
                 startCooldown();
             }

@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.client.GameClient;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
-import de.saginfo.mazehunter.game.player.movement.MovementAnimation;
 
 /**
  * Manages the main game (calles update, close, etc, ...)
@@ -31,7 +30,6 @@ public class GameScreen extends ScreenAdapter {
     
     public PushConfig config;
     
-    public MovementAnimation movementAnimation;
 
     /**kann verwendet werden um von beliebiger Stelle auf z.B. das RenderSystem zuzugreifen*/
     public static GameScreen GAMESCREEN_SINGLETON;
@@ -45,8 +43,6 @@ public class GameScreen extends ScreenAdapter {
     public void show() {
         GAMESCREEN_SINGLETON = this;
         renderSystem = new RenderSystem();
-        
-        movementAnimation = new MovementAnimation();
         
         camera = new OrthographicCamera();
         camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);

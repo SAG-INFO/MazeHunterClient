@@ -76,8 +76,6 @@ public class MovementInput extends InputAdapter {
             movement = true;
         }
 
-        GameScreen.GAMESCREEN_SINGLETON.movementAnimation.update(angle, movement);
-        
         if (Status.canMove == 0) {
 
             MovementRequest movementRequest = new MovementRequest(angle, movement);
