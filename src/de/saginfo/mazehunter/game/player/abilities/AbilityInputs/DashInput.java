@@ -25,7 +25,7 @@ public class DashInput extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Keys.SHIFT_LEFT) {
-            if (cooldownUp && Status.canMove == 0 && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON != null) {
+            if (cooldownUp && Status.canMove == 0 && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
                 sendDashRequest();
                 startCooldown();
             }
