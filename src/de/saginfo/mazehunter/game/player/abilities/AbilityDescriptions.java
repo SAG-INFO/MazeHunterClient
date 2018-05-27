@@ -24,9 +24,8 @@ public class AbilityDescriptions {
     public static String DASH_TYPE = "mobility";
     public static String DASH_DESCRIPTION = "Teleports the player a short distance in the direction he is currently walking.";
     
-    //not implemented yet.
-    public static String HEAL_TYPE = "utility";
-    public static String HEAL_DESCRIPTION = "Roots and heals (yourself) over a period of time.";
+    public static String STANHEAL_TYPE = "utility";
+    public static String STANDARDHEAL_DESCRIPTION = "Roots and heals (yourself) over a period of time.";
     
     //not implemented yet.
     public static String BLIZZARD_TYPE = "attack";

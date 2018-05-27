@@ -8,7 +8,6 @@ package de.saginfo.mazehunter.game;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
-import de.saginfo.mazehunter.game.GameScreen;
 
 /**
  *
@@ -21,7 +20,6 @@ public class ConfigListener extends Listener {
         
         if(object instanceof PushConfig){
             GameScreen.GAMESCREEN_SINGLETON.config = (PushConfig)object;
-            System.out.println(GameScreen.GAMESCREEN_SINGLETON.config.BLIZZARD_COOLDOWN);
         }
     }
 

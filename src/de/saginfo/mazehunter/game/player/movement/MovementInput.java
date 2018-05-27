@@ -68,6 +68,7 @@ public class MovementInput extends InputAdapter {
     public void sendMovementRequest(Vector2 requestedVector) {
 
         boolean movement;
+        int angle = (int) requestedVector.angle();
 
         if (direction.isZero()) {
             movement = false;
@@ -75,9 +76,11 @@ public class MovementInput extends InputAdapter {
             movement = true;
         }
 
+        GameScreen.GAMESCREEN_SINGLETON.movementAnimation.update(angle, movement);
+        
         if (Status.canMove == 0) {
 
-            MovementRequest movementRequest = new MovementRequest((int) requestedVector.angle(), movement);
+            MovementRequest movementRequest = new MovementRequest(angle, movement);
             GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(movementRequest);
 
         } else {
