@@ -49,7 +49,7 @@ public class RenderSystem {
         visuals.sort(zComparator);
     }
 
-    public void removeSprite(Sprite s) {
+    public void removeSprite(Visual s) {
         visuals.remove(s);
     }
 

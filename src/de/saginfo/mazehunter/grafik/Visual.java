@@ -10,4 +10,7 @@ public interface Visual {
     public void draw(SpriteBatch batch, float delta);
     public int getZIndex();
     public void dispose();
+
+    public void setX(float f);
+    public void setY(float f);
 }

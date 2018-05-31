@@ -5,10 +5,14 @@
  */
 package de.saginfo.mazehunter.grafik;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import java.util.Arrays;
 
 /**
  *
@@ -21,15 +25,35 @@ public class AnimationVisual extends SpriteVisual {
     private boolean isPlaying = true;
 
     public AnimationVisual(float fps, String filepath, Animation.PlayMode pm) {
-        this(fps, findTextures(filepath), pm);
+        this(fps, createRegions(filepath), pm);
     }
     
-    private static Array<TextureRegion> findTextures(String name){
-        return null;
+    public static Array<TextureRegion> createRegions(String name){
+        Array<Texture> texs = findTextures(name);
+        Array<TextureRegion> res = new Array<>();
+        
+        for (Texture tex : texs) {
+            res.add(new TextureRegion(tex));
+        }
+        
+        return res;
+    }
+    
+    public static Array<Texture> findTextures(String name){
+        FileHandle f = Gdx.files.local(name);
+        Array<Texture> result = new Array<>();
+        
+        for (FileHandle fileHandle : f.parent().list()) {
+            if(!fileHandle.isDirectory() && fileHandle.file().getName().startsWith(f.nameWithoutExtension())){
+                result.add(new Texture(fileHandle));
+            }
+        }
+        
+        return result;
     }
     
     public AnimationVisual(float fps, Array<? extends TextureRegion> regions, Animation.PlayMode playMode) {
-        animation = new Animation(fps, regions, playMode);
+        animation = new Animation(1f/fps, regions, playMode);
         setRegion(regions.first());
     }
 
@@ -48,7 +72,6 @@ public class AnimationVisual extends SpriteVisual {
 
     private void update() {
         super.setRegion(animation.getKeyFrame(animation_time));
-
         super.setSize(getRegionWidth(), getRegionHeight());
     }
 
