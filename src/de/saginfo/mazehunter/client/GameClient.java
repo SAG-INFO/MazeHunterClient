@@ -55,6 +55,9 @@ public class GameClient extends Client {
         
         //Config Stuff
         getKryo().register(PushConfig.class);
+
+        //Ability Stuff
+        getKryo().register(HealthUpdate.class);
         
         //Dash
         getKryo().register(DashRequest.class);

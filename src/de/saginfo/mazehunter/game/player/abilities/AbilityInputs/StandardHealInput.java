@@ -24,7 +24,7 @@ public class StandardHealInput extends InputAdapter {
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.F) {
             if (cooldownUp && Status.canMove == 0 && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
-                sendHealRequest();
+                sendRequest();
                 startCooldown();
             }
         }
@@ -42,7 +42,7 @@ public class StandardHealInput extends InputAdapter {
         }, GameScreen.GAMESCREEN_SINGLETON.config.STANDARDHEAL_COOLDOWN);
     }
     
-    public void sendHealRequest() {
+    public void sendRequest() {
             GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new StandardHealRequest());
     }
     

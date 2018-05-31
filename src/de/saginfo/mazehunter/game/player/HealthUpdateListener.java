@@ -7,26 +7,26 @@ package de.saginfo.mazehunter.game.player;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import de.saginfo.mazehunter.client.networkData.MovementResponse;
+import de.saginfo.mazehunter.client.networkData.HealthUpdate;
 import de.saginfo.mazehunter.game.GameScreen;
 
 /**
  *
  * @author Karl Huber
  */
-public class HealUpdateListener extends Listener{
+public class HealthUpdateListener extends Listener{
+    
     @Override
     public void received(Connection connection, Object object) {
         
-        if(object instanceof MovementResponse) {
+        if(object instanceof HealthUpdate) {
             
-            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((MovementResponse) object).id);
-            player.position.set(((MovementResponse) object).position);
-            player.velocity.set(((MovementResponse) object).velocity);
+            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((HealthUpdate) object).id);
+            player.health += ((HealthUpdate) object).change;
         }
     }
 
-    public HealUpdateListener() {
+    public HealthUpdateListener() {
         GameScreen.GAMESCREEN_SINGLETON.client.addListener(this);
     }
 }
