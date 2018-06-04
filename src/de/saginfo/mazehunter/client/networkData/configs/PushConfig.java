@@ -31,7 +31,12 @@ public class PushConfig {
     public int STANDARDHEAL_TOTALHEAL;
     
     public int DEFAULT_SPEED;
-    public int DEFAULT_HEALTHPOINTS;
+    
+    public int FIREBALL_DAMAGE;
+    public int FIREBALL_SPEED;
+    public int FIREBALL_SIZE;
+    public int FIREBALL_CHARGES;
+    public float FIREBALL_CD_BETWEEN_USES;
 
     public PushConfig() {
     }

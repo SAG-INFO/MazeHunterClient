@@ -7,30 +7,27 @@ package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import de.saginfo.mazehunter.client.networkData.abilities.DashResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.StandardHealResponse;
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.player.Player;
 
 /**
  *
  * @author Karl Huber
  */
-public class DashListener extends Listener {
+public class FireballListener extends Listener{
     
     //TODO Animation
     
     @Override
     public void received(Connection connection, Object object) {
         
-        if(object instanceof DashResponse){
+        if(object instanceof StandardHealResponse) {
             
-            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((DashResponse) object).id);
-            player.position.set(((DashResponse) object).position);
-            player.velocity.set(((DashResponse) object).velocity);
         }
     }
 
-    public DashListener() {
+    public FireballListener() {
         GameScreen.GAMESCREEN_SINGLETON.client.addListener(this);
     }
 }
+
