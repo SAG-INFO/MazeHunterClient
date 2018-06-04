@@ -9,8 +9,8 @@ package de.saginfo.mazehunter.client.networkData.abilities;
  *
  * @author Karl Huber
  */
-public class StandardHealRequest {
+public class UtilityResponse {
 
-    public StandardHealRequest() {
+    public UtilityResponse() {
     }
 }

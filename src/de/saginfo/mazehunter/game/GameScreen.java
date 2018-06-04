@@ -61,6 +61,7 @@ public class GameScreen extends ScreenAdapter {
         game.update(delta);
         camera.update();
         renderSystem.render(delta);
+        
     }
 
     @Override

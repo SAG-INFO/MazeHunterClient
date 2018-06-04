@@ -6,6 +6,7 @@ import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.AttackInput;
 import de.saginfo.mazehunter.game.player.abilities.ChooseAbilities;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
@@ -30,6 +31,7 @@ public class Game {
         MovementInput movementInput = new MovementInput();
         MovementListener ml = new MovementListener();
         HealthUpdateListener hul = new HealthUpdateListener();
+        AttackInput aI = new AttackInput();
         
         ConfigListener cL = new ConfigListener();
         

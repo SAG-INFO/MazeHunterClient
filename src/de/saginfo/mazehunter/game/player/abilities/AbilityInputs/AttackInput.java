@@ -6,12 +6,11 @@
 package de.saginfo.mazehunter.game.player.abilities.AbilityInputs;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Timer;
-import de.saginfo.mazehunter.client.networkData.abilities.FireballRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.AttackRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
 
@@ -20,62 +19,13 @@ import de.saginfo.mazehunter.game.player.Status;
  * @author Karl Huber
  */
 public class AttackInput extends InputAdapter {
-    
-    public boolean canCollect = true;
-    
-    public int fireBallCharges;
-    public boolean canUseFireball;
-    
-    public boolean blizzardCharges;
-    
+   
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Buttons.LEFT && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
-            if (fireBallCharges > 0 && canUseFireball) {
-                useFireBall();
-            } else if (blizzardCharges) {
-                useBlizzard();
-            }
+        if (keycode == Keys.SPACE && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new AttackRequest(getMouseAngle()));
         }
         return false;
-    }
-    
-    public void useFireBall() {
-        fireBallCharges--;
-        if (fireBallCharges == 0) {
-            canCollect = true;
-        }
-        
-        GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new FireballRequest(getMouseAngle()));
-        
-        canUseFireball = false;
-        Timer t = new Timer();
-        t.scheduleTask(new Timer.Task(){
-            @Override
-            public void run() {
-                canUseFireball = true;
-            }
-        }, GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_CD_BETWEEN_USES);
-    }
-    
-    public void useBlizzard() {
-        blizzardCharges = false;
-        canCollect = true;
-        //TODO: Request Blizzard
-    }
-
-    public void collectFireball() {
-        if (canCollect) {
-            canCollect = false;
-            fireBallCharges = GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_CHARGES;
-        }
-    }
-    
-    public void collectBlizzard() {
-        if (canCollect) {
-            canCollect = false;
-            blizzardCharges = true;
-        }
     }
     
     public float getMouseAngle() {

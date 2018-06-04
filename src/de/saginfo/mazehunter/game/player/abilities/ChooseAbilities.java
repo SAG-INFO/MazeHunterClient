@@ -5,10 +5,10 @@
  */
 package de.saginfo.mazehunter.game.player.abilities;
 
-import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.DashInput;
+import de.saginfo.mazehunter.game.player.abilities.dash.DashInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
-import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
-import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
+import de.saginfo.mazehunter.game.player.abilities.dash.DashListener;
+import de.saginfo.mazehunter.game.player.abilities.standardheal.StandardHealListener;
 
 /**
  *

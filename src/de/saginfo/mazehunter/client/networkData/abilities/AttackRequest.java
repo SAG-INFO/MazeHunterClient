@@ -9,13 +9,13 @@ package de.saginfo.mazehunter.client.networkData.abilities;
  *
  * @author Karl Huber
  */
-public class FireballRequest {
+public class AttackRequest {
     public float angle;
 
-    public FireballRequest(float angle) {
+    public AttackRequest(float angle) {
         this.angle = angle;
     }
 
-    public FireballRequest() {
+    public AttackRequest() {
     }
 }
