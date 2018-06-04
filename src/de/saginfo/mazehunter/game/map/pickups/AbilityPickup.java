@@ -1,4 +1,4 @@
-package de.saginfo.mazehunter.game.map;
+package de.saginfo.mazehunter.game.map.pickups;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.GameScreen;
@@ -14,11 +14,10 @@ public class AbilityPickup {
     public String abilityName;
 
     public AbilityPickup(Vector2 position, String name) {
-        System.out.println("cool");
         this.position = new Vector2(position);
         this.abilityName = name;
         
-        visual = new SpriteVisual("assets\\abilities\\"+name+"Pickup.png");
+        visual = new SpriteVisual("assets\\abilities\\"+name+"\\pickup.png");
         visual.setPosition(position.x, position.y);
         visual.setZIndex(10);
         

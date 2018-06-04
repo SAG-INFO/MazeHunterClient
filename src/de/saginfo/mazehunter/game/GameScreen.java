@@ -25,14 +25,11 @@ public class GameScreen extends ScreenAdapter {
     
     public OrthographicCamera camera;
     public Viewport viewport;
-    
     public GameClient client;
-    
     public InputMultiplexer inputMultiplexer;
+    public HUD hud;
     
     public PushConfig config;
-    
-    public HUD hud;
     
     /**kann verwendet werden um von beliebiger Stelle auf z.B. das RenderSystem zuzugreifen*/
     public static GameScreen GAMESCREEN_SINGLETON;

@@ -11,6 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import de.saginfo.mazehunter.client.networkData.ConnectResponse;
 import de.saginfo.mazehunter.client.networkData.*;
+import de.saginfo.mazehunter.client.networkData.abilities.DisposePickup;
+import de.saginfo.mazehunter.client.networkData.abilities.EquipAbility;
+import de.saginfo.mazehunter.client.networkData.abilities.SpawnPickup;
 import de.saginfo.mazehunter.client.networkData.abilities.StandardHealRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.StandardHealResponse;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
@@ -68,5 +71,10 @@ public class GameClient extends Client {
         getKryo().register(StandardHealResponse.class);
         
         //Blizzard
+        
+        //Pickups
+        getKryo().register(SpawnPickup.class);
+        getKryo().register(DisposePickup.class);
+        getKryo().register(EquipAbility.class);
     }
 }
