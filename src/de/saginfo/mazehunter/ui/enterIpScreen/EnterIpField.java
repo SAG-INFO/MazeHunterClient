@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
-import de.saginfo.mazehunter.ui.Menu;
+import de.saginfo.mazehunter.ui.UI;
 
 /**
  *
@@ -32,7 +32,7 @@ public class EnterIpField extends TextField{
             Sprite bg = new Sprite(new Texture("assets\\ui\\textField.png"));
             background = new NinePatchDrawable(new NinePatch(bg, 10, 10, 10, 10));
 //            selection = new NinePatchDrawable(new NinePatch(atlas.createSprite("selection"), 0, 0, 0, 0));
-            font = Menu.normalFont;
+            font = UI.normalFont;
             fontColor = Color.BLACK;
         }
     }

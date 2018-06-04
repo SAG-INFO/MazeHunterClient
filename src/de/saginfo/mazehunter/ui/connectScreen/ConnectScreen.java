@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.MazeHunterMain;
 import de.saginfo.mazehunter.client.GameClient;
-import de.saginfo.mazehunter.ui.Menu;
+import de.saginfo.mazehunter.ui.UI;
 import de.saginfo.mazehunter.ui.enterIpScreen.EnterIpScreen;
 import java.io.IOException;
 
@@ -61,7 +61,7 @@ public class ConnectScreen extends ScreenAdapter {
         root.setFillParent(true);
         stage.addActor(root);
 
-        label = new Label("Connecting to " + ip + "...", new Label.LabelStyle(Menu.fancyFont, Color.BLACK));
+        label = new Label("Connecting to " + ip + "...", new Label.LabelStyle(UI.fancyFont, Color.BLACK));
         root.add(label);
     }
 

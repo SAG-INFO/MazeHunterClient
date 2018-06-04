@@ -24,24 +24,22 @@ public class ChooseAbilities {
     public static String ability4; //skillshot
     
     public static void chooseDash() {
-        ability1 = "Dash";
+        //ability1 = "Dash";
         DashInput dashInput = new DashInput();
         DashListener dashListener = new DashListener();
+        
     }
     
     public static void chooseStandardHeal() {
         ability2 = "Heal";
         StandardHealInput sHealInput = new StandardHealInput();
         StandardHealListener sHealListener = new StandardHealListener();
+                
     }
     
     public static void chooseBlizzard() {
         ability3 = "Blizzard";
         //TODO: Input/Listener
-    }
-    
-    public static void chooseFireball() {
-        ability4 = "Fireball";
-        //TODO: Input/Listener
+        
     }
 }
