@@ -1,6 +1,7 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
+import de.saginfo.mazehunter.game.map.PickupManager;
 import de.saginfo.mazehunter.game.map.World;
 import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
@@ -24,6 +25,7 @@ public class Game {
 
     public Game() {
         players = new ArrayList<>();
+        
     }
 
     public void startGame() {
@@ -38,6 +40,7 @@ public class Game {
         ChooseAbilities.chooseBlizzard();
         ChooseAbilities.chooseStandardHeal();
         
+        PickupManager manager = new PickupManager();
         //Testing
         // CCTestInput test = new CCTestInput();
         
