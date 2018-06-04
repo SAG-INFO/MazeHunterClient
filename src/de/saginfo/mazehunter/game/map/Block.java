@@ -86,31 +86,31 @@ public class Block {
 
     //position -1 means not found
     public int getPostitionTileXinCoordinate(Tile tile) {
-        int k = -1;
-        k = this.getPositionTileXinTile(tile);
-        if (k == 0) {
-            return 0;
-        } else if (k == 1) {
-            return World.ecke;
-        } else if (k == 2) {
-            return World.ecke + World.center;
-        } else {
-            return -1;
+        int k = this.getPositionTileXinTile(tile);
+        switch (k) {
+            case 0:
+                return 0;
+            case 1:
+                return World.ecke;
+            case 2:
+                return World.ecke + World.center;
+            default:
+                return -1;
         }
     }
 
     //position -1 means not found
     public int getPostitionTileYinCoordinate(Tile tile) {
-        int k = -1;
-        k = this.getPositionTileYintTile(tile);
-        if (k == 0) {
-            return 0;
-        } else if (k == 1) {
-            return World.ecke;
-        } else if (k == 2) {
-            return World.ecke + World.center;
-        } else {
-            return -1;
+        int k = this.getPositionTileYintTile(tile);
+        switch (k) {
+            case 0:
+                return 0;
+            case 1:
+                return World.ecke;
+            case 2:
+                return World.ecke + World.center;
+            default:
+                return -1;
         }
     }
 
