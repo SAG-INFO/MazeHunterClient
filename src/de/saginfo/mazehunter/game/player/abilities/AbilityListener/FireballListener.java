@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities.fireball;
+package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -26,7 +26,8 @@ public class FireballListener extends Listener{
     public void received(Connection connection, Object object) {
         
         if(object instanceof FireballResponse) {
-            fireballs.add(new FireballProjectile(((FireballResponse)object).velocity, ((FireballResponse)object).position, GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_SIZE));
+            System.out.println("recieved request");
+            fireballs.add(new FireballProjectile(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).id).position, GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_SIZE));
         }
     }
 

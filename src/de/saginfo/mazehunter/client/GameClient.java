@@ -6,14 +6,14 @@
 package de.saginfo.mazehunter.client;
 
 import de.saginfo.mazehunter.client.networkData.abilities.DashResponse;
-import de.saginfo.mazehunter.client.networkData.abilities.DashRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.MobilityRequest;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import de.saginfo.mazehunter.client.networkData.ConnectResponse;
 import de.saginfo.mazehunter.client.networkData.*;
 import de.saginfo.mazehunter.client.networkData.abilities.AttackRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.FireballResponse;
-import de.saginfo.mazehunter.client.networkData.abilities.UtilityResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.UtilityRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.StandardHealResponse;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
 import java.io.IOException;
@@ -62,11 +62,11 @@ public class GameClient extends Client {
         getKryo().register(HealthUpdate.class);
         
         //Dash
-        getKryo().register(DashRequest.class);
+        getKryo().register(MobilityRequest.class);
         getKryo().register(DashResponse.class);
 
         //StandardHeal
-        getKryo().register(UtilityResponse.class);
+        getKryo().register(UtilityRequest.class);
         getKryo().register(StandardHealResponse.class);
         
         //SO NE GROßE FEUERBALL JUNGE

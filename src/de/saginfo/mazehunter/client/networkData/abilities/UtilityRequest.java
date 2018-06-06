@@ -7,10 +7,10 @@ package de.saginfo.mazehunter.client.networkData.abilities;
 
 /**
  *
- * @author karl.huber
+ * @author Karl Huber
  */
-public class DashRequest {
+public class UtilityRequest {
 
-    public DashRequest() {
+    public UtilityRequest() {
     }
 }

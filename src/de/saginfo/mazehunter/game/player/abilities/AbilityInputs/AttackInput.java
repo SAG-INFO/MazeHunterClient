@@ -23,18 +23,18 @@ public class AttackInput extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Keys.SPACE && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
-            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new AttackRequest(getMouseAngle()));
+            AttackRequest aR = new AttackRequest(getMouseAngle());
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(aR);
+            System.out.println(getMouseAngle());
         }
         return false;
     }
     
     public float getMouseAngle() {
         final Vector2 playerPos = new Vector2(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position);
-        final Vector2 mousePos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
         final Vector3 unpPlayerPos3 = new Vector3(GameScreen.GAMESCREEN_SINGLETON.camera.unproject(new Vector3(playerPos.x, playerPos.y, 0)));
         final Vector2 unpPlayerPos2 = new Vector2(unpPlayerPos3.x, unpPlayerPos3.y);
-        final Vector2 playerToMouse = new Vector2(mousePos.sub(unpPlayerPos2));
-        return playerToMouse.angle();
+        return new Vector2(new Vector2(Gdx.input.getX(), Gdx.input.getY()).sub(unpPlayerPos2)).angle();
     }
     
     public AttackInput() {

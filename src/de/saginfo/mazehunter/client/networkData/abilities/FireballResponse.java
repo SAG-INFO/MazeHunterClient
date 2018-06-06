@@ -12,13 +12,11 @@ import com.badlogic.gdx.math.Vector2;
  * @author Karl Huber
  */
 public class FireballResponse {
-    int id;
-    public Vector2 position;
+    public int id;
     public Vector2 velocity;
 
-    public FireballResponse(int id, Vector2 position, Vector2 velocity) {
+    public FireballResponse(int id, Vector2 velocity) {
         this.id = id;
-        this.position = position;
         this.velocity = velocity;
     }
 
