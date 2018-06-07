@@ -5,9 +5,9 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.AbilityInputs;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
-import de.saginfo.mazehunter.client.networkData.abilities.UtilityRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.requests.UtilityRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
 
@@ -19,8 +19,9 @@ public class UtilityInput extends InputAdapter {
     
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.F && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
+        if (keycode == Keys.F && Status.canUseAbilities == 0) {
             GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new UtilityRequest());
+            System.out.println("UtilityRequest sent.");
         }
         return false;
     }

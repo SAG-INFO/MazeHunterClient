@@ -13,8 +13,8 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
-import de.saginfo.mazehunter.game.player.abilities.ChooseAbilities;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
+import de.saginfo.mazehunter.game.player.abilities.projectiles.ProjectileManager;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -31,6 +31,8 @@ public class Game {
     //TODO: Migrate Pickupmanager into Map, or somewhere else. 
     public PickupManager pickupManager;
     
+    public ProjectileManager projectileManager;
+    
     public Game() {
         players = new ArrayList<>();
     }
@@ -46,6 +48,8 @@ public class Game {
         createAbilityIO();
         
         pickupManager = new PickupManager();
+        
+        projectileManager = new ProjectileManager();
         
         //Testing
         // CCTestInput test = new CCTestInput();

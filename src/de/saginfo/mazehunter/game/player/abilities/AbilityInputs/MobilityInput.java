@@ -8,7 +8,7 @@ package de.saginfo.mazehunter.game.player.abilities.AbilityInputs;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.Timer;
-import de.saginfo.mazehunter.client.networkData.abilities.MobilityRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.requests.MobilityRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
 

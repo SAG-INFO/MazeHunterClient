@@ -7,7 +7,7 @@ package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import de.saginfo.mazehunter.client.networkData.abilities.DashResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.DashResponse;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Player;
 

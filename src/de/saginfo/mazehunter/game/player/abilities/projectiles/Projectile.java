@@ -18,6 +18,7 @@ public abstract class Projectile {
     Vector2 velocity;
     Vector2 position;
     float radius;
+    int id;
     SpriteVisual visual;
     
     public void dispose() {}
@@ -31,11 +32,12 @@ public abstract class Projectile {
         visual.setY(position.y);
     }
 
-    public Projectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual) {
+    public Projectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual, int id) {
         this.velocity = velocity;
         this.position = position;
         this.radius = radius;
         this.visual = visual;
+        this.id = id;
     }
 }
 

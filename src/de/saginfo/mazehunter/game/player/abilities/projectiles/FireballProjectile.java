@@ -15,9 +15,8 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class FireballProjectile extends Projectile {
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual) {
-        super(velocity, position, radius, visual);
+    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual, int id) {
+        super(velocity, position, radius, visual, id);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        
     }
 }

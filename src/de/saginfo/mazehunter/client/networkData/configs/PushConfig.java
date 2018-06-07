@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package de.saginfo.mazehunter.client.networkData.configs;
-
 /**
  *
  * @author Karl Huber
