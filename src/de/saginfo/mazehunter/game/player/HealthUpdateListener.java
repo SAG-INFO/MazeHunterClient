@@ -20,8 +20,9 @@ public class HealthUpdateListener extends Listener{
     public void received(Connection connection, Object object) {
         
         if(object instanceof HealthUpdate) {
+            
             Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((HealthUpdate) object).id);
-            player.health = ((HealthUpdate) object).newHP;
+            player.health += ((HealthUpdate) object).change;
         }
     }
 

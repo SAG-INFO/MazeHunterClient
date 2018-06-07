@@ -33,15 +33,12 @@ public class ChooseAbilities {
         ability2 = "Heal";
         UtilityInput sHealInput = new UtilityInput();
         StandardHealListener sHealListener = new StandardHealListener();
+                
     }
     
     public static void chooseBlizzard() {
         ability3 = "Blizzard";
         //TODO: Input/Listener
-    }
-    
-    public static void chooseFireball() {
-        ability4 = "Fireball";
-        //TODO: Input/Listener
+        
     }
 }

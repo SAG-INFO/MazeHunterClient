@@ -2,6 +2,7 @@ package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.World;
+import de.saginfo.mazehunter.game.map.pickups.PickupManager;
 import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
@@ -13,6 +14,7 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.ChooseAbilities;
+import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -23,11 +25,12 @@ import java.util.ArrayList;
 public class Game {
 
     public final ArrayList<Player> players;
-
     private SpriteVisual visual;
-
     public World world;
-
+    
+    //TODO: Migrate Pickupmanager into Map, or somewhere else. 
+    public PickupManager pickupManager;
+    
     public Game() {
         players = new ArrayList<>();
     }
@@ -36,10 +39,13 @@ public class Game {
         MovementInput movementInput = new MovementInput();
         MovementListener ml = new MovementListener();
         HealthUpdateListener hul = new HealthUpdateListener();
+        EquipAbilityListener eal = new EquipAbilityListener();
         
         ConfigListener cL = new ConfigListener();
         
         createAbilityIO();
+        
+        pickupManager = new PickupManager();
         
         //Testing
         // CCTestInput test = new CCTestInput();

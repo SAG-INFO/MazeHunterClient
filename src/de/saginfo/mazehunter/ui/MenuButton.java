@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import de.saginfo.mazehunter.ui.Menu;
+import de.saginfo.mazehunter.ui.UI;
 
 /**
  *
@@ -37,7 +37,7 @@ public class MenuButton extends TextButton{
             up = new NinePatchDrawable(new NinePatch(upSprite, 10, 10, 10, 10));
             down = new NinePatchDrawable(new NinePatch(downSprite, 10, 10, 10, 10));
             over = new NinePatchDrawable(new NinePatch(overSprite, 10, 10, 10, 10));
-            font = Menu.fancyFont;
+            font = UI.fancyFont;
             fontColor = Color.BLACK;
         }
     }
