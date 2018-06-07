@@ -18,6 +18,5 @@ public class FireballProjectile extends Projectile {
     public FireballProjectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual) {
         super(velocity, position, radius, visual);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        
     }
 }

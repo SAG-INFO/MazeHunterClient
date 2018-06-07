@@ -15,7 +15,6 @@ import de.saginfo.mazehunter.client.networkData.*;
 import de.saginfo.mazehunter.client.networkData.abilities.DisposePickup;
 import de.saginfo.mazehunter.client.networkData.abilities.EquipAbility;
 import de.saginfo.mazehunter.client.networkData.abilities.SpawnPickup;
-import de.saginfo.mazehunter.client.networkData.abilities.StandardHealRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.AttackRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.FireballResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.UtilityRequest;
@@ -74,7 +73,7 @@ public class GameClient extends Client {
         getKryo().register(StandardHealResponse.class);
         
         //Blizzard
-      getKryo().register(FireballResponse.class);
+        getKryo().register(FireballResponse.class);
         
         //Pickups
         getKryo().register(SpawnPickup.class);

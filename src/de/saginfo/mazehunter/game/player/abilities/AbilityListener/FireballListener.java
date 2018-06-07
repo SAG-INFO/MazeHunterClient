@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class FireballListener extends Listener{
      
     //TODO Animation
-        
+    
     public ArrayList<FireballProjectile> fireballs;
-    private SpriteVisual visual;
+    private final SpriteVisual visual;
     
     @Override
     public void received(Connection connection, Object object) {
@@ -38,4 +38,3 @@ public class FireballListener extends Listener{
         visual = new SpriteVisual("assets\\img\\player\\fireball.png");
     }
 }
-
