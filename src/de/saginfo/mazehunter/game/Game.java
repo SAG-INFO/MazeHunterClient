@@ -7,6 +7,12 @@ import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.AttackInput;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.MobilityInput;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.ChooseAbilities;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
@@ -37,10 +43,7 @@ public class Game {
         
         ConfigListener cL = new ConfigListener();
         
-        //temporary creation of the ability Listeners and stuff until we have a working menu to choose abilities manually.
-        ChooseAbilities.chooseDash();
-        ChooseAbilities.chooseBlizzard();
-        ChooseAbilities.chooseStandardHeal();
+        createAbilityIO();
         
         pickupManager = new PickupManager();
         
@@ -51,7 +54,15 @@ public class Game {
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
     
-    
+    public void createAbilityIO() {
+        AttackInput aI = new AttackInput();
+        UtilityInput uI = new UtilityInput();
+        MobilityInput mI = new MobilityInput();
+        
+        DashListener dL = new DashListener();
+        FireballListener fL = new FireballListener();
+        StandardHealListener shL = new StandardHealListener();
+    }
 
     /**
      * this method is right now beeing called from

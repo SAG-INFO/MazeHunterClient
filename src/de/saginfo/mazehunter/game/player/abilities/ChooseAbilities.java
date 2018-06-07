@@ -5,8 +5,8 @@
  */
 package de.saginfo.mazehunter.game.player.abilities;
 
-import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.DashInput;
-import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.StandardHealInput;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.MobilityInput;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 
@@ -24,15 +24,14 @@ public class ChooseAbilities {
     public static String ability4; //skillshot
     
     public static void chooseDash() {
-        //ability1 = "Dash";
-        DashInput dashInput = new DashInput();
+        ability1 = "Dash";
+        MobilityInput dashInput = new MobilityInput();
         DashListener dashListener = new DashListener();
-        
     }
     
     public static void chooseStandardHeal() {
         ability2 = "Heal";
-        StandardHealInput sHealInput = new StandardHealInput();
+        UtilityInput sHealInput = new UtilityInput();
         StandardHealListener sHealListener = new StandardHealListener();
                 
     }

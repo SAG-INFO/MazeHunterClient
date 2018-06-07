@@ -13,11 +13,9 @@ import de.saginfo.mazehunter.game.player.Player;
 
 /**
  *
- * @author karl.huber
- * 
- * Listens for the serverresponse to the dashrequest therefore renders the dash animation and updates the position.
+ * @author Karl Huber
  */
-public class DashListener extends Listener{
+public class DashListener extends Listener {
     
     //TODO Animation
     

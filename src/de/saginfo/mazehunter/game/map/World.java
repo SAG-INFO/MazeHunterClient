@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class World {
 
     private Block[][] blocklist;
-    public int breite;
+    public int worldwidth;
     public static int ecke;
     public static int center;
     public static int blockbreite;
@@ -35,17 +35,17 @@ public class World {
     /**
      * World generiert die Map. Die Booleanwerte werden im Uhrzeigersinn,
      * beginnend oben eingetragen. Anschließend werden zuerst die Zeilen und
-     * dann die Spalten generiert, beginnend neim Ursprung (0|0).
+     * dann die Spalten generiert, beginnend beim Ursprung (0|0).
      *
      * @param b = größe der welt
      */
     public void makeMap(boolean... b) {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
-            breite = (int) Math.sqrt(b.length / 4);
-            blocklist = new Block[breite][breite];
+            worldwidth = (int) Math.sqrt(b.length / 4);
+            blocklist = new Block[worldwidth][worldwidth];
             int h = 0;
-            for (int j = 0; j < breite; j++) {
-                for (int i = 0; i < breite; i++) {
+            for (int j = 0; j < worldwidth; j++) {
+                for (int i = 0; i < worldwidth; i++) {
                     blocklist[i][j] = new Block(b[h], b[h + 1], b[h + 2], b[h + 3], this.translateBlockToCoordinate(i), this.translateBlockToCoordinate(j));
                     h = h + 4;
                 }
@@ -54,10 +54,10 @@ public class World {
     }
 
     public void makeTestMap(int größe) {
-        breite = größe;
-        blocklist = new Block[breite][breite];
-        for (int j = 0; j < breite; j++) {
-            for (int i = 0; i < breite; i++) {
+        worldwidth = größe;
+        blocklist = new Block[worldwidth][worldwidth];
+        for (int j = 0; j < worldwidth; j++) {
+            for (int i = 0; i < worldwidth; i++) {
                 blocklist[j][i] = new Block(true, true, true, true, this.translateBlockToCoordinate(j), this.translateBlockToCoordinate(i));
             }
 
@@ -66,8 +66,8 @@ public class World {
 
     //position -1 means not found
     public int getPositionBlockXinBlock(Block block) {
-        for (int j = 0; j < breite; j++) {
-            for (int i = 0; i < breite; i++) {
+        for (int j = 0; j < worldwidth; j++) {
+            for (int i = 0; i < worldwidth; i++) {
                 if (blocklist[j][i] == block) {
                     return j;
                 }
@@ -91,8 +91,8 @@ public class World {
 
     //position -1 means not found
     public int getPositionBlockYinBlock(Block block) {
-        for (int j = 0; j < breite; j++) {
-            for (int i = 0; i < breite; i++) {
+        for (int j = 0; j < worldwidth; j++) {
+            for (int i = 0; i < worldwidth; i++) {
                 if (blocklist[j][i] == block) {
                     return i;
                 }
@@ -119,8 +119,8 @@ public class World {
     }
 
     public void checkTileOpenStatus() {
-        for (int x = 0; x < this.breite; x++) {
-            for (int y = 0; y < this.breite; y++) {
+        for (int x = 0; x < this.worldwidth; x++) {
+            for (int y = 0; y < this.worldwidth; y++) {
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
                     }
@@ -146,5 +146,7 @@ public class World {
     public int translateBlockToCoordinate(int k) {
         return (k * blockbreite);
     }
+    
+    
 
 }
