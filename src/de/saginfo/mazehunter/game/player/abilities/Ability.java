@@ -5,11 +5,6 @@
  */
 package de.saginfo.mazehunter.game.player.abilities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import de.saginfo.mazehunter.game.GameScreen;
-
 /**
  *
  * @author Karl Huber

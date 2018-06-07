@@ -60,19 +60,13 @@ public class GameClient extends Client {
 
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
-        
-        //Dash
-        getKryo().register(MobilityRequest.class);
-        getKryo().register(DashResponse.class);
-
-        //StandardHeal
-        getKryo().register(UtilityRequest.class);
-        getKryo().register(StandardHealResponse.class);
-        
-        //SO NE GROßE FEUERBALL JUNGE
         getKryo().register(AttackRequest.class);
-        getKryo().register(FireballResponse.class);
+        getKryo().register(UtilityRequest.class);
+        getKryo().register(MobilityRequest.class);
         
-        //Blizzard
+        //AbilityResponses
+        getKryo().register(DashResponse.class);
+        getKryo().register(StandardHealResponse.class);
+        getKryo().register(FireballResponse.class);
     }
 }
