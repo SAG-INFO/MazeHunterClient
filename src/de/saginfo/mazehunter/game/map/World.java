@@ -21,11 +21,11 @@ public class World {
     public static int blockbreite;
 
     private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
-    
-    public World(){
+
+    public World() {
         this(TEX.getWidth(), TEX.getWidth());
     }
-    
+
     public World(int e, int c) {
         ecke = e;
         center = c;
@@ -146,7 +146,62 @@ public class World {
     public int translateBlockToCoordinate(int k) {
         return (k * blockbreite);
     }
-    
-    
 
+    public int translateCoordinateToBlock(float k) {
+        return (int) k / blockbreite;
+    }
+
+    public int translateCoordinateToTile(float k) {
+        while (k >= blockbreite) {
+            k = k - blockbreite;
+        }
+        if (k < ecke) {
+            return 0;
+        } else if (k <= ecke + center) {
+            return ecke;
+        } else if (k < blockbreite) {
+            return ecke + center;
+        } else {
+            throw new RuntimeException("translateCoordinateToTile funktioniert mit diesem Wert nicht!");
+        }
+    }
+
+    public Tile talktoTile(int x, int y) {
+        return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)].tilelist[translateCoordinateToTile(x)][translateCoordinateToTile(y)];
+    }
+
+    public Block talktoBlock(int x, int y) {
+        return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)];
+    }
+
+    public void markVision(int x, int y) {
+        if (talktoTile(x, y).open == true) {
+            talktoTile(x, y).seen = true;
+            if (translateCoordinateToTile(x) <= ecke + center && translateCoordinateToTile(x) >= ecke + center && translateCoordinateToTile(y) <= ecke + center && translateCoordinateToTile(y) >= ecke + center) {
+                if (talktoBlock(x, y).up == true) {
+                    talktoTile(x, y + ecke).seen = true;
+                } else if (talktoBlock(x, y).right == true) {
+                    talktoTile(x + ecke, y).seen = true;
+                } else if (talktoBlock(x, y).down == true) {
+                    talktoTile(x, y - ecke).seen = true;
+                } else if (talktoBlock(x, y).left == true) {
+                    talktoTile(x - ecke, y).seen = true;
+                }
+
+            } else if (talktoTile(x, y) instanceof PathSide) {
+                if (translateCoordinateToTile(x) < ecke) {
+                    
+                }
+            }
+        }
+    }
+
+    /*@param richtung   Oben = 1
+                        Rechts = 2
+                        Unten = 3
+                        Links = 4
+     */
+    private void markVisionRow(int x, int y, int richtung) {
+
+    }
 }
