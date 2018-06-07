@@ -12,6 +12,7 @@ package de.saginfo.mazehunter.game.map;
 public class Tile {
 
     public boolean open;
+    public boolean seen = false;
     public int blockPositionX;
     public int blockPositionY;
     public int tilePositionX;
