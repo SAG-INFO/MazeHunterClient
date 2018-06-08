@@ -14,6 +14,7 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
+import de.saginfo.mazehunter.game.player.abilities.projectiles.Projectile;
 import de.saginfo.mazehunter.game.player.abilities.projectiles.ProjectileManager;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
@@ -78,15 +79,14 @@ public class Game {
         player.id = id;
         player.name = name;
         player.position.set(position);
-        players.add(player);
         player.maxHealth = 100; //TODO: get the Config from the server
         player.health = player.maxHealth;
+        players.add(player);
     }
 
     public void update(float delta) {
-        for (Player player : players) {
-            player.update(delta);
-        }
+        players.forEach((p) -> {p.update(delta);});
+        projectileManager.projectiles.forEach((p) -> {p.update(delta);});
     }
 
     public Player getPlayer(int id) {

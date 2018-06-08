@@ -27,7 +27,7 @@ public class FireballListener extends Listener{
     public void received(Connection connection, Object object) {
         
         if(object instanceof FireballResponse) {
-            GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new FireballProjectile(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).id).position, GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_SIZE, visual, ((FireballResponse)object).id));
+            //GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new FireballProjectile(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).id).position, GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_SIZE, visual, ((FireballResponse)object).id));
         }
     }
 

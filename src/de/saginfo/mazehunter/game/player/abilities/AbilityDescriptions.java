@@ -31,7 +31,11 @@ public class AbilityDescriptions {
     public static String BLIZZARD_TYPE = "attack";
     public static String BLIZZARD_DESCRIPTION = "Slows and deals damage to players around you.";
     
-    //not implemeted yet.
+    //in progress.
     public static String FIREBALL_TYPE = "skillshot";
     public static String FIREBALL_DESCRIPTION = "Projectile that flies towards in the direction of the cursor and deals damage on impact.";
+    
+    //not implemented yet.
+    public static String TRAP_TYPE = "utility"; 
+    public static String TRAP_DESCRIPTION = "A trap you can lay down that roots any player stepping on it."; 
 }
