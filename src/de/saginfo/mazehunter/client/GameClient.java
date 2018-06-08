@@ -78,7 +78,7 @@ public class GameClient extends Client {
         
         //Projectiles
         getKryo().register(DisposeProjectile.class);
-        
+
         //Pickups
         getKryo().register(SpawnPickup.class);
         getKryo().register(DisposePickup.class);
