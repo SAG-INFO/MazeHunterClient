@@ -27,7 +27,6 @@ public class PerformanceTest {
     }
     
     public void update(float delta){
-        System.out.println(1/delta);
         
         float speed = 3;
         if(Gdx.input.isKeyPressed(Input.Keys.W))

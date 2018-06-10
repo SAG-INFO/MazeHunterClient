@@ -5,6 +5,9 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  *
  * @author julian.mittermeier
@@ -12,10 +15,16 @@ package de.saginfo.mazehunter.game.map;
 public class World {
 
     private Block[][] blocklist;
-    public int breite;
+    public int worldwidth;
     public static int ecke;
     public static int center;
     public static int blockbreite;
+
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+
+    public World() {
+        this(TEX.getWidth(), TEX.getWidth());
+    }
 
     public World(int e, int c) {
         ecke = e;
@@ -26,17 +35,17 @@ public class World {
     /**
      * World generiert die Map. Die Booleanwerte werden im Uhrzeigersinn,
      * beginnend oben eingetragen. Anschließend werden zuerst die Zeilen und
-     * dann die Spalten generiert, beginnend neim Ursprung (0|0).
+     * dann die Spalten generiert, beginnend beim Ursprung (0|0).
      *
      * @param b = größe der welt
      */
     public void makeMap(boolean... b) {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
-            breite = (int) Math.sqrt(b.length / 4);
-            blocklist = new Block[breite][breite];
+            worldwidth = (int) Math.sqrt(b.length / 4);
+            blocklist = new Block[worldwidth][worldwidth];
             int h = 0;
-            for (int j = 0; j < breite; j++) {
-                for (int i = 0; i < breite; i++) {
+            for (int j = 0; j < worldwidth; j++) {
+                for (int i = 0; i < worldwidth; i++) {
                     blocklist[i][j] = new Block(b[h], b[h + 1], b[h + 2], b[h + 3], this.translateBlockToCoordinate(i), this.translateBlockToCoordinate(j));
                     h = h + 4;
                 }
@@ -45,12 +54,11 @@ public class World {
     }
 
     public void makeTestMap(int größe) {
-        breite = größe;
-        blocklist = new Block[breite][breite];
-        for (int j = 0; j < breite; j++) {
-            for (int i = 0; i < breite; i++) {
+        worldwidth = größe;
+        blocklist = new Block[worldwidth][worldwidth];
+        for (int j = 0; j < worldwidth; j++) {
+            for (int i = 0; i < worldwidth; i++) {
                 blocklist[j][i] = new Block(true, true, true, true, this.translateBlockToCoordinate(j), this.translateBlockToCoordinate(i));
-                System.out.println("BLOCKPOSITION " + j + " " + i);
             }
 
         }
@@ -58,8 +66,8 @@ public class World {
 
     //position -1 means not found
     public int getPositionBlockXinBlock(Block block) {
-        for (int j = 0; j < breite; j++) {
-            for (int i = 0; i < breite; i++) {
+        for (int j = 0; j < worldwidth; j++) {
+            for (int i = 0; i < worldwidth; i++) {
                 if (blocklist[j][i] == block) {
                     return j;
                 }
@@ -83,8 +91,8 @@ public class World {
 
     //position -1 means not found
     public int getPositionBlockYinBlock(Block block) {
-        for (int j = 0; j < breite; j++) {
-            for (int i = 0; i < breite; i++) {
+        for (int j = 0; j < worldwidth; j++) {
+            for (int i = 0; i < worldwidth; i++) {
                 if (blocklist[j][i] == block) {
                     return i;
                 }
@@ -111,11 +119,10 @@ public class World {
     }
 
     public void checkTileOpenStatus() {
-        for (int x = 0; x < this.breite; x++) {
-            for (int y = 0; y < this.breite; y++) {
+        for (int x = 0; x < this.worldwidth; x++) {
+            for (int y = 0; y < this.worldwidth; y++) {
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        System.out.println(this.isTileOpen(y, x, j, i));
                     }
                 }
             }
@@ -140,4 +147,61 @@ public class World {
         return (k * blockbreite);
     }
 
+    public int translateCoordinateToBlock(float k) {
+        return (int) k / blockbreite;
+    }
+
+    public int translateCoordinateToTile(float k) {
+        while (k >= blockbreite) {
+            k = k - blockbreite;
+        }
+        if (k < ecke) {
+            return 0;
+        } else if (k <= ecke + center) {
+            return ecke;
+        } else if (k < blockbreite) {
+            return ecke + center;
+        } else {
+            throw new RuntimeException("translateCoordinateToTile funktioniert mit diesem Wert nicht!");
+        }
+    }
+
+    public Tile talktoTile(int x, int y) {
+        return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)].tilelist[translateCoordinateToTile(x)][translateCoordinateToTile(y)];
+    }
+
+    public Block talktoBlock(int x, int y) {
+        return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)];
+    }
+
+    public void markVision(int x, int y) {
+        if (talktoTile(x, y).open == true) {
+            talktoTile(x, y).seen = true;
+            if (translateCoordinateToTile(x) <= ecke + center && translateCoordinateToTile(x) >= ecke + center && translateCoordinateToTile(y) <= ecke + center && translateCoordinateToTile(y) >= ecke + center) {
+                if (talktoBlock(x, y).up == true) {
+                    talktoTile(x, y + ecke).seen = true;
+                } else if (talktoBlock(x, y).right == true) {
+                    talktoTile(x + ecke, y).seen = true;
+                } else if (talktoBlock(x, y).down == true) {
+                    talktoTile(x, y - ecke).seen = true;
+                } else if (talktoBlock(x, y).left == true) {
+                    talktoTile(x - ecke, y).seen = true;
+                }
+
+            } else if (talktoTile(x, y) instanceof PathSide) {
+                if (translateCoordinateToTile(x) < ecke) {
+                    
+                }
+            }
+        }
+    }
+
+    /*@param richtung   Oben = 1
+                        Rechts = 2
+                        Unten = 3
+                        Links = 4
+     */
+    private void markVisionRow(int x, int y, int richtung) {
+
+    }
 }

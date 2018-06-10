@@ -5,13 +5,20 @@
  */
 package de.saginfo.mazehunter.client;
 
+import de.saginfo.mazehunter.client.networkData.abilities.DashResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.DashRequest;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import de.saginfo.mazehunter.client.networkData.ConnectResponse;
 import de.saginfo.mazehunter.client.networkData.*;
+import de.saginfo.mazehunter.client.networkData.abilities.DisposePickup;
+import de.saginfo.mazehunter.client.networkData.abilities.EquipAbility;
+import de.saginfo.mazehunter.client.networkData.abilities.SpawnPickup;
+import de.saginfo.mazehunter.client.networkData.abilities.StandardHealRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.StandardHealResponse;
+import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
@@ -44,10 +51,30 @@ public class GameClient extends Client {
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
         
-        //GameStuff
+        //Movement Stuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
+        getKryo().register(MovementSpeedRequest.class);
+        
+        //Config Stuff
+        getKryo().register(PushConfig.class);
+
+        //Ability Stuff
+        getKryo().register(HealthUpdate.class);
+        
+        //Dash
         getKryo().register(DashRequest.class);
         getKryo().register(DashResponse.class);
+
+        //StandardHeal
+        getKryo().register(StandardHealRequest.class);
+        getKryo().register(StandardHealResponse.class);
+        
+        //Blizzard
+        
+        //Pickups
+        getKryo().register(SpawnPickup.class);
+        getKryo().register(DisposePickup.class);
+        getKryo().register(EquipAbility.class);
     }
 }
