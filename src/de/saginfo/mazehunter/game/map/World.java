@@ -288,4 +288,16 @@ public class World {
             }
         }
     }
+    
+    public void deVision() {
+        for (int i = 0; i < worldwidth; i++) {
+            for (int j = 0; j < worldwidth; j++) {
+                for (int k = 0; k < 3; k++) {
+                    for (int l = 0; l < 3; l++) {
+                        blocklist[i][j].tilelist[k][l].seen = false;
+                    }
+                }                
+            }
+        }
+    }
 }
