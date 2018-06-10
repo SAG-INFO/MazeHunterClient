@@ -140,7 +140,7 @@ public class World {
             case 2:
                 return World.ecke + World.center;
             default:
-                return -1;
+                throw new RuntimeException("translateTileToCoordinate funktioniert mit diesem Wert nicht!");
         }
     }
 
@@ -158,41 +158,57 @@ public class World {
         }
         if (k < ecke) {
             return 0;
-        } else if (k <= ecke + center) {
-            return ecke;
+        } else if (k < ecke + center) {
+            return 1;
         } else if (k < blockbreite) {
-            return ecke + center;
+            return 2;
         } else {
             throw new RuntimeException("translateCoordinateToTile funktioniert mit diesem Wert nicht!");
         }
     }
 
-    public Tile talktoTile(int x, int y) {
+    public int cutTileCoordinate(float k) {
+        int i = 0;
+        while (k >= blockbreite) {
+            k = k - blockbreite;
+            i = i + blockbreite;
+        }
+        if (k < ecke) {
+            return i + 0;
+        } else if (k < ecke + center) {
+            return i + ecke;
+        } else if (k < blockbreite) {
+            return i + ecke + center;
+        } else {
+            throw new RuntimeException("cutTileCoordinate funktioniert mit diesem Wert nicht!");
+        }
+    }
+
+    public Tile talktoTile(float x, float y) {
         return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)].tilelist[translateCoordinateToTile(x)][translateCoordinateToTile(y)];
     }
 
-    public Block talktoBlock(int x, int y) {
+    public Block talktoBlock(float x, float y) {
         return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)];
     }
 
-    public void markVision(int x, int y) {
+    public void markVision(float x, float y) {
         if (talktoTile(x, y).open == true) {
+            int k;
+            if (talktoTile(x, y) instanceof Centeropen) {
+                k = center;
+            } else {
+                k = ecke;
+            }
             talktoTile(x, y).seen = true;
-            if (translateCoordinateToTile(x) <= ecke + center && translateCoordinateToTile(x) >= ecke + center && translateCoordinateToTile(y) <= ecke + center && translateCoordinateToTile(y) >= ecke + center) {
-                if (talktoBlock(x, y).up == true) {
-                    talktoTile(x, y + ecke).seen = true;
-                } else if (talktoBlock(x, y).right == true) {
-                    talktoTile(x + ecke, y).seen = true;
-                } else if (talktoBlock(x, y).down == true) {
-                    talktoTile(x, y - ecke).seen = true;
-                } else if (talktoBlock(x, y).left == true) {
-                    talktoTile(x - ecke, y).seen = true;
-                }
-
-            } else if (talktoTile(x, y) instanceof PathSide) {
-                if (translateCoordinateToTile(x) < ecke) {
-                    
-                }
+            if (talktoTile(x, cutTileCoordinate(y)+k).open == true) {
+                markVisionRow(x, cutTileCoordinate(y)+k, 1);
+            } else if (talktoTile(cutTileCoordinate(x)+k, y).open == true) {
+                markVisionRow(cutTileCoordinate(x)+k, y, 2);
+            } else if (talktoTile(x, cutTileCoordinate(y)-k).open == true) {
+                markVisionRow(x, cutTileCoordinate(y)-k, 3);
+            } else if (talktoTile(cutTileCoordinate(x)-k, y).open == true) {
+                markVisionRow(cutTileCoordinate(x)-k, y, 4);
             }
         }
     }
@@ -202,7 +218,74 @@ public class World {
                         Unten = 3
                         Links = 4
      */
-    private void markVisionRow(int x, int y, int richtung) {
+    private void markVisionRow(float x, float y, int richtung) {
+        if (talktoTile(x, y).open == true) {
+            int k;
+            if (talktoTile(x, y) instanceof Centeropen) {
+                k = center;
+            } else {
+                k = ecke;
+            }
+            talktoTile(x, y).seen = true;
+            if (richtung == 1 || richtung == 3) {
+                if (talktoTile(cutTileCoordinate(x)+k, y).open == true) {
+                    markVisionRow2(cutTileCoordinate(x)+k, y, 2);
+                }
+                if (talktoTile(cutTileCoordinate(x)-k, y).open == true) {
+                    markVisionRow2(cutTileCoordinate(x)-k, y, 4);
+                }
+            } else if (richtung == 2 || richtung == 4) {
+                if (talktoTile(x, cutTileCoordinate(y)+k).open == true) {
+                    markVisionRow2(x, cutTileCoordinate(y)+k, 1);
+                }
+                if (talktoTile(x, cutTileCoordinate(y)-k).open == true) {
+                    markVisionRow2(x, cutTileCoordinate(y)-k, 3);
+                }
+            }
+            switch (richtung) {
+                case 1:
+                    markVisionRow(x, cutTileCoordinate(y)+k, richtung);
+                    break;
+                case 2:
+                    markVisionRow(cutTileCoordinate(x)+k, y, richtung);
+                    break;
+                case 3:
+                    markVisionRow(x, cutTileCoordinate(y)-k, richtung);
+                    break;
+                case 4:
+                    markVisionRow(cutTileCoordinate(x)-k, y, richtung);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
+    private void markVisionRow2(float x, float y, int richtung) {
+        if (talktoTile(x, y).open == true) {
+            int k;
+            if (talktoTile(x, y) instanceof Centeropen) {
+                k = center;
+            } else {
+                k = ecke;
+            }
+            talktoTile(x, y).seen = true;
+            switch (richtung) {
+                case 1:
+                    markVisionRow2(x, cutTileCoordinate(y)+k, richtung);
+                    break;
+                case 2:
+                    markVisionRow2(cutTileCoordinate(x)+k, y, richtung);
+                    break;
+                case 3:
+                    markVisionRow2(x, cutTileCoordinate(y)-k, richtung);
+                    break;
+                case 4:
+                    markVisionRow2(cutTileCoordinate(x)-k, y, richtung);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
