@@ -20,10 +20,11 @@ public class World {
     public static int center;
     public static int blockbreite;
 
-    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+    private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
+    private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
 
     public World() {
-        this(TEX.getWidth(), TEX.getWidth());
+        this(cornerTex.getWidth(), centerTex.getWidth());
     }
 
     public World(int e, int c) {

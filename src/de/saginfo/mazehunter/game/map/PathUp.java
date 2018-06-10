@@ -23,8 +23,8 @@ public class PathUp extends Tile {
 
     private SpriteVisual visual;
 
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
-    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathUpClosed.png"));
+    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathUpOpen.png"));
 
     public PathUp(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
         open = b;

@@ -23,8 +23,8 @@ public class PathSide extends Tile {
 
     private SpriteVisual visual;
 
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
-    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
+    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathSideClosed.png"));
+    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathSideOpen.png"));
 
     public PathSide(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
         open = b;
@@ -34,7 +34,6 @@ public class PathSide extends Tile {
         tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
 
         if (open) {
-            
             visual = new SpriteVisual(new Sprite(TEXwhite));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         } else {

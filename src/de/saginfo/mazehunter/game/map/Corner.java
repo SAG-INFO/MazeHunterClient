@@ -23,7 +23,7 @@ public class Corner extends Tile {
 
     private SpriteVisual visual;
 
-    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\black.png"));
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
 
     public Corner(int xBlock, int yBlock, int xTile, int yTile) {
         open = false;
