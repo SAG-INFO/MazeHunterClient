@@ -15,12 +15,12 @@ import de.saginfo.mazehunter.game.player.Status;
  *
  * @author Karl Huber
  */
-public class UtilityInput extends InputAdapter {
+public class UtilityInput extends AbilityInput {
     
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Keys.F && Status.canUseAbilities == 0) {
-            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new UtilityRequest());
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new UtilityRequest(getMouseAngle()));
             System.out.println("UtilityRequest sent.");
         }
         return false;

@@ -10,7 +10,9 @@ package de.saginfo.mazehunter.client.networkData.abilities.requests;
  * @author Karl Huber
  */
 public class UtilityRequest {
-
-    public UtilityRequest() {
+    public float angle;
+    
+    public UtilityRequest(float angle) {
+        this.angle = angle;
     }
 }

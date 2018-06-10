@@ -7,7 +7,6 @@ package de.saginfo.mazehunter.game.player.abilities.projectiles;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
-import de.saginfo.mazehunter.grafik.Visual;
 
 /**
  *

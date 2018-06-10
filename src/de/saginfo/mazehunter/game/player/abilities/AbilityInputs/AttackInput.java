@@ -18,7 +18,7 @@ import de.saginfo.mazehunter.game.player.Status;
  *
  * @author Karl Huber
  */
-public class AttackInput extends InputAdapter {
+public class AttackInput extends AbilityInput {
    
     @Override
     public boolean keyDown(int keycode) {
@@ -28,15 +28,6 @@ public class AttackInput extends InputAdapter {
             System.out.println(getMouseAngle());
         }
         return false;
-    }
-    
-    public float getMouseAngle() {
-        final Vector2 playerPos = new Vector2(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position);
-        final Vector3 unpPlayerPos3 = new Vector3(GameScreen.GAMESCREEN_SINGLETON.camera.unproject(new Vector3(playerPos.x, playerPos.y, 0)));
-        final Vector2 unpPlayerPos2 = new Vector2(unpPlayerPos3.x, unpPlayerPos3.y);
-        final Vector2 tmp = new Vector2(Gdx.input.getX(), Gdx.input.getY()).sub(unpPlayerPos2);
-        tmp.y = -tmp.y;
-        return tmp.angle();
     }
     
     public AttackInput() {
