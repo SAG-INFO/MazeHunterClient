@@ -40,6 +40,8 @@ public class PlayerVisual{
     private float alpha = 0.2f;
     public void lerpPosition(float x, float y){
         final float invAlpha = 1.0f - alpha;
+        x-=currentVisual.getWidth()/2f;
+        y-=currentVisual.getHeight()/2f;
         currentVisual.setX((x * invAlpha) + (x * alpha));
         currentVisual.setY((y * invAlpha) + (y * alpha));
     }

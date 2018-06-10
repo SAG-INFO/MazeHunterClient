@@ -76,6 +76,7 @@ public class Game {
 
     public Player getPlayer(int id) {
         for (Player player : players) {
+            System.out.println("frfrfr"+player.id);
             if (player.id == id) {
                 return player;
             }

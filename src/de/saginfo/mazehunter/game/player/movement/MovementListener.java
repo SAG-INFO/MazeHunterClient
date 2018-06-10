@@ -23,6 +23,8 @@ public class MovementListener extends Listener{
         
         if(object instanceof MovementResponse) {
             
+            System.out.println(((MovementResponse) object).id);
+            
             Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((MovementResponse) object).id);
             player.position.set(((MovementResponse) object).position);
             player.velocity.set(((MovementResponse) object).velocity);
