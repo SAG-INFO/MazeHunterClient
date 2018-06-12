@@ -13,8 +13,9 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
-import de.saginfo.mazehunter.game.player.abilities.projectiles.Projectile;
+import de.saginfo.mazehunter.game.player.abilities.projectiles.ProjectileListener;
 import de.saginfo.mazehunter.game.player.abilities.projectiles.ProjectileManager;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
@@ -51,6 +52,7 @@ public class Game {
         pickupManager = new PickupManager();
         
         projectileManager = new ProjectileManager();
+        ProjectileListener pL = new ProjectileListener();
         
         //Testing
         // CCTestInput test = new CCTestInput();
@@ -67,6 +69,7 @@ public class Game {
         DashListener dL = new DashListener();
         FireballListener fL = new FireballListener();
         StandardHealListener shL = new StandardHealListener();
+        StunArrowListener sAL = new StunArrowListener();
     }
 
     /**

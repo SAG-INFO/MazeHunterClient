@@ -17,12 +17,8 @@ public abstract class Projectile {
     Vector2 velocity;
     Vector2 position;
     float radius;
-    int id;
+    int projectileID;
     SpriteVisual visual;
-    
-    public void dispose() {}
-    
-    public void shoot() {}
     
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
@@ -36,7 +32,7 @@ public abstract class Projectile {
         this.position = position;
         this.radius = radius;
         this.visual = visual;
-        this.id = id;
+        this.projectileID = id;
     }
 }
 

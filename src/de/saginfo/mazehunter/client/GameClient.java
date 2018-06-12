@@ -18,8 +18,10 @@ import de.saginfo.mazehunter.client.networkData.abilities.projectiles.DisposePro
 import de.saginfo.mazehunter.client.networkData.abilities.requests.AttackRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.UtilityRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballShootResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StandardHealResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowShootResponse;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,7 +78,9 @@ public class GameClient extends Client {
         getKryo().register(DashResponse.class);
         getKryo().register(StandardHealResponse.class);
         getKryo().register(FireballResponse.class);
+        getKryo().register(FireballShootResponse.class);
         getKryo().register(StunArrowResponse.class);
+        getKryo().register(StunArrowShootResponse.class);
         
         //Projectiles
         getKryo().register(DisposeProjectile.class);

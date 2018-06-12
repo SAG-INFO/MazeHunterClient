@@ -20,7 +20,12 @@ public class ProjectileListener extends Listener{
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof DisposeProjectile) {
+            System.out.println("DisposeProjectile received.");
             GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.disposeProjectile(((DisposeProjectile) object).id);
         }
+    }
+
+    public ProjectileListener() {
+        GameScreen.GAMESCREEN_SINGLETON.client.addListener(this);
     }
 }

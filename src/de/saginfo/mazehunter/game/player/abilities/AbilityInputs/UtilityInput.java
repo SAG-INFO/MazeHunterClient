@@ -19,7 +19,7 @@ public class UtilityInput extends AbilityInput {
     
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Keys.F && Status.canUseAbilities == 0) {
+        if (keycode == Keys.F && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
             GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new UtilityRequest(getMouseAngle()));
             System.out.println("UtilityRequest sent.");
         }

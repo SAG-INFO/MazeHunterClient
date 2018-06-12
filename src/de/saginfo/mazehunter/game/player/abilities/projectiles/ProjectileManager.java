@@ -5,6 +5,8 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.projectiles;
 
+import de.saginfo.mazehunter.game.Game;
+import de.saginfo.mazehunter.game.GameScreen;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +18,8 @@ public class ProjectileManager {
     
     public void disposeProjectile(int id) {
         for (Projectile projectile : projectiles) {
-            if (projectile.id == id) {
+            if (projectile.projectileID == id) {
+                GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(projectile.visual);
                 projectiles.remove(projectile);
                 return;
             }
