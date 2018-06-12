@@ -5,6 +5,9 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+
 /**
  *
  * @author julian.mittermeier
@@ -38,14 +41,13 @@ public class Tile {
     public boolean getOpen() {
         return open;
     }
+    
+    public int getIndexX() {
+        return GAMESCREEN_SINGLETON.game.world.translateCoordinateToTile(tilePositionX);
+    }
+    
+    public int getIndexY() {
+        return GAMESCREEN_SINGLETON.game.world.translateCoordinateToTile(tilePositionY);
+    }
 
-
-//    public int getPositionX() {
-//        Block.getPositionTileX(this) = r;
-//        for (int i = 0; i < Block.getPositionTileX(this) ; i++) {
-//            
-//            
-//        }
-//                
-//    }
 }
