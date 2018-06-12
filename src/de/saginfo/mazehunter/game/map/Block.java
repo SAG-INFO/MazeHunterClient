@@ -57,6 +57,10 @@ public class Block {
         BlockPositionY = blocky;
 
     }
+    
+    private void update() {
+    
+    }
 
     //position -1 means not found
     public int getPositionTileXinTile(Tile tile) {

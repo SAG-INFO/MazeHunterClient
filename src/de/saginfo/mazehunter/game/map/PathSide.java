@@ -23,11 +23,13 @@ public class PathSide extends Tile {
 
     private SpriteVisual visual;
 
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathSideClosed.png"));
-    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathSideOpen.png"));
+    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathside_closed.png"));
+    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathside_open.png"));
 
     public PathSide(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
         open = b;
+        indexX = xTile;
+        indexY = yTile;
         blockPositionX = xBlock;
         blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
@@ -40,6 +42,15 @@ public class PathSide extends Tile {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         }
-        visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
+        visual.setPosition(tilePositionX + blockPositionX, tilePositionY + blockPositionY);
+    }
+
+    @Override
+    public void update() {
+        if (visible == false) {
+            visual.setPosition(-100, -100);
+        } else {
+            visual.setPosition(tilePositionX + blockPositionX, tilePositionY + blockPositionY);
+        }
     }
 }

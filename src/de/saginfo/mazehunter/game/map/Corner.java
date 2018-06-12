@@ -27,6 +27,8 @@ public class Corner extends Tile {
 
     public Corner(int xBlock, int yBlock, int xTile, int yTile) {
         open = false;
+        indexX = xTile;
+        indexY = yTile;
         blockPositionX = xBlock;
         blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);

@@ -65,6 +65,18 @@ public class World {
         }
     }
 
+    public void update() {
+        for (int i = 0; i < worldwidth; i++) {
+            for (int j = 0; j < worldwidth; j++) {
+                for (int k = 0; k < 3; k++) {
+                    for (int l = 0; l < 3; l++) {
+                        blocklist[i][j].tilelist[k][l].update();
+                    }
+                }
+            }
+        }
+    }
+
     //position -1 means not found
     public int getPositionBlockXinBlock(Block block) {
         for (int j = 0; j < worldwidth; j++) {
@@ -166,6 +178,23 @@ public class World {
             throw new RuntimeException("translateCoordinateToTile funktioniert mit diesem Wert nicht!");
         }
     }
+    
+    public int translateCoordinatetorealTile(float k) {
+        int t = 0;
+        while (k >= blockbreite) {  
+            k = k - blockbreite;
+            t = t+3;
+        }
+        if (k < ecke) {
+            return t;
+        } else if (k < ecke + center) {
+            return t+1;
+        } else if (k < blockbreite) {
+            return t+2;
+        } else {
+            throw new RuntimeException("translateCoordinatetorealTile funktioniert mit diesem Wert nicht!");
+        }
+    }
 
     public int cutCoordinatetoTile(float k) {
         int i = 0;
@@ -197,23 +226,27 @@ public class World {
         int tx = x - bx * 3;
         int by = (int) y / 3;
         int ty = y - by * 3;
-        return blocklist[translateCoordinateToBlock(bx)][translateCoordinateToBlock(by)].tilelist[translateCoordinateToTile(tx)][translateCoordinateToTile(ty)];
+        if(bx <= worldwidth && by <= worldwidth) {
+        return blocklist[bx][by].tilelist[tx][ty];
+        } else {
+        throw new RuntimeException("talktonumberdoesntwork:(");
+        }
     }
 
     public void markVision(float x, float y) {
         if (talktoTile(x, y).open == true) {
-            talktoTile(x, y).seen = true;
-            if (talktoNumber((int) x, (int) y + 1).open == true) {
-                markVisionRow(talktoNumber((int) x, (int) y + 1), 1);
+            talktoTile(x, y).visible = true;
+            if (talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(y)+1).open == true) {
+                markVisionRow(talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(x)+ 1), 1);
             }
-            if (talktoNumber((int) x + 1, (int) y).open == true) {
-                markVisionRow(talktoNumber((int) x + 1, (int) y), 2);
+            if (talktoNumber(translateCoordinatetorealTile(x) + 1, translateCoordinatetorealTile(y)).open == true) {
+                markVisionRow(talktoNumber(translateCoordinatetorealTile(x) + 1, translateCoordinatetorealTile(y)), 2);
             }
-            if (talktoNumber((int) x, (int) y - 1).open == true) {
-                markVisionRow(talktoNumber((int) x, (int) y - 1), 3);
+            if (talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(y) - 1).open == true) {
+                markVisionRow(talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(y) - 1), 3);
             }
-            if (talktoNumber((int) x - 1, (int) y).open == true) {
-                markVisionRow(talktoNumber((int) x - 1, (int) y), 4);
+            if (talktoNumber(translateCoordinatetorealTile(x) - 1, translateCoordinatetorealTile(y)).open == true) {
+                markVisionRow(talktoNumber(translateCoordinatetorealTile(x) - 1, translateCoordinatetorealTile(y)), 4);
             }
         }
     }
@@ -226,7 +259,7 @@ public class World {
      */
     private void markVisionRow(Tile t, int richtung) {
         if (t.open == true) {
-            t.seen = true;
+            t.visible = true;
             if (richtung == 1 || richtung == 3) {
                 if (talktoNumber(t.getIndexX() + 1, t.getIndexY()).open == true) {
                     markVisionRow2(talktoNumber(t.getIndexX() + 1, t.getIndexY()), 2);
@@ -263,7 +296,7 @@ public class World {
 
     private void markVisionRow2(Tile t, int richtung) {
         if (t.open == true) {
-            t.seen = true;
+            t.visible = true;
             switch (richtung) {
                 case 1:
                     markVisionRow2(talktoNumber(t.getIndexX(), t.getIndexY() + 1), richtung);
@@ -288,7 +321,7 @@ public class World {
             for (int j = 0; j < worldwidth; j++) {
                 for (int k = 0; k < 3; k++) {
                     for (int l = 0; l < 3; l++) {
-                        blocklist[i][j].tilelist[k][l].seen = false;
+                        blocklist[i][j].tilelist[k][l].visible = false;
                     }
                 }
             }

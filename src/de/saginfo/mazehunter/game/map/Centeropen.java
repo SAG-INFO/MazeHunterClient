@@ -18,8 +18,7 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class Centeropen extends Tile {
 
-    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
-
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\center_open.png"));
     public static int width;
     public static int height;
 
@@ -28,6 +27,8 @@ public class Centeropen extends Tile {
     
     public Centeropen(int xBlock, int yBlock, int xTile, int yTile) {
         open = true;
+        indexX = xTile;
+        indexY = yTile;
         blockPositionX = xBlock;
         blockPositionY = yBlock;
         tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
@@ -36,5 +37,14 @@ public class Centeropen extends Tile {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
+    }
+    
+    @Override
+    public void update() {
+        if (visible == false) {
+            visual.setPosition(-100, -100);
+        } else {
+            visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
+        }
     }
 }

@@ -15,12 +15,14 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 public class Tile {
 
     public boolean open;
-    public boolean seen = false;
+    public boolean visible = false;
     public int blockPositionX;
     public int blockPositionY;
     public int tilePositionX;
     public int tilePositionY;
-
+    public int indexX;
+    public int indexY;
+    
     //Graphic image;
     public Tile() {
 
@@ -28,6 +30,10 @@ public class Tile {
 
     public Tile(boolean o) {
         open = o;
+    }
+    
+    public void update() {
+    
     }
 
     public void setOpen() {
@@ -43,11 +49,11 @@ public class Tile {
     }
     
     public int getIndexX() {
-        return GAMESCREEN_SINGLETON.game.world.translateCoordinateToTile(tilePositionX);
+        return indexX;
     }
     
     public int getIndexY() {
-        return GAMESCREEN_SINGLETON.game.world.translateCoordinateToTile(tilePositionY);
+        return indexY;
     }
 
 }
