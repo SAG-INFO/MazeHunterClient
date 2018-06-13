@@ -125,24 +125,24 @@ public class World {
 
     public void markVision(float x, float y) {
         cleanVision();
-        if(getWorldIndex(x)<TileWorldwidth && getWorldIndex(x) >= 0 && getWorldIndex(y) < TileWorldwidth && getWorldIndex(y) >= 0) {
-        if (talktoTile(x, y).open == true) {
-            talktoTile(x, y).visible = true;
-            int a = getWorldIndex(x);
-            int b = getWorldIndex(y);
-            if (talktoNumber(a, b + 1).open && b + 1 < TileWorldwidth) {
-                markVisionRow(talktoNumber(a, b + 1), 1);
+        if (getWorldIndex(x) < TileWorldwidth && getWorldIndex(x) >= 0 && getWorldIndex(y) < TileWorldwidth && getWorldIndex(y) >= 0) {
+            if (talktoTile(x, y).open == true) {
+                talktoTile(x, y).visible = true;
+                int a = getWorldIndex(x);
+                int b = getWorldIndex(y);
+                if (talktoNumber(a, b + 1).open && b + 1 < TileWorldwidth) {
+                    markVisionRow(talktoNumber(a, b + 1), 1);
+                }
+                if (talktoNumber(a + 1, b).open && a + 1 < TileWorldwidth) {
+                    markVisionRow(talktoNumber(a + 1, b), 2);
+                }
+                if (talktoNumber(a, b - 1).open && b - 1 >= 0) {
+                    markVisionRow(talktoNumber(a, b - 1), 3);
+                }
+                if (talktoNumber(a - 1, b).open && a - 1 >= 0) {
+                    markVisionRow(talktoNumber(a - 1, b), 4);
+                }
             }
-            if (talktoNumber(a + 1, b).open && a + 1 < TileWorldwidth) {
-                markVisionRow(talktoNumber(a + 1, b), 2);
-            }
-            if (talktoNumber(a, b - 1).open && b - 1 >= 0) {
-                markVisionRow(talktoNumber(a, b - 1), 3);
-            }
-            if (talktoNumber(a - 1, b).open && a - 1 >= 0) {
-                markVisionRow(talktoNumber(a - 1, b), 4);
-            }
-        }
         }
     }
 
