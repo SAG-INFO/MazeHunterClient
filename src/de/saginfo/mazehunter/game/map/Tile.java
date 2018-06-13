@@ -5,55 +5,73 @@
  */
 package de.saginfo.mazehunter.game.map;
 
-
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
  *
  * @author julian.mittermeier
  */
-public class Tile {
+public abstract class Tile {
 
     public boolean open;
     public boolean visible = false;
-    public int blockPositionX;
-    public int blockPositionY;
-    public int tilePositionX;
-    public int tilePositionY;
-    public int indexX;
-    public int indexY;
-    
-    //Graphic image;
+    public int IndexX;
+    public int IndexY;
+    public Block parent;
+    public SpriteVisual visual;
+
     public Tile() {
 
+    }
+
+    public Tile(Block block, int x, int y) {
+        parent = block;
+        IndexX = x;
+        IndexY = y;
     }
 
     public Tile(boolean o) {
         open = o;
     }
-    
+
     public void update() {
-    
+        if (!visible) {
+            visual.setColor(Color.RED);
+        } else {
+            visual.setColor(Color.BLUE);
+        }
     }
 
-    public void setOpen() {
-        open = true;
+    public int getX() {
+        switch (IndexX) {
+            case 0:
+                return parent.getX();
+            case 1:
+                return parent.getX() + World.ecke;
+            case 2:
+                return parent.getX() + World.ecke + World.center;
+            default:
+                throw new RuntimeException("getXvonTile");
+        }
     }
 
-    public void setClose() {
-        open = false;
+    public int getY() {
+        switch (IndexY) {
+            case 0:
+                return parent.getY();
+            case 1:
+                return parent.getY() + World.ecke;
+            case 2:
+                return parent.getY() + World.ecke + World.center;
+            default:
+                throw new RuntimeException("getYvonTile");
+        }
     }
 
-    public boolean getOpen() {
-        return open;
-    }
-    
-    public int getIndexX() {
-        return indexX;
-    }
-    
-    public int getIndexY() {
-        return indexY;
-    }
-
+    public abstract void draw();
 }

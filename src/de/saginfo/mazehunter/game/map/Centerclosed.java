@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
-import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -22,19 +21,16 @@ public class Centerclosed extends Tile{
 
     public static int width;
     public static int height;
-
-
-    private SpriteVisual visual;
     
-    public Centerclosed(int xBlock, int yBlock, int xTile, int yTile) {
+    public Centerclosed(Block block, int x, int y) {
+        super(block, x, y);
         open = false;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
-        tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
-        tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
-        
+    }
+    
+    @Override
+    public void draw() {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
+        visual.setPosition(getX(), getY());
     }
 }

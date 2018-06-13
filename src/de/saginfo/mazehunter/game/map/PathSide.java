@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
-import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -21,20 +20,16 @@ public class PathSide extends Tile {
     public static int width;
     public static int height;
 
-    private SpriteVisual visual;
-
     private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathside_closed.png"));
     private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathside_open.png"));
 
-    public PathSide(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
+    public PathSide(Block block, int x, int y, boolean b) {
+        super(block, x, y);
         open = b;
-        indexX = xTile;
-        indexY = yTile;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
-        tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
-        tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
+    }
 
+    @Override
+    public void draw() {
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
@@ -42,15 +37,6 @@ public class PathSide extends Tile {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         }
-        visual.setPosition(tilePositionX + blockPositionX, tilePositionY + blockPositionY);
-    }
-
-    @Override
-    public void update() {
-        if (visible == false) {
-            visual.setPosition(-100, -100);
-        } else {
-            visual.setPosition(tilePositionX + blockPositionX, tilePositionY + blockPositionY);
-        }
+        visual.setPosition(getX(), getY());
     }
 }

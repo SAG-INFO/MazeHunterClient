@@ -7,6 +7,7 @@ package de.saginfo.mazehunter.game.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
  *
@@ -15,7 +16,8 @@ import com.badlogic.gdx.graphics.Texture;
 public class World {
 
     private Block[][] blocklist;
-    public int worldwidth;
+    public int BlockWorldwidth;
+    public int TileWorldwidth;
     public static int ecke;
     public static int center;
     public static int blockbreite;
@@ -42,129 +44,30 @@ public class World {
      */
     public void makeMap(boolean... b) {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
-            worldwidth = (int) Math.sqrt(b.length / 4);
-            blocklist = new Block[worldwidth][worldwidth];
+            BlockWorldwidth = (int) Math.sqrt(b.length / 4);
+            TileWorldwidth = BlockWorldwidth * 3;
+            blocklist = new Block[BlockWorldwidth][BlockWorldwidth];
             int h = 0;
-            for (int j = 0; j < worldwidth; j++) {
-                for (int i = 0; i < worldwidth; i++) {
-                    blocklist[i][j] = new Block(b[h], b[h + 1], b[h + 2], b[h + 3], this.translateBlockToCoordinate(i), this.translateBlockToCoordinate(j));
+            for (int j = 0; j < BlockWorldwidth; j++) {
+                for (int i = 0; i < BlockWorldwidth; i++) {
+                    blocklist[i][j] = new Block(b[h], b[h + 1], b[h + 2], b[h + 3], i, j);
+                    blocklist[i][j].draw();
                     h = h + 4;
                 }
             }
         }
-    }
-
-    public void makeTestMap(int größe) {
-        worldwidth = größe;
-        blocklist = new Block[worldwidth][worldwidth];
-        for (int j = 0; j < worldwidth; j++) {
-            for (int i = 0; i < worldwidth; i++) {
-                blocklist[j][i] = new Block(true, true, true, true, this.translateBlockToCoordinate(j), this.translateBlockToCoordinate(i));
-            }
-
-        }
+        System.out.println(TileWorldwidth);
     }
 
     public void update() {
-        for (int i = 0; i < worldwidth; i++) {
-            for (int j = 0; j < worldwidth; j++) {
-                for (int k = 0; k < 3; k++) {
-                    for (int l = 0; l < 3; l++) {
-                        blocklist[i][j].tilelist[k][l].update();
-                    }
-                }
+        for (int i = 0; i < BlockWorldwidth; i++) {
+            for (int j = 0; j < BlockWorldwidth; j++) {
+                blocklist[i][j].update();
             }
         }
     }
 
-    //position -1 means not found
-    public int getPositionBlockXinBlock(Block block) {
-        for (int j = 0; j < worldwidth; j++) {
-            for (int i = 0; i < worldwidth; i++) {
-                if (blocklist[j][i] == block) {
-                    return j;
-                }
-
-            }
-        }
-        return -1;
-    }
-
-    //position -1 means not found
-    public int getPositionBlockXinCoordinate(Block block) {
-        int k;
-        k = this.getPositionBlockXinBlock(block);
-        if (k >= 0) {
-            return k * blockbreite;
-        } else {
-            System.out.println("ERROR");
-            return -1;
-        }
-    }
-
-    //position -1 means not found
-    public int getPositionBlockYinBlock(Block block) {
-        for (int j = 0; j < worldwidth; j++) {
-            for (int i = 0; i < worldwidth; i++) {
-                if (blocklist[j][i] == block) {
-                    return i;
-                }
-
-            }
-        }
-        return -1;
-    }
-
-    //position -1 means not found
-    public int getPositionBlockYinCoordinate(Block block) {
-        int k;
-        k = this.getPositionBlockYinBlock(block);
-        if (k >= 0) {
-            return k * blockbreite;
-        } else {
-            System.out.println("ERROR");
-            return -1;
-        }
-    }
-
-    public boolean isTileOpen(int blockX, int blockY, int tileX, int tileY) {
-        return blocklist[blockX][blockY].tilelist[tileX][tileY].getOpen();
-    }
-
-    public void checkTileOpenStatus() {
-        for (int x = 0; x < this.worldwidth; x++) {
-            for (int y = 0; y < this.worldwidth; y++) {
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                    }
-                }
-            }
-
-        }
-    }
-
-    public int translateTileToCoordinate(int k) {
-        switch (k) {
-            case 0:
-                return 0;
-            case 1:
-                return World.ecke;
-            case 2:
-                return World.ecke + World.center;
-            default:
-                throw new RuntimeException("translateTileToCoordinate funktioniert mit diesem Wert nicht!");
-        }
-    }
-
-    public int translateBlockToCoordinate(int k) {
-        return (k * blockbreite);
-    }
-
-    public int translateCoordinateToBlock(float k) {
-        return (int) k / blockbreite;
-    }
-
-    public int translateCoordinateToTile(float k) {
+    private int getIndex(float k) {
         while (k >= blockbreite) {
             k = k - blockbreite;
         }
@@ -178,47 +81,34 @@ public class World {
             throw new RuntimeException("translateCoordinateToTile funktioniert mit diesem Wert nicht!");
         }
     }
-    
-    public int translateCoordinatetorealTile(float k) {
+
+    public int getWorldIndex(float k) {
         int t = 0;
-        while (k >= blockbreite) {  
+        while (k >= blockbreite) {
             k = k - blockbreite;
-            t = t+3;
+            t = t + 3;
         }
         if (k < ecke) {
             return t;
         } else if (k < ecke + center) {
-            return t+1;
+            return t + 1;
         } else if (k < blockbreite) {
-            return t+2;
+            return t + 2;
         } else {
             throw new RuntimeException("translateCoordinatetorealTile funktioniert mit diesem Wert nicht!");
         }
     }
 
-    public int cutCoordinatetoTile(float k) {
-        int i = 0;
-        while (k >= blockbreite) {
-            k = k - blockbreite;
-            i = i + blockbreite;
-        }
-        if (k < ecke) {
-            return i + 0;
-        } else if (k < ecke + center) {
-            return i + ecke;
-        } else if (k < blockbreite) {
-            return i + ecke + center;
-        } else {
-            throw new RuntimeException("cutCoordinatetoTile funktioniert mit diesem Wert nicht!");
-        }
-    }
-
     public Tile talktoTile(float x, float y) {
-        return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)].tilelist[translateCoordinateToTile(x)][translateCoordinateToTile(y)];
+        return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)].tilelist[getIndex(x)][getIndex(y)];
     }
 
     public Block talktoBlock(float x, float y) {
         return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)];
+    }
+
+    public int translateCoordinateToBlock(float k) {
+        return (int) k / blockbreite;
     }
 
     public Tile talktoNumber(int x, int y) {
@@ -226,28 +116,33 @@ public class World {
         int tx = x - bx * 3;
         int by = (int) y / 3;
         int ty = y - by * 3;
-        if(bx <= worldwidth && by <= worldwidth) {
-        return blocklist[bx][by].tilelist[tx][ty];
+        if (bx <= BlockWorldwidth && by <= BlockWorldwidth) {
+            return blocklist[bx][by].tilelist[tx][ty];
         } else {
-        throw new RuntimeException("talktonumberdoesntwork:(");
+            throw new RuntimeException("talktonumberdoesntwork:(");
         }
     }
 
     public void markVision(float x, float y) {
+        cleanVision();
+        if(getWorldIndex(x)<TileWorldwidth && getWorldIndex(x) >= 0 && getWorldIndex(y) < TileWorldwidth && getWorldIndex(y) >= 0) {
         if (talktoTile(x, y).open == true) {
             talktoTile(x, y).visible = true;
-            if (talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(y)+1).open == true) {
-                markVisionRow(talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(x)+ 1), 1);
+            int a = getWorldIndex(x);
+            int b = getWorldIndex(y);
+            if (talktoNumber(a, b + 1).open && b + 1 < TileWorldwidth) {
+                markVisionRow(talktoNumber(a, b + 1), 1);
             }
-            if (talktoNumber(translateCoordinatetorealTile(x) + 1, translateCoordinatetorealTile(y)).open == true) {
-                markVisionRow(talktoNumber(translateCoordinatetorealTile(x) + 1, translateCoordinatetorealTile(y)), 2);
+            if (talktoNumber(a + 1, b).open && a + 1 < TileWorldwidth) {
+                markVisionRow(talktoNumber(a + 1, b), 2);
             }
-            if (talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(y) - 1).open == true) {
-                markVisionRow(talktoNumber(translateCoordinatetorealTile(x), translateCoordinatetorealTile(y) - 1), 3);
+            if (talktoNumber(a, b - 1).open && b - 1 >= 0) {
+                markVisionRow(talktoNumber(a, b - 1), 3);
             }
-            if (talktoNumber(translateCoordinatetorealTile(x) - 1, translateCoordinatetorealTile(y)).open == true) {
-                markVisionRow(talktoNumber(translateCoordinatetorealTile(x) - 1, translateCoordinatetorealTile(y)), 4);
+            if (talktoNumber(a - 1, b).open && a - 1 >= 0) {
+                markVisionRow(talktoNumber(a - 1, b), 4);
             }
+        }
         }
     }
 
@@ -260,36 +155,32 @@ public class World {
     private void markVisionRow(Tile t, int richtung) {
         if (t.open == true) {
             t.visible = true;
+            int x = t.IndexX + (t.parent.IndexX * 3);
+            int y = t.IndexY + (t.parent.IndexY * 3);
             if (richtung == 1 || richtung == 3) {
-                if (talktoNumber(t.getIndexX() + 1, t.getIndexY()).open == true) {
-                    markVisionRow2(talktoNumber(t.getIndexX() + 1, t.getIndexY()), 2);
+                if (talktoNumber(x + 1, y).open && x + 1 < TileWorldwidth) {
+                    markVisionRow2(talktoNumber(x + 1, y), 2);
                 }
-                if (talktoNumber(t.getIndexX() - 1, t.getIndexY()).open == true) {
-                    markVisionRow2(talktoNumber(t.getIndexX() - 1, t.getIndexY()), 4);
+                if (talktoNumber(x - 1, y).open && x - 1 >= 0) {
+                    markVisionRow2(talktoNumber(x - 1, y), 4);
                 }
             } else if (richtung == 2 || richtung == 4) {
-                if (talktoNumber(t.getIndexX(), t.getIndexY() + 1).open == true) {
-                    markVisionRow2(talktoNumber(t.getIndexX(), t.getIndexY() + 1), 1);
+                if (talktoNumber(x, y + 1).open && y + 1 < TileWorldwidth) {
+                    markVisionRow2(talktoNumber(x, y + 1), 1);
                 }
-                if (talktoNumber(t.getIndexX(), t.getIndexY() - 1).open == true) {
-                    markVisionRow2(talktoNumber(t.getIndexX(), t.getIndexY() - 1), 3);
+                if (talktoNumber(x, y - 1).open && y - 1 >= 0) {
+                    markVisionRow2(talktoNumber(x, y - 1), 3);
                 }
             }
-            switch (richtung) {
-                case 1:
-                    markVisionRow(talktoNumber(t.getIndexX(), t.getIndexY() + 1), richtung);
-                    break;
-                case 2:
-                    markVisionRow(talktoNumber(t.getIndexX() + 1, t.getIndexY()), richtung);
-                    break;
-                case 3:
-                    markVisionRow(talktoNumber(t.getIndexX(), t.getIndexY() - 1), richtung);
-                    break;
-                case 4:
-                    markVisionRow(talktoNumber(t.getIndexX() - 1, t.getIndexY()), richtung);
-                    break;
-                default:
-                    break;
+
+            if (richtung == 1 && y + 1 < TileWorldwidth) {
+                markVisionRow(talktoNumber(x, y + 1), richtung);
+            } else if (richtung == 2 && x + 1 < TileWorldwidth) {
+                markVisionRow(talktoNumber(x + 1, y), richtung);
+            } else if (richtung == 3 && y - 1 >= 0) {
+                markVisionRow(talktoNumber(x, y - 1), richtung);
+            } else if (richtung == 4 && x - 1 >= 0) {
+                markVisionRow(talktoNumber(x - 1, y), richtung);
             }
         }
     }
@@ -297,28 +188,23 @@ public class World {
     private void markVisionRow2(Tile t, int richtung) {
         if (t.open == true) {
             t.visible = true;
-            switch (richtung) {
-                case 1:
-                    markVisionRow2(talktoNumber(t.getIndexX(), t.getIndexY() + 1), richtung);
-                    break;
-                case 2:
-                    markVisionRow2(talktoNumber(t.getIndexX() + 1, t.getIndexY()), richtung);
-                    break;
-                case 3:
-                    markVisionRow2(talktoNumber(t.getIndexX(), t.getIndexY() - 1), richtung);
-                    break;
-                case 4:
-                    markVisionRow2(talktoNumber(t.getIndexX() - 1, t.getIndexY()), richtung);
-                    break;
-                default:
-                    break;
+            int x = t.IndexX + (t.parent.IndexX * 3);
+            int y = t.IndexY + (t.parent.IndexY * 3);
+            if (richtung == 1 && y + 1 < TileWorldwidth) {
+                markVisionRow2(talktoNumber(x, y + 1), richtung);
+            } else if (richtung == 2 && x + 1 < TileWorldwidth) {
+                markVisionRow2(talktoNumber(x + 1, y), richtung);
+            } else if (richtung == 3 && y - 1 >= 0) {
+                markVisionRow2(talktoNumber(x, y - 1), richtung);
+            } else if (richtung == 4 && x - 1 >= 0) {
+                markVisionRow2(talktoNumber(x - 1, y), richtung);
             }
         }
     }
 
     public void cleanVision() {
-        for (int i = 0; i < worldwidth; i++) {
-            for (int j = 0; j < worldwidth; j++) {
+        for (int i = 0; i < BlockWorldwidth; i++) {
+            for (int j = 0; j < BlockWorldwidth; j++) {
                 for (int k = 0; k < 3; k++) {
                     for (int l = 0; l < 3; l++) {
                         blocklist[i][j].tilelist[k][l].visible = false;

@@ -51,7 +51,7 @@ public class Game {
         // CCTestInput test = new CCTestInput();
         
         world = new World(25, 50);
-        world.makeMap(true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+        world.makeMap(true, true, true, false, true, false, true, false, true, true, false, false, false, true, true, false, false, true, true, true, false, false, true, true, false, false, true, false, false, true, true, true, true, false, true, true);
 
     }
     
@@ -77,10 +77,8 @@ public class Game {
             player.update(delta);
         }
         
-        world.cleanVision();
-        world.markVision(30, 30);
+        world.markVision(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
         world.update();
-//        System.out.println(world.talktoNumber(9, 7).getIndexX() + " " + world.talktoNumber(9, 7).getIndexY());
     }
 
     public Player getPlayer(int id) {
