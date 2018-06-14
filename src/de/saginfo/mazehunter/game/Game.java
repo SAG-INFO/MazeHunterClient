@@ -22,6 +22,8 @@ public class Game {
     private SpriteVisual visual;
     public World world;
     
+    public CameraSystem cameraSystem;
+    
     //TODO: Migrate Pickupmanager into Map, or somewhere else. 
     public PickupManager pickupManager;
     
@@ -44,11 +46,14 @@ public class Game {
         
         pickupManager = new PickupManager();
         
+        
         //Testing
         // CCTestInput test = new CCTestInput();
         
         world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
+        
+        cameraSystem = new CameraSystem();
     }
     
     
@@ -69,6 +74,7 @@ public class Game {
     }
 
     public void update(float delta) {
+        cameraSystem.update();
         for (Player player : players) {
             player.update(delta);
         }
