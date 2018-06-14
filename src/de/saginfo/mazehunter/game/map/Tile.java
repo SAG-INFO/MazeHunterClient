@@ -22,6 +22,8 @@ public abstract class Tile {
     public boolean visible = false;
     public int IndexX;
     public int IndexY;
+    int WorldIndexX;
+    int WorldIndexY;
     public Block parent;
     public SpriteVisual visual;
 
@@ -32,7 +34,9 @@ public abstract class Tile {
     public Tile(Block block, int x, int y) {
         parent = block;
         IndexX = x;
+        WorldIndexX = parent.IndexX*3 + x;
         IndexY = y;
+        WorldIndexY = parent.IndexY*3 + y;
     }
 
     public Tile(boolean o) {
