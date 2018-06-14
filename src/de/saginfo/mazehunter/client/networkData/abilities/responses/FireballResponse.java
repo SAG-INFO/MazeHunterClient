@@ -12,13 +12,13 @@ import com.badlogic.gdx.math.Vector2;
  * @author Karl Huber
  */
 public class FireballResponse {
-    public int projectileID;
+    public int entityID;
     public int connectionID;
     public Vector2 velocity;
     public float rotation;
 
     public FireballResponse(int projectileID, int connectionID, Vector2 velocity, float rotation) {
-        this.projectileID = projectileID;
+        this.entityID = projectileID;
         this.connectionID = connectionID;
         this.velocity = velocity;
         this.rotation = rotation;

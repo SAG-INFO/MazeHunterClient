@@ -7,25 +7,21 @@ package de.saginfo.mazehunter.client.networkData.abilities.responses;
 
 import com.badlogic.gdx.math.Vector2;
 
-
 /**
  *
  * @author Karl Huber
  */
-public class StunArrowResponse {
-    public int entityID;
+public class TrapResponse {
+    public Vector2 position;
     public int connectionID;
-    public Vector2 velocity;
-    public float rotation;
+    public int entityID;
 
-    public StunArrowResponse(int projectileID, int connectionID, Vector2 velocity, float rotation) {
-        this.entityID = projectileID;
+    public TrapResponse(Vector2 position, int connectionID, int entityID) {
+        this.position = position;
         this.connectionID = connectionID;
-        this.velocity = velocity;
-        this.rotation = rotation;
+        this.entityID = entityID;
     }
 
-    public StunArrowResponse() {
+    public TrapResponse() {
     }
-    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities.projectiles;
+package de.saginfo.mazehunter.game.player.abilities.Entity.projectiles;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.GameScreen;
@@ -13,10 +13,9 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  *
  * @author Karl Huber
  */
-public class FireballProjectile extends Projectile {
+public class StunArrowProjectile extends Projectile {
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual, int id) {
-        super(velocity, position, radius, visual, id);
-        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+    public StunArrowProjectile(Vector2 velocity, Vector2 position, SpriteVisual visual, int id) {
+        super(velocity, position, visual, id);
     }
 }

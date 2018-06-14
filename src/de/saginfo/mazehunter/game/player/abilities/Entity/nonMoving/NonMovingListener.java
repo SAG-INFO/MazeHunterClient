@@ -3,29 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities.projectiles;
+package de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import de.saginfo.mazehunter.client.networkData.abilities.projectiles.DisposeProjectile;
-import de.saginfo.mazehunter.game.Game;
+import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeNonMoving;
 import de.saginfo.mazehunter.game.GameScreen;
 
 /**
  *
- * @author Karl Huber
+ * @author karl.huber
  */
-public class ProjectileListener extends Listener{
+public class NonMovingListener extends Listener {
     
     @Override
     public void received(Connection connection, Object object) {
-        if(object instanceof DisposeProjectile) {
+        if(object instanceof DisposeNonMoving) {
             System.out.println("DisposeProjectile received.");
-            GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.disposeProjectile(((DisposeProjectile) object).id);
+            GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.disposeNonMoving(((DisposeNonMoving) object).entityID);
         }
     }
 
-    public ProjectileListener() {
+    public NonMovingListener() {
         GameScreen.GAMESCREEN_SINGLETON.client.addListener(this);
     }
 }

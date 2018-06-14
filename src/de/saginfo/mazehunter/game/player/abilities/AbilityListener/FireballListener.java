@@ -12,7 +12,7 @@ import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballShootResponse;
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.player.abilities.projectiles.FireballProjectile;
+import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.FireballProjectile;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -30,7 +30,7 @@ public class FireballListener extends Listener{
             Gdx.app.postRunnable(() -> {
                 SpriteVisual visual = new SpriteVisual("assets\\abilities\\Fireball\\fireball.png");
                 visual.rotate(((FireballResponse) object).rotation);
-                GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new FireballProjectile(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).connectionID).position.cpy(), GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_SIZE, visual, ((FireballResponse)object).projectileID));
+                GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new FireballProjectile(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).connectionID).position.cpy(), visual, ((FireballResponse)object).entityID));
             });
             sound.play(1.0f);
         } else if (object instanceof FireballShootResponse) {

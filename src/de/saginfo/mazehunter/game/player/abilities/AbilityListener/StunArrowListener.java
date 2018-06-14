@@ -13,7 +13,7 @@ import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowRes
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowShootResponse;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;
-import de.saginfo.mazehunter.game.player.abilities.projectiles.StunArrowProjectile;
+import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.StunArrowProjectile;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -32,7 +32,7 @@ public class StunArrowListener extends Listener{
                 System.out.println("StunArrowResponse received.");
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\StunArrow\\stunArrow.png"));
                 visual.rotate(((StunArrowResponse) object).rotation);
-                GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new StunArrowProjectile(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), GameScreen.GAMESCREEN_SINGLETON.config.FIREBALL_SIZE, visual, ((StunArrowResponse)object).projectileID));
+                GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new StunArrowProjectile(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
             });} else if (object instanceof StunArrowShootResponse) {
             //shootanimation
             if (GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowShootResponse) object).playerID) == GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer()) {

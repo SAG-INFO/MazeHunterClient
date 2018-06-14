@@ -14,9 +14,11 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
+import de.saginfo.mazehunter.game.player.abilities.Entity.EntityManager;
+import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMovingManager;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
-import de.saginfo.mazehunter.game.player.abilities.projectiles.ProjectileListener;
-import de.saginfo.mazehunter.game.player.abilities.projectiles.ProjectileManager;
+import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.ProjectileListener;
+import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.ProjectileManager;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -34,6 +36,8 @@ public class Game {
     public PickupManager pickupManager;
     
     public ProjectileManager projectileManager;
+    public NonMovingManager nonMovingManager;
+    public EntityManager entityManager;
     
     public Game() {
         players = new ArrayList<>();
@@ -50,6 +54,8 @@ public class Game {
         createAbilityIO();
         
         pickupManager = new PickupManager();
+        nonMovingManager = new NonMovingManager();
+        entityManager = new EntityManager();
         
         projectileManager = new ProjectileManager();
         ProjectileListener pL = new ProjectileListener();

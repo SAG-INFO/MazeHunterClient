@@ -14,7 +14,7 @@ import de.saginfo.mazehunter.client.networkData.*;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.DisposePickup;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.EquipAbility;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.SpawnPickup;
-import de.saginfo.mazehunter.client.networkData.abilities.projectiles.DisposeProjectile;
+import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeProjectile;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.AttackRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.UtilityRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballResponse;

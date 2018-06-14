@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities.projectiles;
+package de.saginfo.mazehunter.client.networkData.abilities.entity;
 
 /**
  *
  * @author Karl Huber
  */
-public class TrapProjectile {
+public class DisposeProjectile {
+    public int id;
     
+    public DisposeProjectile(int id) {
+        this.id = id;
+    }
+
+    public DisposeProjectile() {
+    }
 }

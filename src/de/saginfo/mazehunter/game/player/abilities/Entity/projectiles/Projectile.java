@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities.projectiles;
+package de.saginfo.mazehunter.game.player.abilities.Entity.projectiles;
 
 import com.badlogic.gdx.math.Vector2;
+import de.saginfo.mazehunter.game.player.abilities.Entity.Entity;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
  *
  * @author Karl Huber
  */
-public abstract class Projectile {
+public abstract class Projectile extends Entity{
     
     Vector2 velocity;
-    Vector2 position;
-    float radius;
-    int projectileID;
-    SpriteVisual visual;
     
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
@@ -27,12 +24,9 @@ public abstract class Projectile {
         visual.setY(position.y);
     }
 
-    public Projectile(Vector2 velocity, Vector2 position, float radius, SpriteVisual visual, int id) {
+    public Projectile(Vector2 velocity, Vector2 position, SpriteVisual visual, int entityID) {
+        super(position, entityID, visual);
         this.velocity = velocity;
-        this.position = position;
-        this.radius = radius;
-        this.visual = visual;
-        this.projectileID = id;
     }
 }
 

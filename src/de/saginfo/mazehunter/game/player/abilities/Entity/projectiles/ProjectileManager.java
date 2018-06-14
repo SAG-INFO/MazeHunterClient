@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player.abilities.projectiles;
+package de.saginfo.mazehunter.game.player.abilities.Entity.projectiles;
 
 import de.saginfo.mazehunter.game.Game;
 import de.saginfo.mazehunter.game.GameScreen;
@@ -18,7 +18,7 @@ public class ProjectileManager {
     
     public void disposeProjectile(int id) {
         for (Projectile projectile : projectiles) {
-            if (projectile.projectileID == id) {
+            if (projectile.entityID == id) {
                 GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(projectile.visual);
                 projectiles.remove(projectile);
                 return;
