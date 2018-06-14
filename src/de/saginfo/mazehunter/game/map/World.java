@@ -17,12 +17,16 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 public class World {
 
     private Block[][] blocklist;
+
     public static int BlockWorldwidth;
     public static int TileWorldwidth;
     public static int CoordinateWorldwidth;
+
     public static int ecke;
     public static int center;
     public static int blockbreite;
+
+    public Tile localPlayerTile;
 
     private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
     private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
@@ -62,7 +66,12 @@ public class World {
     }
 
     public void update() {
-        markVision(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
+        if(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0) {
+        if (talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y) != localPlayerTile) {
+            localPlayerTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
+            markVision(localPlayerTile);
+        }
+        }
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
                 blocklist[i][j].update();
@@ -109,27 +118,26 @@ public class World {
         }
     }
 
-    public void markVision(float x, float y) {
+    public void markVision(Tile t) {
         cleanVision();
-        if (x < CoordinateWorldwidth && x >= 0 && y < CoordinateWorldwidth && y >= 0) {
-            if (talktoTile(x, y).open == true) {
-                talktoTile(x, y).visible = true;
-                int a = talktoTile(x, y).WorldIndexX;
-                int b = talktoTile(x, y).WorldIndexY;
-                if ((b + 1) < TileWorldwidth && talktoNumber(a, b + 1).open) {
-                    markVisionRow(talktoNumber(a, b + 1), 1);
+        if (t.open) {
+                t.visible = true;
+                int x = t.WorldIndexX;
+                int y = t.WorldIndexY;
+                if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
+                    markVisionRow(talktoNumber(x, y + 1), 1);
                 }
-                if ((a + 1) < TileWorldwidth && talktoNumber(a + 1, b).open) {
-                    markVisionRow(talktoNumber(a + 1, b), 2);
+                if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
+                    markVisionRow(talktoNumber(x + 1, y), 2);
                 }
-                if ((b - 1) >= 0 && talktoNumber(a, b - 1).open) {
-                    markVisionRow(talktoNumber(a, b - 1), 3);
+                if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
+                    markVisionRow(talktoNumber(x, y - 1), 3);
                 }
-                if ((a - 1) >= 0 && talktoNumber(a - 1, b).open) {
-                    markVisionRow(talktoNumber(a - 1, b), 4);
+                if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
+                    markVisionRow(talktoNumber(x - 1, y), 4);
                 }
             }
-        }
+        
     }
 
 
