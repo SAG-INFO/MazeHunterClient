@@ -34,9 +34,9 @@ public abstract class Tile {
     public Tile(Block block, int x, int y) {
         parent = block;
         IndexX = x;
-        WorldIndexX = parent.IndexX*3 + x;
+        WorldIndexX = parent.IndexX * 3 + x;
         IndexY = y;
-        WorldIndexY = parent.IndexY*3 + y;
+        WorldIndexY = parent.IndexY * 3 + y;
     }
 
     public Tile(boolean o) {
