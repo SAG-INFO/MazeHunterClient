@@ -65,12 +65,25 @@ public class World {
         }
     }
 
-    public void update() {
-        if(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0) {
-        if (talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y) != localPlayerTile) {
-            localPlayerTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
-            markVision(localPlayerTile);
+    public void makeTestMap(int k) {
+        BlockWorldwidth = k;
+        TileWorldwidth = k * 3;
+        CoordinateWorldwidth = BlockWorldwidth * (2 * ecke + center);
+        blocklist = new Block[BlockWorldwidth][BlockWorldwidth];
+        for (int j = 0; j < BlockWorldwidth; j++) {
+            for (int i = 0; i < BlockWorldwidth; i++) {
+                blocklist[i][j] = new Block(true, false, true, true, i, j);
+                blocklist[i][j].draw();
+            }
         }
+    }
+
+    public void update() {
+        if (GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0) {
+            if (talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y) != localPlayerTile) {
+                localPlayerTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
+                markVision(localPlayerTile);
+            }
         }
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
@@ -121,23 +134,23 @@ public class World {
     public void markVision(Tile t) {
         cleanVision();
         if (t.open) {
-                t.visible = true;
-                int x = t.WorldIndexX;
-                int y = t.WorldIndexY;
-                if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
-                    markVisionRow(talktoNumber(x, y + 1), 1);
-                }
-                if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
-                    markVisionRow(talktoNumber(x + 1, y), 2);
-                }
-                if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
-                    markVisionRow(talktoNumber(x, y - 1), 3);
-                }
-                if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
-                    markVisionRow(talktoNumber(x - 1, y), 4);
-                }
+            t.visible = true;
+            int x = t.WorldIndexX;
+            int y = t.WorldIndexY;
+            if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
+                markVisionRow(talktoNumber(x, y + 1), 1);
             }
-        
+            if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
+                markVisionRow(talktoNumber(x + 1, y), 2);
+            }
+            if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
+                markVisionRow(talktoNumber(x, y - 1), 3);
+            }
+            if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
+                markVisionRow(talktoNumber(x - 1, y), 4);
+            }
+        }
+
     }
 
 

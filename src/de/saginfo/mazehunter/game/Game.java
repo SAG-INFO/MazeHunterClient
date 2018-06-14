@@ -51,8 +51,6 @@ public class Game {
         // CCTestInput test = new CCTestInput();
         
         world = new World(25, 50);
-        world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
-
     }
     
     
