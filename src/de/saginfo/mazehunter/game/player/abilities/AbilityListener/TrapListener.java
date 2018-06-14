@@ -29,7 +29,7 @@ public class TrapListener extends Listener{
             Gdx.app.postRunnable(() -> {
                 System.out.println("TrapResponse received.");
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\Trap\\trap.png"));
-                GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.nonMoving.add(new TrapNonMoving(GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((TrapResponse)object).connectionID).position.cpy(), ((TrapResponse)object).entityID, visual));
+                GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.nonMoving.add(new TrapNonMoving(((TrapResponse) object).position, ((TrapResponse)object).entityID, visual));
             });} else if (object instanceof TrapShootResponse) {
             //shootanimation
             if (GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((TrapShootResponse) object).connectionID) == GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer()) {

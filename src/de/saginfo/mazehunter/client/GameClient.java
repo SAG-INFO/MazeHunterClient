@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import de.saginfo.mazehunter.client.networkData.ConnectResponse;
 import de.saginfo.mazehunter.client.networkData.*;
+import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeNonMoving;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.DisposePickup;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.EquipAbility;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.SpawnPickup;
@@ -22,6 +23,8 @@ import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballShoo
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StandardHealResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowShootResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.TrapResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.TrapShootResponse;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,9 +84,12 @@ public class GameClient extends Client {
         getKryo().register(FireballShootResponse.class);
         getKryo().register(StunArrowResponse.class);
         getKryo().register(StunArrowShootResponse.class);
+        getKryo().register(TrapResponse.class);
+        getKryo().register(TrapShootResponse.class);
         
-        //Projectiles
+        //Entity Stuff
         getKryo().register(DisposeProjectile.class);
+        getKryo().register(DisposeNonMoving.class);
 
         //Pickups
         getKryo().register(SpawnPickup.class);

@@ -19,7 +19,7 @@ public class NonMovingListener extends Listener {
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof DisposeNonMoving) {
-            System.out.println("DisposeProjectile received.");
+            System.out.println("DisposeNonMoving received.");
             GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.disposeNonMoving(((DisposeNonMoving) object).entityID);
         }
     }

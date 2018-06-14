@@ -17,5 +17,7 @@ public abstract class NonMoving extends Entity {
     
     public NonMoving(Vector2 position, int entityID, Visual visual) {
         super(position, entityID, visual);
+        this.visual.setX(position.x);
+        this.visual.setY(position.y);
     }
 }

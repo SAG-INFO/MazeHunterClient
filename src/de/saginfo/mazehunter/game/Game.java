@@ -14,7 +14,9 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.TrapListener;
 import de.saginfo.mazehunter.game.player.abilities.Entity.EntityManager;
+import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMovingListener;
 import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMovingManager;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
 import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.ProjectileListener;
@@ -54,11 +56,12 @@ public class Game {
         createAbilityIO();
         
         pickupManager = new PickupManager();
+        
         nonMovingManager = new NonMovingManager();
         entityManager = new EntityManager();
-        
         projectileManager = new ProjectileManager();
         ProjectileListener pL = new ProjectileListener();
+        NonMovingListener nmL = new NonMovingListener();
         
         //Testing
         // CCTestInput test = new CCTestInput();
@@ -76,6 +79,7 @@ public class Game {
         FireballListener fL = new FireballListener();
         StandardHealListener shL = new StandardHealListener();
         StunArrowListener sAL = new StunArrowListener();
+        TrapListener tL = new TrapListener();
     }
 
     /**
