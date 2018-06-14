@@ -7,6 +7,7 @@ package de.saginfo.mazehunter.game.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
@@ -16,8 +17,9 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 public class World {
 
     private Block[][] blocklist;
-    public int BlockWorldwidth;
-    public int TileWorldwidth;
+    public static int BlockWorldwidth;
+    public static int TileWorldwidth;
+    public static int CoordinateWorldwidth;
     public static int ecke;
     public static int center;
     public static int blockbreite;
@@ -46,6 +48,7 @@ public class World {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
             BlockWorldwidth = (int) Math.sqrt(b.length / 4);
             TileWorldwidth = BlockWorldwidth * 3;
+            CoordinateWorldwidth = BlockWorldwidth * (2 * ecke + center);
             blocklist = new Block[BlockWorldwidth][BlockWorldwidth];
             int h = 0;
             for (int j = 0; j < BlockWorldwidth; j++) {
@@ -56,10 +59,10 @@ public class World {
                 }
             }
         }
-        System.out.println(TileWorldwidth);
     }
 
     public void update() {
+        markVision(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
                 blocklist[i][j].update();
@@ -108,7 +111,7 @@ public class World {
 
     public void markVision(float x, float y) {
         cleanVision();
-        if (talktoTile(x, y).WorldIndexX < TileWorldwidth && talktoTile(x, y).WorldIndexX >= 0 && talktoTile(x, y).WorldIndexY < TileWorldwidth && talktoTile(x, y).WorldIndexX >= 0) {
+        if (x < CoordinateWorldwidth && x >= 0 && y < CoordinateWorldwidth && y >= 0) {
             if (talktoTile(x, y).open == true) {
                 talktoTile(x, y).visible = true;
                 int a = talktoTile(x, y).WorldIndexX;
