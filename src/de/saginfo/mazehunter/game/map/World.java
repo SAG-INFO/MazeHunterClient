@@ -82,23 +82,6 @@ public class World {
         }
     }
 
-    public int getWorldIndex(float k) {
-        int t = 0;
-        while (k >= blockbreite) {
-            k = k - blockbreite;
-            t = t + 3;
-        }
-        if (k < ecke) {
-            return t;
-        } else if (k < ecke + center) {
-            return t + 1;
-        } else if (k < blockbreite) {
-            return t + 2;
-        } else {
-            throw new RuntimeException("translateCoordinatetorealTile funktioniert mit diesem Wert nicht!");
-        }
-    }
-
     public Tile talktoTile(float x, float y) {
         return blocklist[translateCoordinateToBlock(x)][translateCoordinateToBlock(y)].tilelist[getIndex(x)][getIndex(y)];
     }
@@ -125,21 +108,21 @@ public class World {
 
     public void markVision(float x, float y) {
         cleanVision();
-        if (getWorldIndex(x) < TileWorldwidth && getWorldIndex(x) >= 0 && getWorldIndex(y) < TileWorldwidth && getWorldIndex(y) >= 0) {
+        if (talktoTile(x, y).WorldIndexX < TileWorldwidth && talktoTile(x, y).WorldIndexX >= 0 && talktoTile(x, y).WorldIndexY < TileWorldwidth && talktoTile(x, y).WorldIndexX >= 0) {
             if (talktoTile(x, y).open == true) {
                 talktoTile(x, y).visible = true;
-                int a = getWorldIndex(x);
-                int b = getWorldIndex(y);
-                if (talktoNumber(a, b + 1).open && b + 1 < TileWorldwidth) {
+                int a = talktoTile(x, y).WorldIndexX;
+                int b = talktoTile(x, y).WorldIndexY;
+                if ((b + 1) < TileWorldwidth && talktoNumber(a, b + 1).open) {
                     markVisionRow(talktoNumber(a, b + 1), 1);
                 }
-                if (talktoNumber(a + 1, b).open && a + 1 < TileWorldwidth) {
+                if ((a + 1) < TileWorldwidth && talktoNumber(a + 1, b).open) {
                     markVisionRow(talktoNumber(a + 1, b), 2);
                 }
-                if (talktoNumber(a, b - 1).open && b - 1 >= 0) {
+                if ((b - 1) >= 0 && talktoNumber(a, b - 1).open) {
                     markVisionRow(talktoNumber(a, b - 1), 3);
                 }
-                if (talktoNumber(a - 1, b).open && a - 1 >= 0) {
+                if ((a - 1) >= 0 && talktoNumber(a - 1, b).open) {
                     markVisionRow(talktoNumber(a - 1, b), 4);
                 }
             }
@@ -158,28 +141,28 @@ public class World {
             int x = t.IndexX + (t.parent.IndexX * 3);
             int y = t.IndexY + (t.parent.IndexY * 3);
             if (richtung == 1 || richtung == 3) {
-                if (talktoNumber(x + 1, y).open && x + 1 < TileWorldwidth) {
+                if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
                     markVisionRow2(talktoNumber(x + 1, y), 2);
                 }
-                if (talktoNumber(x - 1, y).open && x - 1 >= 0) {
+                if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
                     markVisionRow2(talktoNumber(x - 1, y), 4);
                 }
             } else if (richtung == 2 || richtung == 4) {
-                if (talktoNumber(x, y + 1).open && y + 1 < TileWorldwidth) {
+                if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
                     markVisionRow2(talktoNumber(x, y + 1), 1);
                 }
-                if (talktoNumber(x, y - 1).open && y - 1 >= 0) {
+                if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
                     markVisionRow2(talktoNumber(x, y - 1), 3);
                 }
             }
 
-            if (richtung == 1 && y + 1 < TileWorldwidth) {
+            if (richtung == 1 && (y + 1) < TileWorldwidth) {
                 markVisionRow(talktoNumber(x, y + 1), richtung);
-            } else if (richtung == 2 && x + 1 < TileWorldwidth) {
+            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
                 markVisionRow(talktoNumber(x + 1, y), richtung);
-            } else if (richtung == 3 && y - 1 >= 0) {
+            } else if (richtung == 3 && (y - 1) >= 0) {
                 markVisionRow(talktoNumber(x, y - 1), richtung);
-            } else if (richtung == 4 && x - 1 >= 0) {
+            } else if (richtung == 4 && (x - 1) >= 0) {
                 markVisionRow(talktoNumber(x - 1, y), richtung);
             }
         }
@@ -190,13 +173,13 @@ public class World {
             t.visible = true;
             int x = t.IndexX + (t.parent.IndexX * 3);
             int y = t.IndexY + (t.parent.IndexY * 3);
-            if (richtung == 1 && y + 1 < TileWorldwidth) {
+            if (richtung == 1 && (y + 1) < TileWorldwidth) {
                 markVisionRow2(talktoNumber(x, y + 1), richtung);
-            } else if (richtung == 2 && x + 1 < TileWorldwidth) {
+            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
                 markVisionRow2(talktoNumber(x + 1, y), richtung);
-            } else if (richtung == 3 && y - 1 >= 0) {
+            } else if (richtung == 3 && (y - 1) >= 0) {
                 markVisionRow2(talktoNumber(x, y - 1), richtung);
-            } else if (richtung == 4 && x - 1 >= 0) {
+            } else if (richtung == 4 && (x - 1) >= 0) {
                 markVisionRow2(talktoNumber(x - 1, y), richtung);
             }
         }
