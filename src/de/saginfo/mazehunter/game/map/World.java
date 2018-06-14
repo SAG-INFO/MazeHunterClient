@@ -72,7 +72,7 @@ public class World {
         blocklist = new Block[BlockWorldwidth][BlockWorldwidth];
         for (int j = 0; j < BlockWorldwidth; j++) {
             for (int i = 0; i < BlockWorldwidth; i++) {
-                blocklist[i][j] = new Block(true, false, true, true, i, j);
+                blocklist[i][j] = new Block(true, true, true, true, i, j);
                 blocklist[i][j].draw();
             }
         }
