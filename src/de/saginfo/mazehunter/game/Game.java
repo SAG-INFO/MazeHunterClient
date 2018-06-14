@@ -77,7 +77,6 @@ public class Game {
             player.update(delta);
         }
         
-        world.markVision(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
         world.update();
     }
 
