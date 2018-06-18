@@ -27,7 +27,7 @@ public class PathUp extends Tile {
         super(block, x, y);
         open = b;
     }
-    
+
     @Override
     public void draw() {
         if (open) {
@@ -37,6 +37,16 @@ public class PathUp extends Tile {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         }
-        visual.setPosition(getX(), getY());
+        visual.setPosition(getVisualX(), getVisualY());
+    }
+
+    @Override
+    public float getVisualX() {
+        return getX() + ((World.center - visual.getWidth()) / 2);
+    }
+
+    @Override
+    public float getVisualY() {
+        return getY() + ((World.ecke - visual.getHeight()) / 2);
     }
 }

@@ -76,6 +76,10 @@ public abstract class Tile {
                 throw new RuntimeException("getYvonTile");
         }
     }
+    
+    public abstract float getVisualX();
+    
+    public abstract float getVisualY();
 
     public abstract void draw();
 }

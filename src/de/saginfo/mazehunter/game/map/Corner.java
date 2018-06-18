@@ -26,11 +26,21 @@ public class Corner extends Tile {
         super(block, x, y);
         open = false;
     }
-    
+
     @Override
     public void draw() {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(getX(), getY());
+        visual.setPosition(getVisualX(), getVisualY());
+    }
+
+    @Override
+    public float getVisualX() {
+        return getX() + ((World.ecke - visual.getWidth()) / 2);
+    }
+
+    @Override
+    public float getVisualY() {
+        return getY() + ((World.ecke - visual.getHeight()) / 2);
     }
 }
