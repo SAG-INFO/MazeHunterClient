@@ -32,10 +32,8 @@ public class TrapListener extends Listener{
                 GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.nonMoving.add(new TrapNonMoving(((TrapResponse) object).position, ((TrapResponse)object).entityID, visual));
             });} else if (object instanceof TrapShootResponse) {
             //shootanimation
-            if (GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((TrapShootResponse) object).connectionID) == GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer()) {
                 Status.root(GameScreen.GAMESCREEN_SINGLETON.config.TRAP_ROOTDURATION);
-            }
-            GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.disposeNonMoving(((TrapShootResponse) object).entityID);
+                GameScreen.GAMESCREEN_SINGLETON.game.nonMovingManager.disposeNonMoving(((TrapShootResponse) object).entityID);
         }
     }
     

@@ -8,7 +8,6 @@ package de.saginfo.mazehunter.game.player.abilities.Entity.projectiles;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeProjectile;
-import de.saginfo.mazehunter.game.Game;
 import de.saginfo.mazehunter.game.GameScreen;
 
 /**

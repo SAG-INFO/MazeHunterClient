@@ -5,7 +5,6 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.Entity.projectiles;
 
-import de.saginfo.mazehunter.game.Game;
 import de.saginfo.mazehunter.game.GameScreen;
 import java.util.ArrayList;
 
