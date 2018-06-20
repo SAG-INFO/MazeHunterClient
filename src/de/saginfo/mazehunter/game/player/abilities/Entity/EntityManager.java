@@ -5,15 +5,29 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.Entity;
 
+import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMoving;
+import java.util.ArrayList;
+
 /**
  *
  * @author karl.huber
  */
 public class EntityManager {
-    private int entityID;
     
-    public int getNewEntityID() {
-        entityID++;
-        return entityID;
+    public ArrayList<Entity> entities;
+
+    public void disposeEntity(int entityID) {
+        for (Entity e : entities) {
+            if (e.entityID == entityID) {
+                GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(e.visual);
+                entities.remove(e);
+                return;
+            }
+        }
+    }
+
+    public EntityManager() {
+        entities = new ArrayList<>();
     }
 }

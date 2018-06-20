@@ -32,13 +32,13 @@ public class StunArrowListener extends Listener{
                 System.out.println("StunArrowResponse received.");
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\StunArrow\\stunArrow.png"));
                 visual.rotate(((StunArrowResponse) object).rotation);
-                GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.projectiles.add(new StunArrowProjectile(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
+                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new StunArrowProjectile(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
             });} else if (object instanceof StunArrowShootResponse) {
             //shootanimation
             if (GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowShootResponse) object).playerID) == GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer()) {
                 Status.stun(((StunArrowShootResponse) object).stunDuration);
             }
-            GameScreen.GAMESCREEN_SINGLETON.game.projectileManager.disposeProjectile(((StunArrowShootResponse) object).projectileID);
+            GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((StunArrowShootResponse) object).entityID);
         }
     }
     

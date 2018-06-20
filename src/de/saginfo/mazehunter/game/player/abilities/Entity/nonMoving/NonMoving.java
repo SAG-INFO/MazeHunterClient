@@ -20,4 +20,7 @@ public abstract class NonMoving extends Entity {
         this.visual.setX(position.x);
         this.visual.setY(position.y);
     }
+    
+    @Override
+    public void update(float delta) {}
 }

@@ -7,6 +7,7 @@ package de.saginfo.mazehunter.game.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import java.util.ArrayList;
 
 /**
  *
@@ -53,6 +54,64 @@ public class World {
         }
     }
 
+    /**
+     * 
+     * generates a random map
+     *
+     * @param worldwith
+     */
+    public void makeMap(int worldwith) {
+        
+        blocklist = new Block[worldwidth][worldwidth];
+        boolean N;
+        boolean O;
+        boolean S;
+        boolean W;
+          
+        for (int x = 0; x < worldwith; x++) {
+            if (x == 0) {
+                blocklist[x][0]= new Block(false, getRandom(), getRandom(), false, this.translateBlockToCoordinate(x), this.translateBlockToCoordinate(0));
+            }
+            blocklist[x][0]= new Block(false, getRandom(), getRandom(), blocklist[x-1][0].tilelist[2][1].open, this.translateBlockToCoordinate(x), this.translateBlockToCoordinate(0));
+        }
+        
+        for (int y = 1; y < worldwidth; y++) {
+            for (int x = 0; x < worldwidth; x++) {
+                if (x == 0) {
+                    O = false;
+                    if (y == 0) {
+                        S = false;
+                        N = blocklist[x][y+1].tilelist[1][2].open;
+                        W = blocklist[x-1][y].tilelist[2][1].open;
+                    } else if (y == worldwith-1) {
+                        N = false;
+                        S = getRandom();
+                        W = blocklist[x-1][y].tilelist[2][1].open;
+                    }
+                } else if (x == worldwith-1) {
+                    W = false;
+                    if (y == 0) {
+                        S = false;
+                    } else if (y == worldwith-1) {
+                        N = false;
+                    }
+                }
+                
+                if (true) {
+                    N = blocklist[x][y-1].tilelist[1][2].open;
+                    O = getRandom();
+                    S = getRandom();
+                    W = blocklist[x-1][y].tilelist[2][1].open;
+                } 
+                blocklist[x][y] = new Block(N, O, S, W, this.translateBlockToCoordinate(x), this.translateBlockToCoordinate(y));
+            }
+        }
+    }
+    
+    private boolean getRandom() {
+        return Math.random()<0.6f;
+    }
+    
     public void makeTestMap(int größe) {
         worldwidth = größe;
         blocklist = new Block[worldwidth][worldwidth];
@@ -126,7 +185,6 @@ public class World {
                     }
                 }
             }
-
         }
     }
 

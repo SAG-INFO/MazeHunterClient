@@ -16,11 +16,8 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealL
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.TrapListener;
 import de.saginfo.mazehunter.game.player.abilities.Entity.EntityManager;
-import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMovingListener;
-import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMovingManager;
+import de.saginfo.mazehunter.game.player.abilities.Entity.EntityListener;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
-import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.ProjectileListener;
-import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.ProjectileManager;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import java.util.ArrayList;
@@ -37,8 +34,6 @@ public class Game {
     //TODO: Migrate Pickupmanager into Map, or somewhere else. 
     public PickupManager pickupManager;
     
-    public ProjectileManager projectileManager;
-    public NonMovingManager nonMovingManager;
     public EntityManager entityManager;
     
     public Game() {
@@ -57,11 +52,8 @@ public class Game {
         
         pickupManager = new PickupManager();
         
-        nonMovingManager = new NonMovingManager();
         entityManager = new EntityManager();
-        projectileManager = new ProjectileManager();
-        ProjectileListener pL = new ProjectileListener();
-        NonMovingListener nmL = new NonMovingListener();
+        EntityListener eL = new EntityListener();
         
         //Testing
         // CCTestInput test = new CCTestInput();
@@ -99,7 +91,7 @@ public class Game {
 
     public void update(float delta) {
         players.forEach((p) -> {p.update(delta);});
-        projectileManager.projectiles.forEach((p) -> {p.update(delta);});
+        entityManager.entities.forEach((p) -> {p.update(delta);});
     }
 
     public Player getPlayer(int id) {

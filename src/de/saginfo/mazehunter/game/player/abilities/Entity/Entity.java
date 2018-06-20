@@ -26,4 +26,6 @@ public class Entity {
         this.visual = visual;
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
     }
+    
+    public void update(float delta) {}
 }

@@ -9,13 +9,13 @@ package de.saginfo.mazehunter.client.networkData.abilities.entity;
  *
  * @author Karl Huber
  */
-public class DisposeNonMoving {
+public class DisposeEntity {
     public int entityID;
-
-    public DisposeNonMoving(int entityID) {
-        this.entityID = entityID;
+    
+    public DisposeEntity(int id) {
+        this.entityID = id;
     }
 
-    public DisposeNonMoving() {
+    public DisposeEntity() {
     }
 }
