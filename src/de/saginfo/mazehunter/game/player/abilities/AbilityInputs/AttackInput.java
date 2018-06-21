@@ -5,11 +5,7 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.AbilityInputs;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.AttackRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;

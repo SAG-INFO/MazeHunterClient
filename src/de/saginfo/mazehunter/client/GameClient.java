@@ -16,6 +16,7 @@ import de.saginfo.mazehunter.client.networkData.abilities.pickups.EquipAbility;
 import de.saginfo.mazehunter.client.networkData.abilities.pickups.SpawnPickup;
 import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeEntity;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.AttackRequest;
+import de.saginfo.mazehunter.client.networkData.abilities.requests.SlideRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.UtilityRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballShootResponse;
@@ -75,6 +76,7 @@ public class GameClient extends Client {
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
         getKryo().register(MobilityRequest.class);
+        getKryo().register(SlideRequest.class);
         
         //AbilityResponses
         getKryo().register(DashResponse.class);

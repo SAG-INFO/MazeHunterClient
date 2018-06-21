@@ -9,9 +9,11 @@ import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.AttackInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.MobilityInput;
+import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.SlideInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.SlideListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.TrapListener;
@@ -66,12 +68,14 @@ public class Game {
         AttackInput aI = new AttackInput();
         UtilityInput uI = new UtilityInput();
         MobilityInput mI = new MobilityInput();
+        SlideInput sI = new SlideInput();
         
         DashListener dL = new DashListener();
         FireballListener fL = new FireballListener();
         StandardHealListener shL = new StandardHealListener();
         StunArrowListener sAL = new StunArrowListener();
         TrapListener tL = new TrapListener();
+        SlideListener sL = new SlideListener();
     }
 
     /**
