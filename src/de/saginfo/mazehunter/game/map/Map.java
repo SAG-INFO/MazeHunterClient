@@ -12,7 +12,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
  *
- * @author julian.mittermeier
+ * @author goilster.typ.euw
  */
 public class Map {
 
@@ -34,7 +34,7 @@ public class Map {
     public Map() {
         this(cornerTex.getWidth(), centerTex.getWidth());
     }
-
+  
     public Map(int e, int c) {
         ecke = e;
         center = c;
@@ -79,9 +79,6 @@ public class Map {
     }
 
     public void update() {
-        if(Gdx.input.isKeyJustPressed(Keys.H)){
-            moveRow(2, 1);
-        }
         if (GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0) {
             if (talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y) != localPlayerTile) {
                 localPlayerTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
@@ -133,8 +130,6 @@ public class Map {
             throw new RuntimeException("talktonumberdoesntwork:(");
         }
     }
-
-    
     
 //    public void markVision(Tile t, int direction, int edges){
 //        if(!t.open || edges>=3)
@@ -175,7 +170,7 @@ public class Map {
         }
 
     }
-
+  
     /*@param richtung   Oben = 1
                         Rechts = 2
                         Unten = 3
@@ -322,4 +317,6 @@ public class Map {
                 break;
         }
     }
+  
 }
+

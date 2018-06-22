@@ -34,6 +34,7 @@ public class RenderSystem {
     }
 
     public void render(float delta) {
+        visuals.sort(zComparator);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(GAMESCREEN_SINGLETON.camera.combined);

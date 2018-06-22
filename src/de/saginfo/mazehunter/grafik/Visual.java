@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public interface Visual {
     public void draw(SpriteBatch batch, float delta);
     public int getZIndex();
+    public void setZIndex(int zIndex);
     public void dispose();
 
     public void setX(float f);

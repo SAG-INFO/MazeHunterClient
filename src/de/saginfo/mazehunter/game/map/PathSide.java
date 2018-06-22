@@ -33,9 +33,11 @@ public class PathSide extends Tile {
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+            visual.setZIndex(20);
         } else {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+            visual.setZIndex((int) (75 + Math.random() * 10));
         }
         visual.setPosition(getVisualX(), getVisualY());
     }
