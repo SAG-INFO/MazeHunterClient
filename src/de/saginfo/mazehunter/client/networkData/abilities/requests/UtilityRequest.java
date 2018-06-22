@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.client.networkData.abilities;
+package de.saginfo.mazehunter.client.networkData.abilities.requests;
 
 /**
  *
  * @author Karl Huber
  */
-public class StandardHealResponse {
-    int id;
-
-    public StandardHealResponse(int id) {
-        this.id = id;
-    }
-
-    public StandardHealResponse() {
+public class UtilityRequest {
+    public float angle;
+    
+    public UtilityRequest(float angle) {
+        this.angle = angle;
     }
 }

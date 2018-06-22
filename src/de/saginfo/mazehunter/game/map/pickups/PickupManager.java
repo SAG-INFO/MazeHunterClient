@@ -3,8 +3,8 @@ package de.saginfo.mazehunter.game.map.pickups;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import de.saginfo.mazehunter.client.networkData.abilities.DisposePickup;
-import de.saginfo.mazehunter.client.networkData.abilities.SpawnPickup;
+import de.saginfo.mazehunter.client.networkData.abilities.pickups.DisposePickup;
+import de.saginfo.mazehunter.client.networkData.abilities.pickups.SpawnPickup;
 import de.saginfo.mazehunter.game.GameScreen;
 import java.util.HashMap;
 
