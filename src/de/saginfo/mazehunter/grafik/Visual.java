@@ -14,6 +14,4 @@ public interface Visual {
 
     public void setX(float f);
     public void setY(float f);
-
-    public void setZIndex(int i);
 }
