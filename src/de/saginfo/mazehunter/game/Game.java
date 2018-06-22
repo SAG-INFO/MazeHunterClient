@@ -1,7 +1,5 @@
 package de.saginfo.mazehunter.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.World;
 import de.saginfo.mazehunter.game.map.pickups.PickupManager;
@@ -22,7 +20,6 @@ public class Game {
 
     public final ArrayList<Player> players;
     private SpriteVisual visual;
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\fog.png"));   
     public World world;
     
     //TODO: Migrate Pickupmanager into Map, or somewhere else. 
@@ -50,7 +47,7 @@ public class Game {
         //Testing
         // CCTestInput test = new CCTestInput();
         
-        world = new World(25, 50);
+        world = new World();
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
     
@@ -75,8 +72,6 @@ public class Game {
         for (Player player : players) {
             player.update(delta);
         }
-        
-        world.update();
     }
 
     public Player getPlayer(int id) {
