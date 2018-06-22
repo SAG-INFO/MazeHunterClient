@@ -1,4 +1,4 @@
-package de.saginfo.mazehunter.client.networkData.abilities;
+package de.saginfo.mazehunter.client.networkData.abilities.pickups;
 
 /**
  *
