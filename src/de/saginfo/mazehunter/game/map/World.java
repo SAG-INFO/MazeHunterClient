@@ -292,6 +292,7 @@ public class World {
                 moveRowLeft(row);
                 break;
         }
+        markVision(localPlayerTile);
     }
 
 }
