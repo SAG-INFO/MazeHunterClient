@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
-import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -18,23 +17,30 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class Centeropen extends Tile {
 
-    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\white.png"));
-
     public static int width;
     public static int height;
 
+    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\center_open.png"));
 
-    private SpriteVisual visual;
-    
-    public Centeropen(int xBlock, int yBlock, int xTile, int yTile) {
+    public Centeropen(Block block, int x, int y) {
+        super(block, x, y);
         open = true;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
-        tilePositionX = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(xTile);
-        tilePositionY = GAMESCREEN_SINGLETON.game.world.translateTileToCoordinate(yTile);
-        
+    }
+
+    @Override
+    public void draw() {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(tilePositionX+ blockPositionX, tilePositionY+blockPositionY);
+        visual.setPosition(getVisualX(), getVisualY());
+    }
+    
+    @Override
+    public float getVisualX() {
+        return getX()+((World.center-visual.getWidth())/2);
+    }
+
+    @Override
+    public float getVisualY() {
+        return getY()+((World.center-visual.getHeight())/2);
     }
 }
