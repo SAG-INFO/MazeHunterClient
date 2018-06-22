@@ -14,7 +14,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
  *
  * @author goilster.typ.euw
  */
-public class World {
+public class Map {
 
     private Block[][] blocklist;
 
@@ -28,7 +28,7 @@ public class World {
 
     public Tile localPlayerTile;
 
-    public World(int e, int c) {
+    public Map(int e, int c) {
         ecke = e;
         center = c;
         blockbreite = c + 2 * e;

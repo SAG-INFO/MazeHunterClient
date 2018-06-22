@@ -32,15 +32,16 @@ public class Corner extends Tile {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         visual.setPosition(getVisualX(), getVisualY());
+        visual.setZIndex((int) (75 + Math.random() * 10));
     }
 
     @Override
     public float getVisualX() {
-        return getX() + ((World.ecke - visual.getWidth()) / 2);
+        return getX() + ((Map.ecke - visual.getWidth()) / 2);
     }
 
     @Override
     public float getVisualY() {
-        return getY() + ((World.ecke - visual.getHeight()) / 2);
+        return getY() + ((Map.ecke - visual.getHeight()) / 2);
     }
 }

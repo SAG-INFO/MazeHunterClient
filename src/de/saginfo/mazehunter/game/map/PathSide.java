@@ -33,20 +33,22 @@ public class PathSide extends Tile {
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+            visual.setZIndex(20);
         } else {
             visual = new SpriteVisual(new Sprite(TEXblack));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+            visual.setZIndex((int) (75 + Math.random() * 10));
         }
         visual.setPosition(getVisualX(), getVisualY());
     }
 
     @Override
     public float getVisualX() {
-        return getX() + ((World.ecke - visual.getWidth()) / 2);
+        return getX() + ((Map.ecke - visual.getWidth()) / 2);
     }
 
     @Override
     public float getVisualY() {
-        return getY() + ((World.center - visual.getHeight()) / 2);
+        return getY() + ((Map.center - visual.getHeight()) / 2);
     }
 }
