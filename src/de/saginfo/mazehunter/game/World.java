@@ -15,7 +15,7 @@ public class World {
     public final PickupManager pickupManager;
     public EntityManager entityManager;
     
-    private final float cameraSmooth = 0.8f;
+    private final float cameraSmooth = 0.3f;
     private final Vector3 tmpVec = new Vector3();
 
     public World() {
@@ -23,14 +23,17 @@ public class World {
         map.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
         pickupManager = new PickupManager();
         entityManager = new EntityManager();
+        
+        GameScreen.GAMESCREEN_SINGLETON.camera.zoom = 0.7f;
     }
     
     public void update(float delta){
         entityManager.update(delta);
         map.update();
+        updateCam();
     }
     
     private void updateCam(){
-        GameScreen.GAMESCREEN_SINGLETON.camera.position.lerp(tmpVec.set(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position, cameraSmooth), 0);
+        GameScreen.GAMESCREEN_SINGLETON.camera.position.lerp(tmpVec.set(GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer().position, 0), cameraSmooth);
     }
 }
