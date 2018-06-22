@@ -26,9 +26,10 @@ public class PlayerVisual{
     private Visual currentVisual;
     
     public PlayerVisual() {
-        idle_down = new SpriteVisual("assets\\img\\player\\dt.png");
+        idle_down = new SpriteVisual("assets\\img\\player\\idle_down.png");
         run_down = new AnimationVisual(24, "assets\\img\\player\\run_down", Animation.PlayMode.LOOP_PINGPONG);
-        setSprite(idle_down);
+        
+        setSprite(run_down);
     }
     
     private void setSprite(Visual visual) {
