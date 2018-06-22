@@ -35,6 +35,7 @@ public class PlayerVisual{
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(currentVisual);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         currentVisual = visual;
+        currentVisual.setZIndex(100);
     }
     
     private float alpha = 0.2f;

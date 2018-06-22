@@ -20,7 +20,7 @@ public class EntityListener extends Listener {
     public void received(Connection connection, Object object) {
         if(object instanceof DisposeEntity) {
             System.out.println("DisposeNonMoving received.");
-            GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((DisposeEntity) object).entityID);
+            GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((DisposeEntity) object).entityID);
         }
     }
 

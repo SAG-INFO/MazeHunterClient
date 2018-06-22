@@ -51,6 +51,7 @@ public class RenderSystem {
 
     public void removeSprite(Visual s) {
         visuals.remove(s);
+        visuals.sort(zComparator);
     }
 
     public void dispose() {

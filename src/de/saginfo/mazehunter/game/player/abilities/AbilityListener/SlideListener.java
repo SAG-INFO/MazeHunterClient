@@ -10,7 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.SlideResponse;
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.map.World;
+import de.saginfo.mazehunter.game.map.Map;
 
 /**
  *
@@ -22,18 +22,18 @@ public class SlideListener extends Listener{
     public void received(Connection connection, Object object)  {
         if(object instanceof SlideResponse){
             
-            final Vector2 velocity = new Vector2(World.blockbreite, 0);
+            final Vector2 velocity = new Vector2(Map.blockbreite, 0);
             char xory; 
             final Vector2 position = new Vector2();
             
             switch (((SlideResponse) object).direction) {
-                case 'N':  velocity.setAngle(90); xory = 'y'; position.set(((SlideResponse) object).row*World.blockbreite, 0);
-                case 'O':  velocity.setAngle(0); xory = 'x';position.set(0, ((SlideResponse) object).row*World.blockbreite);
-                case 'S':  velocity.setAngle(180); xory = 'y'; position.set(((SlideResponse) object).row*World.blockbreite, 0);
-                case 'W':  velocity.setAngle(270); xory = 'x';position.set(0, ((SlideResponse) object).row*World.blockbreite);
+                case 'N':  velocity.setAngle(90); xory = 'y'; position.set(((SlideResponse) object).row*Map.blockbreite, 0);
+                case 'O':  velocity.setAngle(0); xory = 'x';position.set(0, ((SlideResponse) object).row*Map.blockbreite);
+                case 'S':  velocity.setAngle(180); xory = 'y'; position.set(((SlideResponse) object).row*Map.blockbreite, 0);
+                case 'W':  velocity.setAngle(270); xory = 'x';position.set(0, ((SlideResponse) object).row*Map.blockbreite);
                 default: xory = 'L'; 
             }
-        GameScreen.GAMESCREEN_SINGLETON.game.world.movePlayers(position, velocity, xory);
+//        GameScreen.GAMESCREEN_SINGLETON.game.world.movePlayers(position, velocity, xory);
         }
     }
 

@@ -14,7 +14,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
  *
  * @author julian.mittermeier
  */
-public class World {
+public class Map {
 
     private Block[][] blocklist;
 
@@ -31,11 +31,11 @@ public class World {
     private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
     private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
 
-    public World() {
+    public Map() {
         this(cornerTex.getWidth(), centerTex.getWidth());
     }
 
-    public World(int e, int c) {
+    public Map(int e, int c) {
         ecke = e;
         center = c;
         blockbreite = c + 2 * e;
@@ -134,6 +134,26 @@ public class World {
         }
     }
 
+    
+    
+//    public void markVision(Tile t, int direction, int edges){
+//        if(!t.open || edges>=3)
+//            return;
+//        
+//        t.visible = true;
+//        int x = t.WorldIndexX;
+//        int y = t.WorldIndexY;
+//        
+//        if(direction != 0 && x != TileWorldwidth-1)
+//            markVision(talktoNumber(x+1, y), 2, direction==2?edges:edges+1);
+//        if(direction != 2 && x != 0)
+//            markVision(talktoNumber(x-1, y), 0, direction==0?edges:edges+1);
+//        if(direction != 3 && y!= TileWorldwidth-1)
+//            markVision(talktoNumber(x, y+1), 1, direction==1?edges:edges+1);
+//        if(direction != 1 && y!=0)
+//            markVision(talktoNumber(x, y-1), 3, direction==3?edges:edges+1);
+//    }
+    
     public void markVision(Tile t) {
         cleanVision();
         if (t.open) {
@@ -155,7 +175,6 @@ public class World {
         }
 
     }
-
 
     /*@param richtung   Oben = 1
                         Rechts = 2
