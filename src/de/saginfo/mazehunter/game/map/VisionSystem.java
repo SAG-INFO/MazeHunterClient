@@ -42,6 +42,7 @@ public class VisionSystem {
 //                      2 = Rechts
 //                      3 = Unten
 //                      4 = Links
+    @param maxflags = Anzahl an Ecken um die man schauen kann
 //     */
     public void markVision(Tile t, int direction, int flags, int maxflags) {
         if (t.open && flags < maxflags + 2) {
