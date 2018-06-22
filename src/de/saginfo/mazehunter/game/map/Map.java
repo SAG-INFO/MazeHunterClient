@@ -25,6 +25,8 @@ public class Map {
     public static int ecke;
     public static int center;
     public static int blockbreite;
+    
+    public Tile localPlayerTile;
 
     private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
     private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
@@ -77,12 +79,34 @@ public class Map {
     }
 
     public void update() {
+        if (playerOnMap()) {
+            Tile currentTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
+            if (currentTile != localPlayerTile) {
+                localPlayerTile = currentTile;
+            }
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.I)){
+            moveRow(localPlayerTile.WorldIndexX/3, 1);
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.J)){
+            moveRow(localPlayerTile.WorldIndexY/3, 2);
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.K)){
+            moveRow(localPlayerTile.WorldIndexX/3, 3);
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.L)){
+            moveRow(localPlayerTile.WorldIndexY/3, 4);
+        }
         
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
                 blocklist[i][j].update();
             }
         }
+    }
+    
+    private boolean playerOnMap() {
+        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
 
     private int getIndex(float k) {
