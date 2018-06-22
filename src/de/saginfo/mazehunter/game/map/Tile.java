@@ -49,6 +49,9 @@ public abstract class Tile {
         } else {
             visual.setColor(Color.BLUE);
         }
+        //TODO: Effizienz steigern
+        WorldIndexX = parent.IndexX * 3 + IndexX;
+        WorldIndexY = parent.IndexY * 3 + IndexY;
     }
 
     public int getX() {
@@ -82,4 +85,8 @@ public abstract class Tile {
     public abstract float getVisualY();
 
     public abstract void draw();
+    
+    public void clean(){
+        GAMESCREEN_SINGLETON.renderSystem.removeSprite(visual);
+    }
 }

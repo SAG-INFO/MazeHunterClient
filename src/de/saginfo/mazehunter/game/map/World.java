@@ -220,5 +220,85 @@ public class World {
             }
         }
     }
+    
+    //moves row to the right; k is moved row
+    private void moveRowRight(int k) {
+        Block b = blocklist[BlockWorldwidth - 1][k];
+        for (int i = BlockWorldwidth - 2; i >= 0; i--) {
+            blocklist[i][k].clean();
+            blocklist[i][k].IndexX = blocklist[i][k].IndexX + 1;
+            blocklist[i + 1][k] = blocklist[i][k];
+        }
+        blocklist[0][k] = b;
+        blocklist[0][k].IndexX = 0;
+        for (int m = 0; m < BlockWorldwidth; m++) {
+            blocklist[m][k].draw();
+        }
+    }
+
+    //moves row to the left; k is moved row
+    private void moveRowLeft(int k) {
+        Block b = blocklist[0][k];
+        for (int i = 1; i < BlockWorldwidth; i++) {
+            blocklist[i][k].clean();
+            blocklist[i][k].IndexX = blocklist[i][k].IndexX - 1;
+            blocklist[i - 1][k] = blocklist[i][k];
+        }
+        blocklist[BlockWorldwidth - 1][k] = b;
+        blocklist[BlockWorldwidth - 1][k].IndexX = BlockWorldwidth - 1;
+        for (int m = 0; m < BlockWorldwidth; m++) {
+            blocklist[m][k].draw();
+        }
+    }
+
+    //moves row up; k is moved row
+    private void moveRowUp(int k) {
+        
+        Block b = blocklist[k][BlockWorldwidth - 1];
+        for (int i = BlockWorldwidth - 2; i >= 0; i--) {
+            blocklist[k][i].clean();
+            blocklist[k][i].IndexY = blocklist[k][i].IndexY + 1;
+            blocklist[k][i + 1] = blocklist[k][i];
+        }
+        blocklist[k][0] = b;
+        blocklist[k][0].IndexY = 0;
+        for (int m = 0; m < BlockWorldwidth; m++) {
+            blocklist[k][m].draw();
+        }
+    }
+
+    //moves row down; k is moved row
+    private void moveRowDown(int k) {
+        Block b = blocklist[k][0];
+        for (int i = 1; i < BlockWorldwidth; i++) {
+            blocklist[k][i].clean();
+            blocklist[k][i].IndexY = blocklist[k][i].IndexY - 1;
+            blocklist[k][i - 1] = blocklist[k][i];
+        }
+        blocklist[k][BlockWorldwidth - 1] = b;
+        blocklist[k][BlockWorldwidth - 1].IndexY = BlockWorldwidth - 1;
+        for (int m = 0; m < BlockWorldwidth; m++) {
+            blocklist[k][m].draw();
+        }
+    }
+
+    //direction: 1 moves row up, 2 moves row right, 3 moves row down, 4 moves row
+    //row: what row to move; X coordinate when up or down, Y coordinate when left or right
+    public void moveRow(int row, int direction) {
+        switch (direction) {
+            case 1:
+                moveRowUp(row);
+                break;
+            case 2:
+                moveRowRight(row);
+                break;
+            case 3:
+                moveRowDown(row);
+                break;
+            case 4:
+                moveRowLeft(row);
+                break;
+        }
+    }
 
 }
