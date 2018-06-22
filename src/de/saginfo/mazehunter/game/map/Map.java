@@ -16,7 +16,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
  */
 public class Map {
 
-    private Block[][] blocklist;
+    Block[][] blocklist;
 
     public static int BlockWorldwidth;
     public static int TileWorldwidth;
@@ -25,8 +25,6 @@ public class Map {
     public static int ecke;
     public static int center;
     public static int blockbreite;
-
-    public Tile localPlayerTile;
 
     private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
     private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
@@ -79,12 +77,7 @@ public class Map {
     }
 
     public void update() {
-        if (GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0) {
-            if (talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y) != localPlayerTile) {
-                localPlayerTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
-                markVision(localPlayerTile);
-            }
-        }
+        
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
                 blocklist[i][j].update();
@@ -128,113 +121,6 @@ public class Map {
             return blocklist[bx][by].tilelist[tx][ty];
         } else {
             throw new RuntimeException("talktonumberdoesntwork:(");
-        }
-    }
-    
-//    public void markVision(Tile t, int direction, int edges){
-//        if(!t.open || edges>=3)
-//            return;
-//        
-//        t.visible = true;
-//        int x = t.WorldIndexX;
-//        int y = t.WorldIndexY;
-//        
-//        if(direction != 0 && x != TileWorldwidth-1)
-//            markVision(talktoNumber(x+1, y), 2, direction==2?edges:edges+1);
-//        if(direction != 2 && x != 0)
-//            markVision(talktoNumber(x-1, y), 0, direction==0?edges:edges+1);
-//        if(direction != 3 && y!= TileWorldwidth-1)
-//            markVision(talktoNumber(x, y+1), 1, direction==1?edges:edges+1);
-//        if(direction != 1 && y!=0)
-//            markVision(talktoNumber(x, y-1), 3, direction==3?edges:edges+1);
-//    }
-    
-    public void markVision(Tile t) {
-        cleanVision();
-        if (t.open) {
-            t.visible = true;
-            int x = t.WorldIndexX;
-            int y = t.WorldIndexY;
-            if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
-                markVisionRow(talktoNumber(x, y + 1), 1);
-            }
-            if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
-                markVisionRow(talktoNumber(x + 1, y), 2);
-            }
-            if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
-                markVisionRow(talktoNumber(x, y - 1), 3);
-            }
-            if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
-                markVisionRow(talktoNumber(x - 1, y), 4);
-            }
-        }
-
-    }
-  
-    /*@param richtung   Oben = 1
-                        Rechts = 2
-                        Unten = 3
-                        Links = 4
-     */
-    private void markVisionRow(Tile t, int richtung) {
-        if (t.open == true) {
-            t.visible = true;
-            int x = t.IndexX + (t.parent.IndexX * 3);
-            int y = t.IndexY + (t.parent.IndexY * 3);
-            if (richtung == 1 || richtung == 3) {
-                if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
-                    markVisionRow2(talktoNumber(x + 1, y), 2);
-                }
-                if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
-                    markVisionRow2(talktoNumber(x - 1, y), 4);
-                }
-            } else if (richtung == 2 || richtung == 4) {
-                if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
-                    markVisionRow2(talktoNumber(x, y + 1), 1);
-                }
-                if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
-                    markVisionRow2(talktoNumber(x, y - 1), 3);
-                }
-            }
-
-            if (richtung == 1 && (y + 1) < TileWorldwidth) {
-                markVisionRow(talktoNumber(x, y + 1), richtung);
-            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
-                markVisionRow(talktoNumber(x + 1, y), richtung);
-            } else if (richtung == 3 && (y - 1) >= 0) {
-                markVisionRow(talktoNumber(x, y - 1), richtung);
-            } else if (richtung == 4 && (x - 1) >= 0) {
-                markVisionRow(talktoNumber(x - 1, y), richtung);
-            }
-        }
-    }
-
-    private void markVisionRow2(Tile t, int richtung) {
-        if (t.open == true) {
-            t.visible = true;
-            int x = t.IndexX + (t.parent.IndexX * 3);
-            int y = t.IndexY + (t.parent.IndexY * 3);
-            if (richtung == 1 && (y + 1) < TileWorldwidth) {
-                markVisionRow2(talktoNumber(x, y + 1), richtung);
-            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
-                markVisionRow2(talktoNumber(x + 1, y), richtung);
-            } else if (richtung == 3 && (y - 1) >= 0) {
-                markVisionRow2(talktoNumber(x, y - 1), richtung);
-            } else if (richtung == 4 && (x - 1) >= 0) {
-                markVisionRow2(talktoNumber(x - 1, y), richtung);
-            }
-        }
-    }
-
-    public void cleanVision() {
-        for (int i = 0; i < BlockWorldwidth; i++) {
-            for (int j = 0; j < BlockWorldwidth; j++) {
-                for (int k = 0; k < 3; k++) {
-                    for (int l = 0; l < 3; l++) {
-                        blocklist[i][j].tilelist[k][l].visible = false;
-                    }
-                }
-            }
         }
     }
     
