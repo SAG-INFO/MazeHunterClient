@@ -6,13 +6,13 @@
 package de.saginfo.mazehunter.game.map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
  *
- * @author julian.mittermeier
+ * @author goilster.typ.euw
  */
 public class World {
 
@@ -27,13 +27,6 @@ public class World {
     public static int blockbreite;
 
     public Tile localPlayerTile;
-
-    private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
-    private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
-
-    public World() {
-        this(cornerTex.getWidth(), centerTex.getWidth());
-    }
 
     public World(int e, int c) {
         ecke = e;

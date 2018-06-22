@@ -9,7 +9,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
  *
- * @author julian.mittermeier
+ * @author heftigster.guy.na
  */
 public class Block {
 
