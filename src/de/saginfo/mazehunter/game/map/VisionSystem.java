@@ -23,7 +23,7 @@ public class VisionSystem {
             Tile currentTile = map.talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
             if (currentTile != localPlayerTile) {
                 localPlayerTile = currentTile;
-                startVision(localPlayerTile, -1, 0, 1);
+                startVision(localPlayerTile, 0, 0, 1);
             }
         }
     }
@@ -142,7 +142,7 @@ public class VisionSystem {
 //            }
 //        }
 //    }
-//
+
     public void cleanVision() {
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
