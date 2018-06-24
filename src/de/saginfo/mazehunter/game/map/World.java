@@ -8,7 +8,9 @@ package de.saginfo.mazehunter.game.map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+import de.saginfo.mazehunter.game.player.Player;
 
 /**
  *
@@ -156,8 +158,10 @@ public class World {
 
     }
 
-
-    /*@param richtung   Oben = 1
+    /**
+     * 
+     * 
+     * @param richtung  Oben = 1
                         Rechts = 2
                         Unten = 3
                         Links = 4
@@ -302,5 +306,12 @@ public class World {
                 moveRowLeft(row);
                 break;
         }
+    }
+    
+    public void movePlayers(Vector2 velocity, int row) {
+        int angle = (int)velocity.angle();
+        GAMESCREEN_SINGLETON.game.players.stream().filter((p) -> (((angle == 0 || angle == 180) && p.position.y - row > blockbreite) || ((angle == 90 || angle == 270) && p.position.x - row > blockbreite))).forEachOrdered((p) -> {
+            p.position.add(velocity);
+        });
     }
 }

@@ -9,11 +9,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballResponse;
-import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballShootResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.FrostBoltResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.FrostBoltShootResponse;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.abilities.Entity.EntityNotFoundException;
-import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.FireballEntity;
+import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.FrostBoltEntity;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,31 +22,31 @@ import java.util.logging.Logger;
  *
  * @author Karl Huber
  */
-public class FireballListener extends Listener{
+public class FrostBoltlListener extends Listener{
      
     Sound sound = Gdx.audio.newSound(Gdx.files.local("assets\\abilities\\Fireball\\airhorn.mp3"));
     
     @Override
     public void received(Connection connection, Object object) {
         
-        if(object instanceof FireballResponse) {
+        if(object instanceof FrostBoltResponse) {
             Gdx.app.postRunnable(() -> {
                 SpriteVisual visual = new SpriteVisual("assets\\abilities\\Fireball\\fireball.png");
-                visual.rotate(((FireballResponse) object).rotation);
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new FireballEntity(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).connectionID).position.cpy(), visual, ((FireballResponse)object).entityID));
+                visual.rotate(((FrostBoltResponse) object).rotation);
+                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new FrostBoltEntity(((FrostBoltResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FrostBoltResponse)object).connectionID).position.cpy(), visual, ((FrostBoltResponse)object).entityID));
             });
             sound.play(1.0f);
-        } else if (object instanceof FireballShootResponse) {
+        } else if (object instanceof FrostBoltShootResponse) {
             try {
                 //shootanimation
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((FireballShootResponse) object).projectileID);
+                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((FrostBoltShootResponse) object).projectileID);
             } catch (EntityNotFoundException ex) {
-                Logger.getLogger(FireballListener.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrostBoltlListener.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public FireballListener() {
+    public FrostBoltlListener() {
         GameScreen.GAMESCREEN_SINGLETON.client.addListener(this);
     }
 }

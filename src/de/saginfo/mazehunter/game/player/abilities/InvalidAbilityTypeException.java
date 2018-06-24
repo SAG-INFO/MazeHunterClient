@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player;
+package de.saginfo.mazehunter.game.player.abilities;
 
 /**
  *
  * @author Karl Huber
  */
-public class Status {
-    
-    // "mobility" type Abilities are also affected by canMove
-    public static boolean canMove; 
-    public static boolean canUseAbilities; 
+public class InvalidAbilityTypeException extends Exception {
+    public InvalidAbilityTypeException(String message) {
+        super(message);
+    }
 }

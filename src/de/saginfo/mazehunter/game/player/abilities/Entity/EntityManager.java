@@ -6,7 +6,6 @@
 package de.saginfo.mazehunter.game.player.abilities.Entity;
 
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving.NonMoving;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +16,7 @@ public class EntityManager {
     
     public ArrayList<Entity> entities;
 
-    public void disposeEntity(int entityID) {
+    public void disposeEntity(int entityID) throws EntityNotFoundException {
         for (Entity e : entities) {
             if (e.entityID == entityID) {
                 GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(e.visual);
@@ -25,6 +24,8 @@ public class EntityManager {
                 return;
             }
         }
+        String s = "Entity with ID " + entityID + " doesn't exist.";
+        throw new EntityNotFoundException(s);
     }
 
     public EntityManager() {

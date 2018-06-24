@@ -19,9 +19,7 @@ import de.saginfo.mazehunter.game.player.Status;
  */
 public class MovementInput extends InputAdapter {
 
-    private boolean cancel;
-
-    private Vector2 direction = new Vector2(0, 0);
+    private final Vector2 direction = new Vector2(0, 0);
 
     @Override
     public boolean keyDown(int keycode) {
@@ -70,37 +68,12 @@ public class MovementInput extends InputAdapter {
         boolean movement;
         int angle = (int) requestedVector.angle();
 
-        if (direction.isZero()) {
-            movement = false;
-        } else {
-            movement = true;
-        }
+        movement = !direction.isZero();
 
-        if (Status.canMove == 0) {
-
+        if (Status.canMove) {
             MovementRequest movementRequest = new MovementRequest(angle, movement);
             GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(movementRequest);
-
-        } else {
-
-            cancelOld();
-            while (Status.canMove > 0) {
-                if (cancel == true) {return;}
-            }
-            MovementRequest movementRequest = new MovementRequest((int) requestedVector.angle(), movement);
-            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(movementRequest);
         }
-    }
-
-    public void cancelOld() {
-        cancel = true;
-        Timer t = new Timer();
-        t.scheduleTask(new Timer.Task() {
-            @Override
-            public void run() {
-                cancel = false;
-            }
-        }, 0, 05);
     }
 
     public MovementInput() {

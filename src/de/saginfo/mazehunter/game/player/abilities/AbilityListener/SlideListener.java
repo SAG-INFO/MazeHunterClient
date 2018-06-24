@@ -22,18 +22,20 @@ public class SlideListener extends Listener{
     public void received(Connection connection, Object object)  {
         if(object instanceof SlideResponse){
             
+            System.out.println("SlideResponse received.");
+            
             final Vector2 velocity = new Vector2(World.blockbreite, 0);
-            char xory; 
-            final Vector2 position = new Vector2();
             
             switch (((SlideResponse) object).direction) {
-                case 'N':  velocity.setAngle(90); xory = 'y'; position.set(((SlideResponse) object).row*World.blockbreite, 0);
-                case 'O':  velocity.setAngle(0); xory = 'x';position.set(0, ((SlideResponse) object).row*World.blockbreite);
-                case 'S':  velocity.setAngle(180); xory = 'y'; position.set(((SlideResponse) object).row*World.blockbreite, 0);
-                case 'W':  velocity.setAngle(270); xory = 'x';position.set(0, ((SlideResponse) object).row*World.blockbreite);
-                default: xory = 'L'; 
+                case 'N':  velocity.setAngle(90); break;
+                case 'O':  velocity.setAngle(0); break;
+                case 'S':  velocity.setAngle(180); break;
+                case 'W':  velocity.setAngle(270); break;
             }
-        GameScreen.GAMESCREEN_SINGLETON.game.world.movePlayers(position, velocity, xory);
+            
+            System.out.println(" row:" + ((SlideResponse) object).row + "direction:" + ((SlideResponse) object).direction);
+            GameScreen.GAMESCREEN_SINGLETON.game.world.movePlayers(velocity, ((SlideResponse) object).row);
+            //TODO moveRow()
         }
     }
 
