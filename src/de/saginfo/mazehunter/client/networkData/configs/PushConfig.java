@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package de.saginfo.mazehunter.client.networkData.configs;
-
 /**
  *
  * @author Karl Huber
@@ -17,22 +16,15 @@ package de.saginfo.mazehunter.client.networkData.configs;
  */
 public class PushConfig {
     
-    public int BLIZZARD_RADIUS;
     public float BLIZZARD_SLOW_DURATION; 
     public float BLIZZARD_SLOW_AMOUNT;
-    public int BLIZZARD_DAMAGE;
-    public float BLIZZARD_COOLDOWN;
-    
-    public float DASH_COOLDOWN;
-    public int DASH_RANGE;
     
     public float STANDARDHEAL_DURATION ;
-    public float STANDARDHEAL_COOLDOWN;
-    public int STANDARDHEAL_TOTALHEAL;
     
     public int DEFAULT_SPEED;
-    public int DEFAULT_HEALTHPOINTS;
-
+    
+    public float TRAP_ROOTDURATION;
+    
     public PushConfig() {
     }
 }

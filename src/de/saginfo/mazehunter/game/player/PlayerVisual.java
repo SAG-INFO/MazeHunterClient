@@ -5,8 +5,6 @@
  */
 package de.saginfo.mazehunter.game.player;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.grafik.AnimationVisual;
@@ -26,16 +24,16 @@ public class PlayerVisual{
     private Visual currentVisual;
     
     public PlayerVisual() {
-        idle_down = new SpriteVisual("assets\\img\\player\\idle_down.png");
+        idle_down = new SpriteVisual("assets\\img\\player\\dt.png");
         run_down = new AnimationVisual(24, "assets\\img\\player\\run_down", Animation.PlayMode.LOOP_PINGPONG);
-        
-        setSprite(run_down);
+        setSprite(idle_down);
     }
     
     private void setSprite(Visual visual) {
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(currentVisual);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         currentVisual = visual;
+        currentVisual.setZIndex(50);
     }
     
     private float alpha = 0.2f;

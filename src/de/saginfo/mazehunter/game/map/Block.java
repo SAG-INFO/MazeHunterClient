@@ -9,7 +9,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
  *
- * @author julian.mittermeier
+ * @author heftigster.guy.na
  */
 public class Block {
 
@@ -18,99 +18,75 @@ public class Block {
     boolean right;
     boolean down;
     boolean left;
-    int BlockPositionX;
-    int BlockPositionY;
+    int IndexX;
+    int IndexY;
 
-    public Block(boolean u, boolean r, boolean d, boolean l, int blockx, int blocky) {
-
+    public Block(boolean u, boolean r, boolean d, boolean l, int x, int y) {
         up = u;
         right = r;
         down = d;
         left = l;
 
+        IndexX = x;
+        IndexY = y;
+
         tilelist = new Tile[3][3];
-        tilelist[0][0] = new Corner(blockx, blocky, 0, 0);
-        tilelist[1][0] = new PathUp(d, blockx, blocky, 1, 0);
-        tilelist[2][0] = new Corner(blockx, blocky, 2, 0);
-        tilelist[0][1] = new PathSide(l, blockx, blocky, 0, 1);
-        tilelist[2][1] = new PathSide(r, blockx, blocky, 2, 1);
-        tilelist[0][2] = new Corner(blockx, blocky, 0, 2);
-        tilelist[1][2] = new PathUp(u, blockx, blocky, 1, 2);
-        tilelist[2][2] = new Corner(blockx, blocky, 2, 2);
+        tilelist[0][0] = new Corner(this, 0, 0);
+        tilelist[1][0] = new PathUp(this, 1, 0, d);
+        tilelist[2][0] = new Corner(this, 2, 0);
+        tilelist[0][1] = new PathSide(this, 0, 1, l);
+        tilelist[2][1] = new PathSide(this, 2, 1, r);
+        tilelist[0][2] = new Corner(this, 0, 2);
+        tilelist[1][2] = new PathUp(this, 1, 2, u);
+        tilelist[2][2] = new Corner(this, 2, 2);
 
         if (u == false && r == false && d == false && l == false) {
-            tilelist[1][1] = new Centerclosed(blockx, blocky, 1, 1);
+            tilelist[1][1] = new Centerclosed(this, 1, 1);
         } else {
-            tilelist[1][1] = new Centeropen(blockx, blocky, 1, 1);
+            tilelist[1][1] = new Centeropen(this, 1, 1);
         }
 
-        Corner.width = World.ecke;
-        Corner.height = World.ecke;
-        Centeropen.width = World.center;
-        Centeropen.height = World.center;
-        PathUp.height = World.ecke;
-        PathUp.width = World.center;
-        PathSide.height = World.center;
-        PathSide.width = World.ecke;
-
-        BlockPositionX = blockx;
-        BlockPositionY = blocky;
+        Corner.width = Map.ecke;
+        Corner.height = Map.ecke;
+        Centeropen.width = Map.center;
+        Centeropen.height = Map.center;
+        PathUp.height = Map.ecke;
+        PathUp.width = Map.center;
+        PathSide.height = Map.center;
+        PathSide.width = Map.ecke;
 
     }
 
-    //position -1 means not found
-    public int getPositionTileXinTile(Tile tile) {
+    public void update() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tilelist[j][i] == tile) {
-                    return j;
-                }
-
+                        tilelist[i][j].update();
             }
         }
-        return -1;
     }
 
-    //position -1 means not found
-    public int getPositionTileYintTile(Tile tile) {
-        for (int j = 0; j < 3; j++) {
-            for (int i = 0; i < 3; i++) {
-                if (tilelist[j][i] == tile) {
-                    return i;
-                }
+    public int getX() {
+        return IndexX * Map.blockbreite;
+    }
 
+    public int getY() {
+        return IndexY * Map.blockbreite;
+    }
+
+    public void draw() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tilelist[i][j].draw();
             }
-        }
-        return -1;
-    }
-
-    //position -1 means not found
-    public int getPostitionTileXinCoordinate(Tile tile) {
-        int k = this.getPositionTileXinTile(tile);
-        switch (k) {
-            case 0:
-                return 0;
-            case 1:
-                return World.ecke;
-            case 2:
-                return World.ecke + World.center;
-            default:
-                return -1;
+            
         }
     }
-
-    //position -1 means not found
-    public int getPostitionTileYinCoordinate(Tile tile) {
-        int k = this.getPositionTileYintTile(tile);
-        switch (k) {
-            case 0:
-                return 0;
-            case 1:
-                return World.ecke;
-            case 2:
-                return World.ecke + World.center;
-            default:
-                return -1;
+    
+    public void clean() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tilelist[i][j].clean();
+            }
         }
     }
 

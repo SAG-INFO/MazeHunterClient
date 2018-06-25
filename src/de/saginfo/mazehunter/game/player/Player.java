@@ -24,6 +24,10 @@ public class Player {
     
     public int health;
     public int maxHealth;
+    
+    public String attackAbility;
+    public String utilityAbility;
+    public String mobilityAbility;
 
     public Player() {
         this.position = new Vector2();
