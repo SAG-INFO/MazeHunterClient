@@ -136,6 +136,18 @@ public class Map {
         return (int) k / blockbreite;
     }
 
+    public Block getRandomBlock() {
+        if (BlockWorldwidth >1) {
+            return blocklist[getRandomInt(BlockWorldwidth - 1)][getRandomInt(BlockWorldwidth - 1)];
+        } else {
+            return blocklist[0][0];
+        }
+    }
+
+    public int getRandomInt(int maxInt) {
+        return ((int) (Math.random() * (maxInt + 1)));
+    }
+
     public Tile talktoNumber(int x, int y) {
         int bx = (int) x / 3;
         int tx = x - bx * 3;
