@@ -21,7 +21,7 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class FireballListener extends Listener{
      
-    Sound sound = Gdx.audio.newSound(Gdx.files.local("assets\\abilities\\Fireball\\airhorn.mp3"));
+    Sound sound = Gdx.audio.newSound(Gdx.files.local("assets\\sounds\\feuerballjonge.mp3"));
     
     @Override
     public void received(Connection connection, Object object) {
