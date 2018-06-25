@@ -33,6 +33,7 @@ public class FireballListener extends Listener{
             Gdx.app.postRunnable(() -> {
                 SpriteVisual visual = new SpriteVisual("assets\\abilities\\Fireball\\fireball.png");
                 visual.rotate(((FireballResponse) object).rotation);
+
                 GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new FireballEntity(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).connectionID).position.cpy(), visual, ((FireballResponse)object).entityID));
             });
             sound.play(1.0f);

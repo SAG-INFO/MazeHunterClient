@@ -1,6 +1,7 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.map.Map;
@@ -34,13 +35,8 @@ public class Game {
 
     public final ArrayList<Player> players;
     private SpriteVisual visual;
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\fog.png"));   
-    public Map world;
     
-    //TODO: Migrate Pickupmanager into Map, or somewhere else. 
-    public PickupManager pickupManager;
-    
-    public EntityManager entityManager;
+    public World world;
     
     public Game() {
         players = new ArrayList<>();
@@ -51,22 +47,12 @@ public class Game {
         MovementListener ml = new MovementListener();
         HealthUpdateListener hul = new HealthUpdateListener();
         EquipAbilityListener eal = new EquipAbilityListener();
+
         StatusListener sL = new StatusListener();
         
         ConfigListener cL = new ConfigListener();
-        
-        createAbilityIO();
-        
-        pickupManager = new PickupManager();
-        
-        entityManager = new EntityManager();
-        EntityListener eL = new EntityListener();
-        
-        //Testing
-        // CCTestInput test = new CCTestInput();
-        
-        world = new Map(25, 50);
-        world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
+
+        world = new World();
     }
     
     public void createAbilityIO() {
@@ -100,9 +86,7 @@ public class Game {
 
     public void update(float delta) {
         players.forEach((p) -> {p.update(delta);});
-        entityManager.entities.forEach((p) -> {p.update(delta);});
-        
-        world.update();
+        world.update(delta);
     }
 
     public Player getPlayer(int id) {

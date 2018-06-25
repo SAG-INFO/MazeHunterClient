@@ -8,17 +8,15 @@ package de.saginfo.mazehunter.game.map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
-import de.saginfo.mazehunter.game.player.Player;
 
 /**
  *
- * @author julian.mittermeier
+ * @author goilster.typ.euw
  */
 public class Map {
 
-    private Block[][] blocklist;
+    Block[][] blocklist;
 
     public static int BlockWorldwidth;
     public static int TileWorldwidth;
@@ -81,20 +79,34 @@ public class Map {
     }
 
     public void update() {
-        if(Gdx.input.isKeyJustPressed(Keys.H)){
-            moveRow(2, 1);
-        }
-        if (GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y < CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0) {
-            if (talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y) != localPlayerTile) {
-                localPlayerTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
-                markVision(localPlayerTile);
+        if (playerOnMap()) {
+            Tile currentTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
+            if (currentTile != localPlayerTile) {
+                localPlayerTile = currentTile;
             }
         }
+        if (Gdx.input.isKeyJustPressed(Keys.I)) {
+            moveRow(localPlayerTile.WorldIndexX / 3, 1);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.L)) {
+            moveRow(localPlayerTile.WorldIndexY / 3, 2);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.K)) {
+            moveRow(localPlayerTile.WorldIndexX / 3, 3);
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.J)) {
+            moveRow(localPlayerTile.WorldIndexY / 3, 4);
+        }
+
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
                 blocklist[i][j].update();
             }
         }
+    }
+
+    private boolean playerOnMap() {
+        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
 
     private int getIndex(float k) {
@@ -136,110 +148,18 @@ public class Map {
         }
     }
 
-    public void markVision(Tile t) {
-        cleanVision();
-        if (t.open) {
-            t.visible = true;
-            int x = t.WorldIndexX;
-            int y = t.WorldIndexY;
-            if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
-                markVisionRow(talktoNumber(x, y + 1), 1);
-            }
-            if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
-                markVisionRow(talktoNumber(x + 1, y), 2);
-            }
-            if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
-                markVisionRow(talktoNumber(x, y - 1), 3);
-            }
-            if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
-                markVisionRow(talktoNumber(x - 1, y), 4);
-            }
-        }
-
-    }
-
-    /**
-     * 
-     * 
-     * @param richtung  Oben = 1
-                        Rechts = 2
-                        Unten = 3
-                        Links = 4
-     */
-    private void markVisionRow(Tile t, int richtung) {
-        if (t.open == true) {
-            t.visible = true;
-            int x = t.IndexX + (t.parent.IndexX * 3);
-            int y = t.IndexY + (t.parent.IndexY * 3);
-            if (richtung == 1 || richtung == 3) {
-                if ((x + 1) < TileWorldwidth && talktoNumber(x + 1, y).open) {
-                    markVisionRow2(talktoNumber(x + 1, y), 2);
-                }
-                if ((x - 1) >= 0 && talktoNumber(x - 1, y).open) {
-                    markVisionRow2(talktoNumber(x - 1, y), 4);
-                }
-            } else if (richtung == 2 || richtung == 4) {
-                if ((y + 1) < TileWorldwidth && talktoNumber(x, y + 1).open) {
-                    markVisionRow2(talktoNumber(x, y + 1), 1);
-                }
-                if ((y - 1) >= 0 && talktoNumber(x, y - 1).open) {
-                    markVisionRow2(talktoNumber(x, y - 1), 3);
-                }
-            }
-
-            if (richtung == 1 && (y + 1) < TileWorldwidth) {
-                markVisionRow(talktoNumber(x, y + 1), richtung);
-            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
-                markVisionRow(talktoNumber(x + 1, y), richtung);
-            } else if (richtung == 3 && (y - 1) >= 0) {
-                markVisionRow(talktoNumber(x, y - 1), richtung);
-            } else if (richtung == 4 && (x - 1) >= 0) {
-                markVisionRow(talktoNumber(x - 1, y), richtung);
-            }
-        }
-    }
-
-    private void markVisionRow2(Tile t, int richtung) {
-        if (t.open == true) {
-            t.visible = true;
-            int x = t.IndexX + (t.parent.IndexX * 3);
-            int y = t.IndexY + (t.parent.IndexY * 3);
-            if (richtung == 1 && (y + 1) < TileWorldwidth) {
-                markVisionRow2(talktoNumber(x, y + 1), richtung);
-            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
-                markVisionRow2(talktoNumber(x + 1, y), richtung);
-            } else if (richtung == 3 && (y - 1) >= 0) {
-                markVisionRow2(talktoNumber(x, y - 1), richtung);
-            } else if (richtung == 4 && (x - 1) >= 0) {
-                markVisionRow2(talktoNumber(x - 1, y), richtung);
-            }
-        }
-    }
-
-    public void cleanVision() {
-        for (int i = 0; i < BlockWorldwidth; i++) {
-            for (int j = 0; j < BlockWorldwidth; j++) {
-                for (int k = 0; k < 3; k++) {
-                    for (int l = 0; l < 3; l++) {
-                        blocklist[i][j].tilelist[k][l].visible = false;
-                    }
-                }
-            }
-        }
-    }
-    
     //moves row to the right; k is moved row
     private void moveRowRight(int k) {
         Block b = blocklist[BlockWorldwidth - 1][k];
         for (int i = BlockWorldwidth - 2; i >= 0; i--) {
-            blocklist[i][k].clean();
             blocklist[i][k].IndexX = blocklist[i][k].IndexX + 1;
             blocklist[i + 1][k] = blocklist[i][k];
         }
         blocklist[0][k] = b;
         blocklist[0][k].IndexX = 0;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[m][k].draw();
+            blocklist[m][k].updateGrafXPosition();
+
         }
     }
 
@@ -247,30 +167,30 @@ public class Map {
     private void moveRowLeft(int k) {
         Block b = blocklist[0][k];
         for (int i = 1; i < BlockWorldwidth; i++) {
-            blocklist[i][k].clean();
             blocklist[i][k].IndexX = blocklist[i][k].IndexX - 1;
             blocklist[i - 1][k] = blocklist[i][k];
         }
         blocklist[BlockWorldwidth - 1][k] = b;
         blocklist[BlockWorldwidth - 1][k].IndexX = BlockWorldwidth - 1;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[m][k].draw();
+            blocklist[m][k].updateGrafXPosition();
+
         }
     }
 
     //moves row up; k is moved row
     private void moveRowUp(int k) {
-        
+
         Block b = blocklist[k][BlockWorldwidth - 1];
         for (int i = BlockWorldwidth - 2; i >= 0; i--) {
-            blocklist[k][i].clean();
             blocklist[k][i].IndexY = blocklist[k][i].IndexY + 1;
             blocklist[k][i + 1] = blocklist[k][i];
         }
         blocklist[k][0] = b;
         blocklist[k][0].IndexY = 0;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[k][m].draw();
+            blocklist[k][m].updateGrafXPosition();
+
         }
     }
 
@@ -278,20 +198,21 @@ public class Map {
     private void moveRowDown(int k) {
         Block b = blocklist[k][0];
         for (int i = 1; i < BlockWorldwidth; i++) {
-            blocklist[k][i].clean();
             blocklist[k][i].IndexY = blocklist[k][i].IndexY - 1;
             blocklist[k][i - 1] = blocklist[k][i];
         }
         blocklist[k][BlockWorldwidth - 1] = b;
         blocklist[k][BlockWorldwidth - 1].IndexY = BlockWorldwidth - 1;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[k][m].draw();
+            blocklist[k][m].updateGrafXPosition();
+
         }
     }
 
     //direction: 1 moves row up, 2 moves row right, 3 moves row down, 4 moves row
     //row: what row to move; X coordinate when up or down, Y coordinate when left or right
     public void moveRow(int row, int direction) {
+//        row = translateCoordinateToBlock(row);
         switch (direction) {
             case 1:
                 moveRowUp(row);
@@ -307,11 +228,5 @@ public class Map {
                 break;
         }
     }
-    
-    public void movePlayers(Vector2 velocity, int row) {
-        int angle = (int)velocity.angle();
-        GAMESCREEN_SINGLETON.game.players.stream().filter((p) -> (((angle == 0 || angle == 180) && p.position.y - row > blockbreite) || ((angle == 90 || angle == 270) && p.position.x - row > blockbreite))).forEachOrdered((p) -> {
-            p.position.add(velocity);
-        });
-    }
+
 }

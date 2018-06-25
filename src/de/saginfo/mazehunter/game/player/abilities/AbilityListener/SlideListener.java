@@ -22,6 +22,7 @@ public class SlideListener extends Listener{
     public void received(Connection connection, Object object)  {
         if(object instanceof SlideResponse){
             
+
             System.out.println("SlideResponse received.");
             
             final Vector2 velocity = new Vector2(Map.blockbreite, 0);

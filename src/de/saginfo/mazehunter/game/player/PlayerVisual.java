@@ -5,8 +5,6 @@
  */
 package de.saginfo.mazehunter.game.player;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.grafik.AnimationVisual;
@@ -35,6 +33,7 @@ public class PlayerVisual{
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(currentVisual);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         currentVisual = visual;
+        currentVisual.setZIndex(50);
     }
     
     private float alpha = 0.2f;

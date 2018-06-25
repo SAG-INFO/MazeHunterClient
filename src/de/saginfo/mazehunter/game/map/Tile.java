@@ -86,6 +86,10 @@ public abstract class Tile {
 
     public abstract void draw();
     
+    public void updateGrafXPosition() {
+            visual.setPosition(getVisualX(), getVisualY());
+    }
+    
     public void clean(){
         GAMESCREEN_SINGLETON.renderSystem.removeSprite(visual);
     }

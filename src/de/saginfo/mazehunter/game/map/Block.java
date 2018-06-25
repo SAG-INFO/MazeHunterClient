@@ -9,7 +9,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
  *
- * @author julian.mittermeier
+ * @author heftigster.guy.na
  */
 public class Block {
 
@@ -86,6 +86,14 @@ public class Block {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 tilelist[i][j].clean();
+            }
+        }
+    }
+    
+    public void updateGrafXPosition() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tilelist[i][j].updateGrafXPosition();
             }
         }
     }

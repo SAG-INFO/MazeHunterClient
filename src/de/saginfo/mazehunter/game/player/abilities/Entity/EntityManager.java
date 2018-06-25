@@ -28,6 +28,10 @@ public class EntityManager {
         throw new EntityNotFoundException(s);
     }
 
+    public void update(float delta){
+        entities.forEach((entity) -> {entity.update(delta);});
+    }
+    
     public EntityManager() {
         entities = new ArrayList<>();
     }

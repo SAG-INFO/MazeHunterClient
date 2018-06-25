@@ -35,7 +35,9 @@ public class StunArrowListener extends Listener{
                 System.out.println("StunArrowResponse received.");
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\StunArrow\\stunArrow.png"));
                 visual.rotate(((StunArrowResponse) object).rotation);
+
                 GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new StunArrowEntity(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
+
             });} else if (object instanceof StunArrowShootResponse) {
             //shootanimation
             if (GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowShootResponse) object).playerID) == GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer()) {

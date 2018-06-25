@@ -32,6 +32,7 @@ public class Centerclosed extends Tile {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         visual.setPosition(getVisualX(), getVisualY());
+        visual.setZIndex((int) (75+Math.random()*10));
     }
     
     @Override

@@ -32,11 +32,12 @@ public class Centeropen extends Tile {
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         visual.setPosition(getVisualX(), getVisualY());
+        visual.setZIndex(20);
     }
-    
+
     @Override
     public float getVisualX() {
-        return getX()+((Map.center-visual.getWidth())/2);
+        return getX() + ((Map.center - visual.getWidth()) / 2);
     }
 
     @Override
