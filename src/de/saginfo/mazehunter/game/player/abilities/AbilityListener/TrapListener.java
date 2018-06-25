@@ -6,6 +6,7 @@
 package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowResponse;
@@ -23,6 +24,8 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class TrapListener extends Listener{
     
+    Sound sound = Gdx.audio.newSound(Gdx.files.local("assets\\sounds\\itsatrap.mp3"));
+    
     @Override
     public void received(Connection connection, Object object ) {
         if (object instanceof TrapResponse) {
@@ -30,7 +33,9 @@ public class TrapListener extends Listener{
                 System.out.println("TrapResponse received.");
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\Trap\\trap.png"));
                 GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(new TrapNonMoving(((TrapResponse) object).position, ((TrapResponse)object).entityID, visual));
+                sound.play(1.0f);
             });} else if (object instanceof TrapShootResponse) {
+                
                 //shootanimation
                 Status.root(GameScreen.GAMESCREEN_SINGLETON.config.TRAP_ROOTDURATION);
         }
