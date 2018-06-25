@@ -8,7 +8,6 @@ package de.saginfo.mazehunter.game.player.movement;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import de.saginfo.mazehunter.client.networkData.MovementRequest;
 import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.player.Status;

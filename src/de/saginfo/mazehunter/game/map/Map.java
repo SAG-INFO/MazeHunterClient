@@ -16,7 +16,7 @@ import de.saginfo.mazehunter.game.player.Player;
  *
  * @author julian.mittermeier
  */
-public class World {
+public class Map {
 
     private Block[][] blocklist;
 
@@ -33,11 +33,11 @@ public class World {
     private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
     private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
 
-    public World() {
+    public Map() {
         this(cornerTex.getWidth(), centerTex.getWidth());
     }
 
-    public World(int e, int c) {
+    public Map(int e, int c) {
         ecke = e;
         center = c;
         blockbreite = c + 2 * e;

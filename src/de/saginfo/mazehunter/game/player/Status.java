@@ -10,8 +10,7 @@ package de.saginfo.mazehunter.game.player;
  * @author Karl Huber
  */
 public class Status {
-    
     // "mobility" type Abilities are also affected by canMove
-    public static boolean canMove; 
-    public static boolean canUseAbilities; 
+    public static boolean canMove = true;
+    public static boolean canUseAbilities = true; 
 }

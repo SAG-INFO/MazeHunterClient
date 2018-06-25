@@ -42,11 +42,11 @@ public class PathUp extends Tile {
 
     @Override
     public float getVisualX() {
-        return getX() + ((World.center - visual.getWidth()) / 2);
+        return getX() + ((Map.center - visual.getWidth()) / 2);
     }
 
     @Override
     public float getVisualY() {
-        return getY() + ((World.ecke - visual.getHeight()) / 2);
+        return getY() + ((Map.ecke - visual.getHeight()) / 2);
     }
 }

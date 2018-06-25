@@ -10,7 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.SlideResponse;
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.map.World;
+import de.saginfo.mazehunter.game.map.Map;
 
 /**
  *
@@ -24,13 +24,14 @@ public class SlideListener extends Listener{
             
             System.out.println("SlideResponse received.");
             
-            final Vector2 velocity = new Vector2(World.blockbreite, 0);
+            final Vector2 velocity = new Vector2(Map.blockbreite, 0);
+            int tmp;
             
             switch (((SlideResponse) object).direction) {
-                case 'N':  velocity.setAngle(90); break;
-                case 'O':  velocity.setAngle(0); break;
-                case 'S':  velocity.setAngle(180); break;
-                case 'W':  velocity.setAngle(270); break;
+                case 'N':  velocity.setAngle(90); tmp = 1; break; 
+                case 'O':  velocity.setAngle(0); tmp = 2; break;
+                case 'S':  velocity.setAngle(180); tmp = 3; break;
+                case 'W':  velocity.setAngle(270); tmp = 4; break;
             }
             
             System.out.println(" row:" + ((SlideResponse) object).row + "direction:" + ((SlideResponse) object).direction);

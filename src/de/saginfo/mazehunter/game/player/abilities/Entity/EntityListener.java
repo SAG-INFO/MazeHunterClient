@@ -21,7 +21,7 @@ public class EntityListener extends Listener {
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof DisposeEntity) {
-            System.out.println("DisposeNonMoving received.");
+            System.out.println("DisposeEntity received.");
             try {
                 GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((DisposeEntity) object).entityID);
             } catch (EntityNotFoundException ex) {
