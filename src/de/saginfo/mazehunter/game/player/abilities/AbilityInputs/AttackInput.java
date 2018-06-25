@@ -18,7 +18,7 @@ public class AttackInput extends AbilityInput {
    
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Keys.SPACE && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
+        if (keycode == Keys.SPACE && Status.canUseAbilities && GameScreen.GAMESCREEN_SINGLETON.config != null) {
             AttackRequest aR = new AttackRequest(getMouseAngle());
             GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(aR);
             System.out.println(getMouseAngle());

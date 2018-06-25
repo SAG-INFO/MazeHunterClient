@@ -12,9 +12,9 @@ import de.saginfo.mazehunter.grafik.Visual;
  *
  * @author karl.huber
  */
-public class TrapNonMoving extends NonMoving {
+public class TrapEntity extends NonMoving {
 
-    public TrapNonMoving(Vector2 position, int entityID, Visual visual) {
+    public TrapEntity(Vector2 position, int entityID, Visual visual) {
         super(position, entityID, visual);
     }
 }

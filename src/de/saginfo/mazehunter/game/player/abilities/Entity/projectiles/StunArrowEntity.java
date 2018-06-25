@@ -12,9 +12,9 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  *
  * @author Karl Huber
  */
-public class FireballProjectile extends Projectile {
+public class StunArrowEntity extends Projectile {
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, SpriteVisual visual, int id) {
+    public StunArrowEntity(Vector2 velocity, Vector2 position, SpriteVisual visual, int id) {
         super(velocity, position, visual, id);
     }
 }

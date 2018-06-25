@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.saginfo.mazehunter.game.player;
+package de.saginfo.mazehunter.game.player.abilities.Entity;
 
 /**
+ * hehexd.
  *
  * @author Karl Huber
  */
-public class Status {
-    // "mobility" type Abilities are also affected by canMove
-    public static boolean canMove = true;
-    public static boolean canUseAbilities = true; 
+public class EntityNotFoundException extends Exception {
+    public EntityNotFoundException(String message) {
+        super(message);
+    }
 }
