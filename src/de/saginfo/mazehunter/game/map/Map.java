@@ -25,7 +25,7 @@ public class Map {
     public static int ecke;
     public static int center;
     public static int blockbreite;
-    
+
     public Tile localPlayerTile;
 
     private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
@@ -34,7 +34,7 @@ public class Map {
     public Map() {
         this(cornerTex.getWidth(), centerTex.getWidth());
     }
-  
+
     public Map(int e, int c) {
         ecke = e;
         center = c;
@@ -85,26 +85,26 @@ public class Map {
                 localPlayerTile = currentTile;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Keys.I)){
-            moveRow(localPlayerTile.WorldIndexX/3, 1);
+        if (Gdx.input.isKeyJustPressed(Keys.I)) {
+            moveRow(localPlayerTile.WorldIndexX / 3, 1);
         }
-        if(Gdx.input.isKeyJustPressed(Keys.J)){
-            moveRow(localPlayerTile.WorldIndexY/3, 2);
+        if (Gdx.input.isKeyJustPressed(Keys.L)) {
+            moveRow(localPlayerTile.WorldIndexY / 3, 2);
         }
-        if(Gdx.input.isKeyJustPressed(Keys.K)){
-            moveRow(localPlayerTile.WorldIndexX/3, 3);
+        if (Gdx.input.isKeyJustPressed(Keys.K)) {
+            moveRow(localPlayerTile.WorldIndexX / 3, 3);
         }
-        if(Gdx.input.isKeyJustPressed(Keys.L)){
-            moveRow(localPlayerTile.WorldIndexY/3, 4);
+        if (Gdx.input.isKeyJustPressed(Keys.J)) {
+            moveRow(localPlayerTile.WorldIndexY / 3, 4);
         }
-        
+
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
                 blocklist[i][j].update();
             }
         }
     }
-    
+
     private boolean playerOnMap() {
         return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
@@ -147,19 +147,19 @@ public class Map {
             throw new RuntimeException("talktonumberdoesntwork:(");
         }
     }
-    
+
     //moves row to the right; k is moved row
     private void moveRowRight(int k) {
         Block b = blocklist[BlockWorldwidth - 1][k];
         for (int i = BlockWorldwidth - 2; i >= 0; i--) {
-            blocklist[i][k].clean();
             blocklist[i][k].IndexX = blocklist[i][k].IndexX + 1;
             blocklist[i + 1][k] = blocklist[i][k];
         }
         blocklist[0][k] = b;
         blocklist[0][k].IndexX = 0;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[m][k].draw();
+            blocklist[m][k].updateGrafXPosition();
+
         }
     }
 
@@ -167,30 +167,30 @@ public class Map {
     private void moveRowLeft(int k) {
         Block b = blocklist[0][k];
         for (int i = 1; i < BlockWorldwidth; i++) {
-            blocklist[i][k].clean();
             blocklist[i][k].IndexX = blocklist[i][k].IndexX - 1;
             blocklist[i - 1][k] = blocklist[i][k];
         }
         blocklist[BlockWorldwidth - 1][k] = b;
         blocklist[BlockWorldwidth - 1][k].IndexX = BlockWorldwidth - 1;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[m][k].draw();
+            blocklist[m][k].updateGrafXPosition();
+
         }
     }
 
     //moves row up; k is moved row
     private void moveRowUp(int k) {
-        
+
         Block b = blocklist[k][BlockWorldwidth - 1];
         for (int i = BlockWorldwidth - 2; i >= 0; i--) {
-            blocklist[k][i].clean();
             blocklist[k][i].IndexY = blocklist[k][i].IndexY + 1;
             blocklist[k][i + 1] = blocklist[k][i];
         }
         blocklist[k][0] = b;
         blocklist[k][0].IndexY = 0;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[k][m].draw();
+            blocklist[k][m].updateGrafXPosition();
+
         }
     }
 
@@ -198,20 +198,21 @@ public class Map {
     private void moveRowDown(int k) {
         Block b = blocklist[k][0];
         for (int i = 1; i < BlockWorldwidth; i++) {
-            blocklist[k][i].clean();
             blocklist[k][i].IndexY = blocklist[k][i].IndexY - 1;
             blocklist[k][i - 1] = blocklist[k][i];
         }
         blocklist[k][BlockWorldwidth - 1] = b;
         blocklist[k][BlockWorldwidth - 1].IndexY = BlockWorldwidth - 1;
         for (int m = 0; m < BlockWorldwidth; m++) {
-            blocklist[k][m].draw();
+            blocklist[k][m].updateGrafXPosition();
+
         }
     }
 
     //direction: 1 moves row up, 2 moves row right, 3 moves row down, 4 moves row
     //row: what row to move; X coordinate when up or down, Y coordinate when left or right
     public void moveRow(int row, int direction) {
+//        row = translateCoordinateToBlock(row);
         switch (direction) {
             case 1:
                 moveRowUp(row);
@@ -227,6 +228,5 @@ public class Map {
                 break;
         }
     }
-  
-}
 
+}
