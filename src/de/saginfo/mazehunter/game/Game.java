@@ -85,8 +85,6 @@ public class Game {
     public void update(float delta) {
         players.forEach((p) -> {p.update(delta);});
         world.update(delta);
-        
-        System.out.println(GameScreen.GAMESCREEN_SINGLETON.game.world.map.getRandomInt(50));
     }
 
     public Player getPlayer(int id) {
