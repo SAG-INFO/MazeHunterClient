@@ -34,13 +34,13 @@ public class FireballListener extends Listener{
                 SpriteVisual visual = new SpriteVisual("assets\\abilities\\Fireball\\fireball.png");
                 visual.rotate(((FireballResponse) object).rotation);
 
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new FireballEntity(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).connectionID).position.cpy(), visual, ((FireballResponse)object).entityID));
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(new FireballEntity(((FireballResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FireballResponse)object).connectionID).position.cpy(), visual, ((FireballResponse)object).entityID));
             });
             sound.play(1.0f);
         } else if (object instanceof FireballShootResponse) {
             try {
                 //shootanimation
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((FireballShootResponse) object).projectileID);
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((FireballShootResponse) object).projectileID);
             } catch (EntityNotFoundException ex) {
                 Logger.getLogger(FireballListener.class.getName()).log(Level.SEVERE, null, ex);
             }

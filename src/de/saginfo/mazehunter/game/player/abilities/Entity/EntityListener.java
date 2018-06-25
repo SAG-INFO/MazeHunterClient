@@ -24,7 +24,7 @@ public class EntityListener extends Listener {
 
             System.out.println("DisposeEntity received.");
             try {
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((DisposeEntity) object).entityID);
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((DisposeEntity) object).entityID);
             } catch (EntityNotFoundException ex) {
                 Logger.getLogger(EntityListener.class.getName()).log(Level.SEVERE, null, ex);
             }

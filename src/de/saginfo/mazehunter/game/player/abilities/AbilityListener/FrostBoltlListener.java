@@ -33,13 +33,13 @@ public class FrostBoltlListener extends Listener{
             Gdx.app.postRunnable(() -> {
                 SpriteVisual visual = new SpriteVisual("assets\\abilities\\Fireball\\fireball.png");
                 visual.rotate(((FrostBoltResponse) object).rotation);
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new FrostBoltEntity(((FrostBoltResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FrostBoltResponse)object).connectionID).position.cpy(), visual, ((FrostBoltResponse)object).entityID));
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(((FrostBoltResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((FrostBoltResponse)object).connectionID).position.cpy(), visual, ((FrostBoltResponse)object).entityID));
             });
             sound.play(1.0f);
         } else if (object instanceof FrostBoltShootResponse) {
             try {
                 //shootanimation
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((FrostBoltShootResponse) object).projectileID);
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((FrostBoltShootResponse) object).projectileID);
             } catch (EntityNotFoundException ex) {
                 Logger.getLogger(FrostBoltlListener.class.getName()).log(Level.SEVERE, null, ex);
             }
