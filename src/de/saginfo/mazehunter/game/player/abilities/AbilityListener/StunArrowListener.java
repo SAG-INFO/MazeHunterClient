@@ -36,7 +36,7 @@ public class StunArrowListener extends Listener{
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\StunArrow\\stunArrow.png"));
                 visual.rotate(((StunArrowResponse) object).rotation);
 
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.entities.add(new StunArrowEntity(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(new StunArrowEntity(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
 
             });} else if (object instanceof StunArrowShootResponse) {
             //shootanimation
@@ -44,7 +44,7 @@ public class StunArrowListener extends Listener{
                 //update hp bar
             }
             try {
-                GameScreen.GAMESCREEN_SINGLETON.game.entityManager.disposeEntity(((StunArrowShootResponse) object).entityID);
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((StunArrowShootResponse) object).entityID);
             } catch (EntityNotFoundException ex) {
                 Logger.getLogger(StunArrowListener.class.getName()).log(Level.SEVERE, null, ex);
             }

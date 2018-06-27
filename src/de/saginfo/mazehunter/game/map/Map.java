@@ -85,18 +85,6 @@ public class Map {
                 localPlayerTile = currentTile;
             }
         }
-        if (Gdx.input.isKeyJustPressed(Keys.I)) {
-            moveRow(localPlayerTile.WorldIndexX / 3, 1);
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.L)) {
-            moveRow(localPlayerTile.WorldIndexY / 3, 2);
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.K)) {
-            moveRow(localPlayerTile.WorldIndexX / 3, 3);
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.J)) {
-            moveRow(localPlayerTile.WorldIndexY / 3, 4);
-        }
 
         for (int i = 0; i < BlockWorldwidth; i++) {
             for (int j = 0; j < BlockWorldwidth; j++) {
