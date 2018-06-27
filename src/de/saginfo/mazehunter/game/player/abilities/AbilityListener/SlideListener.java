@@ -20,13 +20,13 @@ public class SlideListener extends Listener{
     
     @Override
     public void received(Connection connection, Object object)  {
+        System.out.println(object);
         if(object instanceof SlideResponse){
             
-
             System.out.println("SlideResponse received.");
             
             final Vector2 velocity = new Vector2(Map.blockbreite, 0);
-            int tmp;
+            int tmp = 0;
             
             switch (((SlideResponse) object).direction) {
                 case 'N':  velocity.setAngle(90); tmp = 1; break; 
@@ -36,8 +36,9 @@ public class SlideListener extends Listener{
             }
             
             System.out.println(" row:" + ((SlideResponse) object).row + "direction:" + ((SlideResponse) object).direction);
-            GameScreen.GAMESCREEN_SINGLETON.game.world.movePlayers(velocity, ((SlideResponse) object).row);
-            //TODO moveRow()
+            //GameScreen.GAMESCREEN_SINGLETON.game.world.map.movePlayers(velocity, ((SlideResponse) object).row);
+            int r = GameScreen.GAMESCREEN_SINGLETON.game.world.map.translateCoordinateToBlock(((SlideResponse) object).row);
+            GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(r, tmp);
         }
     }
 

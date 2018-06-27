@@ -52,6 +52,8 @@ public class Game {
         
         ConfigListener cL = new ConfigListener();
 
+        createAbilityIO();
+        
         world = new World();
     }
     
