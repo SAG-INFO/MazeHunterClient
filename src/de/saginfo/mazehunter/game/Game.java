@@ -49,7 +49,6 @@ public class Game {
         EquipAbilityListener eal = new EquipAbilityListener();
 
         StatusListener sL = new StatusListener();
-        
         ConfigListener cL = new ConfigListener();
 
         createAbilityIO();

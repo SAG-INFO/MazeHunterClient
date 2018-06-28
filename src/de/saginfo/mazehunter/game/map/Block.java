@@ -5,7 +5,9 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import aurelienribon.tweenengine.Tween;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+import de.saginfo.mazehunter.grafik.VisualAccessor;
 
 /**
  *
@@ -86,6 +88,14 @@ public class Block {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 tilelist[i][j].clean();
+            }
+        }
+    }
+    
+    public void animateIn(float x, float y){
+        for (Tile[] tiles : tilelist) {
+            for (Tile tile : tiles) {
+                tile.animateIn(x, y);
             }
         }
     }

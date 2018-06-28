@@ -15,24 +15,20 @@ import de.saginfo.mazehunter.game.GameScreen;
  * @author karl.huber
  */
 public class SlideInput extends InputAdapter {
-    
+
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.UP) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('N'));
-                System.out.println("N");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('N'));
         }
         if (keycode == Input.Keys.RIGHT) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('O'));
-                System.out.println("O");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('O'));
         }
         if (keycode == Input.Keys.DOWN) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('S'));
-                System.out.println("S");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('S'));
         }
         if (keycode == Input.Keys.LEFT) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('W'));
-                System.out.println("W");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest('W'));
         }
         return false;
     }

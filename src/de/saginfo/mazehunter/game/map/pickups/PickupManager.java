@@ -28,6 +28,7 @@ public class PickupManager extends Listener{
                 @Override
                 public void run() {
                     pickups.put(sp.id, new AbilityPickup(sp.position, sp.abilityName));
+                    System.out.println("gntrgtrgiohjtzhjzjuik");
                 }
             });
         }else if(object instanceof DisposePickup){

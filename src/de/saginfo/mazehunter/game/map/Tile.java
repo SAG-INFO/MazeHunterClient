@@ -5,12 +5,14 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
+import de.saginfo.mazehunter.grafik.VisualAccessor;
 
 /**
  *
@@ -25,6 +27,7 @@ public abstract class Tile {
     int WorldIndexX;
     int WorldIndexY;
     public Block parent;
+    
     public SpriteVisual visual;
 
     public Tile() {
@@ -45,15 +48,15 @@ public abstract class Tile {
 
     public void update() {
         if (!visible) {
-            visual.setColor(Color.RED);
+            visual.setColor(new Color(1, 0.5f, 0.5f, 1f));
         } else {
-            visual.setColor(Color.BLUE);
+            visual.setColor(new Color(0.5f, 0.5f, 1, 1f));
         }
         //TODO: Effizienz steigern
         WorldIndexX = parent.IndexX * 3 + IndexX;
         WorldIndexY = parent.IndexY * 3 + IndexY;
     }
-
+    
     public int getX() {
         switch (IndexX) {
             case 0:
@@ -80,6 +83,9 @@ public abstract class Tile {
         }
     }
     
+    public void animateIn(float x, float y){
+    }
+    
     public abstract float getVisualX();
     
     public abstract float getVisualY();
@@ -87,7 +93,8 @@ public abstract class Tile {
     public abstract void draw();
     
     public void updateGrafXPosition() {
-            visual.setPosition(getVisualX(), getVisualY());
+//        Tween t = Tween.to(this.visual, VisualAccessor.POSITION, 1).target(getVisualX(), getVisualY()).start(GAMESCREEN_SINGLETON.renderSystem.tweenManager);
+        visual.setPosition(getVisualX(), getVisualY());
     }
     
     public void clean(){

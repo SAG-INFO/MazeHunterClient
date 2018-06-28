@@ -6,7 +6,6 @@
 package de.saginfo.mazehunter.game.map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
@@ -97,15 +96,15 @@ public class Map {
         return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
 
-    private int getIndex(float k) {
-        while (k >= blockbreite) {
-            k = k - blockbreite;
+    private int getIndex(float pixelCoordiante) {
+        while (pixelCoordiante >= blockbreite) {
+            pixelCoordiante = pixelCoordiante - blockbreite;
         }
-        if (k < ecke) {
+        if (pixelCoordiante < ecke) {
             return 0;
-        } else if (k < ecke + center) {
+        } else if (pixelCoordiante < ecke + center) {
             return 1;
-        } else if (k < blockbreite) {
+        } else if (pixelCoordiante < blockbreite) {
             return 2;
         } else {
             throw new RuntimeException("translateCoordinateToTile funktioniert mit diesem Wert nicht!");
@@ -141,6 +140,7 @@ public class Map {
         Block b = blocklist[BlockWorldwidth - 1][k];
         for (int i = BlockWorldwidth - 2; i >= 0; i--) {
             blocklist[i][k].IndexX = blocklist[i][k].IndexX + 1;
+            blocklist[i][k].animateIn(i, i);
             blocklist[i + 1][k] = blocklist[i][k];
         }
         blocklist[0][k] = b;
@@ -178,7 +178,6 @@ public class Map {
         blocklist[k][0].IndexY = 0;
         for (int m = 0; m < BlockWorldwidth; m++) {
             blocklist[k][m].updateGrafXPosition();
-
         }
     }
 
@@ -193,14 +192,12 @@ public class Map {
         blocklist[k][BlockWorldwidth - 1].IndexY = BlockWorldwidth - 1;
         for (int m = 0; m < BlockWorldwidth; m++) {
             blocklist[k][m].updateGrafXPosition();
-
         }
     }
 
     //direction: 1 moves row up, 2 moves row right, 3 moves row down, 4 moves row
     //row: what row to move; X coordinate when up or down, Y coordinate when left or right
     public void moveRow(int row, int direction) {
-//        row = translateCoordinateToBlock(row);
         switch (direction) {
             case 1:
                 moveRowUp(row);
@@ -216,5 +213,4 @@ public class Map {
                 break;
         }
     }
-
 }

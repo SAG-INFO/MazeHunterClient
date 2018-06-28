@@ -1,11 +1,13 @@
 package de.saginfo.mazehunter.grafik;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+import de.saginfo.mazehunter.game.map.Block;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -28,9 +30,14 @@ public class RenderSystem {
     private final ArrayList<Visual> visuals;
     public final SpriteBatch batch;
 
+    public TweenManager tweenManager;
+    
     public RenderSystem() {
         visuals = new ArrayList<Visual>();
         batch = new SpriteBatch();
+        tweenManager = new TweenManager();
+        Tween.registerAccessor(Visual.class, new VisualAccessor());
+        Tween.registerAccessor(SpriteVisual.class, new VisualAccessor());
     }
 
     public void render(float delta) {
