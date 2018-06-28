@@ -200,7 +200,6 @@ public class Map {
     //direction: 1 moves row up, 2 moves row right, 3 moves row down, 4 moves row
     //row: what row to move; X coordinate when up or down, Y coordinate when left or right
     public void moveRow(int row, int direction) {
-//        row = translateCoordinateToBlock(row);
         switch (direction) {
             case 1:
                 moveRowUp(row);
