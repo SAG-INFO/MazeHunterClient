@@ -67,7 +67,6 @@ public class GameClient extends Client {
         //Movement Stuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
-        getKryo().register(MovementSpeedRequest.class);
         
         //Config Stuff
         getKryo().register(PushConfig.class);

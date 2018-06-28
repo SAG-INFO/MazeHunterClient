@@ -35,8 +35,6 @@ public class SlideListener extends Listener{
                 case 'W':  velocity.setAngle(270); tmp = 4; break;
             }
             
-            System.out.println(" row:" + ((SlideResponse) object).row + "direction:" + ((SlideResponse) object).direction);
-            //GameScreen.GAMESCREEN_SINGLETON.game.world.map.movePlayers(velocity, ((SlideResponse) object).row);
             int r = GameScreen.GAMESCREEN_SINGLETON.game.world.map.translateCoordinateToBlock(((SlideResponse) object).row);
             GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(r, tmp);
         }
