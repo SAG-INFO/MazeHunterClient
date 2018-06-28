@@ -5,7 +5,9 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -37,9 +39,9 @@ public abstract class Tile {
     public Tile(Block block, int x, int y) {
         parent = block;
         IndexX = x;
-        WorldIndexX = parent.IndexX * 3 + x;
+        WorldIndexX = parent.indexX * 3 + x;
         IndexY = y;
-        WorldIndexY = parent.IndexY * 3 + y;
+        WorldIndexY = parent.indexY * 3 + y;
     }
 
     public Tile(boolean o) {
@@ -53,8 +55,8 @@ public abstract class Tile {
             visual.setColor(new Color(0.5f, 0.5f, 1, 1f));
         }
         //TODO: Effizienz steigern
-        WorldIndexX = parent.IndexX * 3 + IndexX;
-        WorldIndexY = parent.IndexY * 3 + IndexY;
+        WorldIndexX = parent.indexX * 3 + IndexX;
+        WorldIndexY = parent.indexY * 3 + IndexY;
     }
     
     public int getX() {
@@ -92,12 +94,24 @@ public abstract class Tile {
 
     public abstract void draw();
     
-    public void updateGrafXPosition() {
-//        Tween t = Tween.to(this.visual, VisualAccessor.POSITION, 1).target(getVisualX(), getVisualY()).start(GAMESCREEN_SINGLETON.renderSystem.tweenManager);
+    public void animateGrafXPosition() {
+        Tween t = Tween.to(this.visual, VisualAccessor.POSITION, 1).target(getVisualX(), getVisualY()).start(GAMESCREEN_SINGLETON.tweenManager);
+    }
+    
+    public void updateGrafXPosition(){
         visual.setPosition(getVisualX(), getVisualY());
     }
     
     public void clean(){
         GAMESCREEN_SINGLETON.renderSystem.removeSprite(visual);
+    }
+
+    void fadeOut() {
+        Tween t = Tween.to(this.visual, VisualAccessor.POSITION, 1).target(getVisualX(), getVisualY()).start(GAMESCREEN_SINGLETON.tweenManager).setCallback(new TweenCallback() {
+            @Override
+            public void onEvent(int type, BaseTween<?> source) {
+                GAMESCREEN_SINGLETON.renderSystem.removeSprite(visual);
+            }
+        });
     }
 }

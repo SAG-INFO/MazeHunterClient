@@ -1,5 +1,6 @@
 package de.saginfo.mazehunter.game;
 
+import aurelienribon.tweenengine.TweenManager;
 import de.saginfo.mazehunter.game.hud.HUD;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -27,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
     public Viewport viewport;
     public GameClient client;
     public InputMultiplexer inputMultiplexer;
+    public TweenManager tweenManager;
     public HUD hud;
     
     public PushConfig config;
@@ -56,11 +58,14 @@ public class GameScreen extends ScreenAdapter {
         
         hud = new HUD();
         
+        tweenManager = new TweenManager();
+        
         game.startGame();
     }
 
     @Override
     public void render(float delta) {
+        tweenManager.update(delta);
         game.update(delta);
         camera.update();
         renderSystem.render(delta);

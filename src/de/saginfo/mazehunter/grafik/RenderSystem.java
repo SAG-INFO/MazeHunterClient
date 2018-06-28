@@ -30,12 +30,9 @@ public class RenderSystem {
     private final ArrayList<Visual> visuals;
     public final SpriteBatch batch;
 
-    public TweenManager tweenManager;
-    
     public RenderSystem() {
         visuals = new ArrayList<Visual>();
         batch = new SpriteBatch();
-        tweenManager = new TweenManager();
         Tween.registerAccessor(Visual.class, new VisualAccessor());
         Tween.registerAccessor(SpriteVisual.class, new VisualAccessor());
     }
