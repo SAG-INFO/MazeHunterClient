@@ -26,17 +26,16 @@ public class SlideListener extends Listener{
             System.out.println("SlideResponse received.");
             
             final Vector2 velocity = new Vector2(Map.blockbreite, 0);
-            int tmp = 0;
+            int dir = 0;
             
             switch (((SlideResponse) object).direction) {
-                case 'N':  velocity.setAngle(90); tmp = 1; break; 
-                case 'O':  velocity.setAngle(0); tmp = 2; break;
-                case 'S':  velocity.setAngle(180); tmp = 3; break;
-                case 'W':  velocity.setAngle(270); tmp = 4; break;
+                case 1:  velocity.setAngle(90); dir = 1; break; 
+                case 2:  velocity.setAngle(0); dir = 2; break;
+                case 3:  velocity.setAngle(180); dir = 3; break;
+                case 4:  velocity.setAngle(270); dir = 4; break;
             }
             
-            int r = GameScreen.GAMESCREEN_SINGLETON.game.world.map.translateCoordinateToBlock(((SlideResponse) object).row);
-            GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(r, tmp);
+            GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(((SlideResponse) object).row, dir);
         }
     }
 

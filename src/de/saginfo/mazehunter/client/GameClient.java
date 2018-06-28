@@ -70,13 +70,13 @@ public class GameClient extends Client {
         
         //Config Stuff
         getKryo().register(PushConfig.class);
-
+        
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
         getKryo().register(CanUseAbilitiesUpdate.class);
         getKryo().register(CanMoveUpdate.class);
         
-        //AbilityRequests
+        //Ability Requests
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
         getKryo().register(MobilityRequest.class);
@@ -97,7 +97,7 @@ public class GameClient extends Client {
         
         //Entity Stuff
         getKryo().register(DisposeEntity.class);
-
+        
         //Pickups
         getKryo().register(SpawnPickup.class);
         getKryo().register(DisposePickup.class);
