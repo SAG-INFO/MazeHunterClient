@@ -32,7 +32,6 @@ import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author sreis
@@ -46,13 +45,13 @@ public class GameClient extends Client {
     public GameClient() {
         registerClasses();
     }
-    
+
     public void connectToServer(String ip) throws IOException {
         super.start();
         super.connect(TIMEOUT, ip, TCP_PORT, UDP_PORT);
     }
-    
-    private void registerClasses(){
+
+    private void registerClasses() {
         //general Stuff
         getKryo().register(Vector2.class);
         getKryo().register(ArrayList.class);

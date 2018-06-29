@@ -15,7 +15,7 @@ import de.saginfo.mazehunter.game.GameScreen;
  * @author karl.huber
  */
 public class SlideInput extends InputAdapter {
-    
+
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.UP) {

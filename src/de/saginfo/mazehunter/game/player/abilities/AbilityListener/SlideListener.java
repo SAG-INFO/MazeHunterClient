@@ -5,6 +5,7 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -16,8 +17,8 @@ import de.saginfo.mazehunter.game.map.Map;
  *
  * @author karl.huber
  */
-public class SlideListener extends Listener{
-    
+public class SlideListener extends Listener {
+
     @Override
     public void received(Connection connection, Object object)  {
         System.out.println(object);
