@@ -22,7 +22,7 @@ public class MobilityInput extends InputAdapter {
     
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Keys.SHIFT_LEFT && Status.canMove == 0 && Status.canUseAbilities == 0 && GameScreen.GAMESCREEN_SINGLETON.config != null) {
+        if (keycode == Keys.SHIFT_LEFT && Status.canMove && Status.canUseAbilities && GameScreen.GAMESCREEN_SINGLETON.config != null) {
                 GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new MobilityRequest());
         }
         return false;

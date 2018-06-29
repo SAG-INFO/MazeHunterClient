@@ -20,6 +20,9 @@ import de.saginfo.mazehunter.client.networkData.abilities.requests.SlideRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.requests.UtilityRequest;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.FireballShootResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.FrostBoltResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.FrostBoltShootResponse;
+import de.saginfo.mazehunter.client.networkData.abilities.responses.SlideResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StandardHealResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowShootResponse;
@@ -28,7 +31,6 @@ import de.saginfo.mazehunter.client.networkData.abilities.responses.TrapShootRes
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
 import java.io.IOException;
 import java.util.ArrayList;
-
 
 /**
  *
@@ -43,13 +45,13 @@ public class GameClient extends Client {
     public GameClient() {
         registerClasses();
     }
-    
+
     public void connectToServer(String ip) throws IOException {
         super.start();
         super.connect(TIMEOUT, ip, TCP_PORT, UDP_PORT);
     }
-    
-    private void registerClasses(){
+
+    private void registerClasses() {
         //general Stuff
         getKryo().register(Vector2.class);
         getKryo().register(ArrayList.class);
@@ -64,15 +66,16 @@ public class GameClient extends Client {
         //Movement Stuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
-        getKryo().register(MovementSpeedRequest.class);
         
         //Config Stuff
         getKryo().register(PushConfig.class);
-
+        
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
+        getKryo().register(CanUseAbilitiesUpdate.class);
+        getKryo().register(CanMoveUpdate.class);
         
-        //AbilityRequests
+        //Ability Requests
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
         getKryo().register(MobilityRequest.class);
@@ -81,16 +84,19 @@ public class GameClient extends Client {
         //AbilityResponses
         getKryo().register(DashResponse.class);
         getKryo().register(StandardHealResponse.class);
-        getKryo().register(FireballResponse.class);
-        getKryo().register(FireballShootResponse.class);
+        getKryo().register(FrostBoltResponse.class);
+        getKryo().register(FrostBoltShootResponse.class);
         getKryo().register(StunArrowResponse.class);
         getKryo().register(StunArrowShootResponse.class);
         getKryo().register(TrapResponse.class);
         getKryo().register(TrapShootResponse.class);
+        getKryo().register(SlideResponse.class);
+        getKryo().register(FireballResponse.class);
+        getKryo().register(FireballShootResponse.class);
         
         //Entity Stuff
         getKryo().register(DisposeEntity.class);
-
+        
         //Pickups
         getKryo().register(SpawnPickup.class);
         getKryo().register(DisposePickup.class);

@@ -10,12 +10,13 @@ import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.game.player.StatusListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.AttackInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.MobilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.SlideInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
-import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FrostBoltlListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.SlideListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
@@ -46,8 +47,10 @@ public class Game {
         MovementListener ml = new MovementListener();
         HealthUpdateListener hul = new HealthUpdateListener();
         EquipAbilityListener eal = new EquipAbilityListener();
+
+        StatusListener sL = new StatusListener();
         ConfigListener cL = new ConfigListener();
-        EntityListener eL = new EntityListener();
+
         createAbilityIO();
         
         world = new World();
@@ -60,7 +63,7 @@ public class Game {
         SlideInput sI = new SlideInput();
         
         DashListener dL = new DashListener();
-        FireballListener fL = new FireballListener();
+        FrostBoltlListener fL = new FrostBoltlListener();
         StandardHealListener shL = new StandardHealListener();
         StunArrowListener sAL = new StunArrowListener();
         TrapListener tL = new TrapListener();

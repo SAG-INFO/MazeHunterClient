@@ -9,13 +9,13 @@ package de.saginfo.mazehunter.client.networkData;
  *
  * @author Karl Huber
  */
-public class MovementSpeedRequest {
-    public float change;
+public class CanUseAbilitiesUpdate {
+    public boolean canUseAbilities;
 
-    public MovementSpeedRequest(float change) {
-        this.change = change;
+    public CanUseAbilitiesUpdate(boolean canUseAbilities) {
+        this.canUseAbilities = canUseAbilities;
     }
-
-    public MovementSpeedRequest() {
+    
+    public CanUseAbilitiesUpdate() {
     }
 }

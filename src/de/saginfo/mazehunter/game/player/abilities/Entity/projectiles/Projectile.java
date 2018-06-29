@@ -18,6 +18,8 @@ public abstract class Projectile extends Entity{
     Vector2 velocity;
     
     private final Vector2 tmp = new Vector2();
+    
+    @Override
     public void update(float delta){
         this.position.add(tmp.set(velocity).scl(delta));
         visual.setX(position.x);

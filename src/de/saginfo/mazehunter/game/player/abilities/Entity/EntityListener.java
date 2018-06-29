@@ -9,6 +9,8 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeEntity;
 import de.saginfo.mazehunter.game.GameScreen;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +21,13 @@ public class EntityListener extends Listener {
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof DisposeEntity) {
-            System.out.println("DisposeNonMoving received.");
-            GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((DisposeEntity) object).entityID);
+
+            System.out.println("DisposeEntity received.");
+            try {
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((DisposeEntity) object).entityID);
+            } catch (EntityNotFoundException ex) {
+                Logger.getLogger(EntityListener.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

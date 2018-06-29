@@ -42,6 +42,6 @@ public class Centeropen extends Tile {
 
     @Override
     public float getVisualY() {
-        return getY() + ((Map.center - visual.getHeight()) / 2);
+        return getY()+((Map.center-visual.getHeight())/2);
     }
 }

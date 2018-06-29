@@ -5,7 +5,9 @@
  */
 package de.saginfo.mazehunter.game.map;
 
+import aurelienribon.tweenengine.Tween;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+import de.saginfo.mazehunter.grafik.VisualAccessor;
 
 /**
  *
@@ -18,8 +20,8 @@ public class Block {
     boolean right;
     boolean down;
     boolean left;
-    int IndexX;
-    int IndexY;
+    int indexX;
+    int indexY;
 
     public Block(boolean u, boolean r, boolean d, boolean l, int x, int y) {
         up = u;
@@ -27,8 +29,8 @@ public class Block {
         down = d;
         left = l;
 
-        IndexX = x;
-        IndexY = y;
+        indexX = x;
+        indexY = y;
 
         tilelist = new Tile[3][3];
         tilelist[0][0] = new Corner(this, 0, 0);
@@ -66,11 +68,11 @@ public class Block {
     }
 
     public int getX() {
-        return IndexX * Map.blockbreite;
+        return indexX * Map.blockbreite;
     }
 
     public int getY() {
-        return IndexY * Map.blockbreite;
+        return indexY * Map.blockbreite;
     }
 
     public void draw() {
@@ -90,12 +92,42 @@ public class Block {
         }
     }
     
+    public void animateIn(float x, float y){
+        for (Tile[] tiles : tilelist) {
+            for (Tile tile : tiles) {
+                tile.animateIn(x, y);
+            }
+        }
+    }
+    
+    public void animateGrafXPosition() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tilelist[i][j].animateGrafXPosition();
+            }
+        }
+    }
+    
+    public void fadeOut(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tilelist[i][j].fadeOut();
+            }
+        }
+    }
+    
     public void updateGrafXPosition() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 tilelist[i][j].updateGrafXPosition();
             }
         }
+    }
+    
+    public Block clone(){
+        Block b = new Block(this.up, this.right, this.down, this.left, this.indexX, this.indexY);
+        b.draw();
+        return b;
     }
 
 }

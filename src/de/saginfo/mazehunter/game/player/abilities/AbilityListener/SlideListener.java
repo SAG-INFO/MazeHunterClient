@@ -5,6 +5,7 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -16,24 +17,26 @@ import de.saginfo.mazehunter.game.map.Map;
  *
  * @author karl.huber
  */
-public class SlideListener extends Listener{
-    
+public class SlideListener extends Listener {
+
     @Override
     public void received(Connection connection, Object object)  {
+        System.out.println(object);
         if(object instanceof SlideResponse){
             
+            System.out.println("SlideResponse received.");
+            
             final Vector2 velocity = new Vector2(Map.blockbreite, 0);
-            char xory; 
-            final Vector2 position = new Vector2();
+            int dir = 0;
             
             switch (((SlideResponse) object).direction) {
-                case 'N':  velocity.setAngle(90); xory = 'y'; position.set(((SlideResponse) object).row*Map.blockbreite, 0);
-                case 'O':  velocity.setAngle(0); xory = 'x';position.set(0, ((SlideResponse) object).row*Map.blockbreite);
-                case 'S':  velocity.setAngle(180); xory = 'y'; position.set(((SlideResponse) object).row*Map.blockbreite, 0);
-                case 'W':  velocity.setAngle(270); xory = 'x';position.set(0, ((SlideResponse) object).row*Map.blockbreite);
-                default: xory = 'L'; 
+                case 1:  velocity.setAngle(90); dir = 1; break; 
+                case 2:  velocity.setAngle(0); dir = 2; break;
+                case 3:  velocity.setAngle(180); dir = 3; break;
+                case 4:  velocity.setAngle(270); dir = 4; break;
             }
-//        GameScreen.GAMESCREEN_SINGLETON.game.world.movePlayers(position, velocity, xory);
+            
+            GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(((SlideResponse) object).row, dir);
         }
     }
 

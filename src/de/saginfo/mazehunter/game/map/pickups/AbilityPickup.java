@@ -18,8 +18,8 @@ public class AbilityPickup {
         this.abilityName = name;
         
         visual = new SpriteVisual("assets\\abilities\\"+name+"\\pickup.png");
-        visual.setPosition(position.x, position.y);
-        visual.setZIndex(10);
+        visual.setPosition(position.x-visual.getWidth()/2, position.y-visual.getHeight()/2);
+        visual.setZIndex(70);
         
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
     }
