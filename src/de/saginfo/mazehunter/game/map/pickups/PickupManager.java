@@ -35,7 +35,7 @@ public class PickupManager extends Listener{
             Gdx.app.postRunnable(new Runnable() {
                 @Override
                 public void run() {
-                    pickups.remove(((DisposePickup) object).id).dispose();
+//                    pickups.remove(((DisposePickup) object).id).dispose();
                 }
             });
         }

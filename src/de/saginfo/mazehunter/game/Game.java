@@ -43,6 +43,8 @@ public class Game {
     }
 
     public void startGame() {
+        world = new World();
+        
         MovementInput movementInput = new MovementInput();
         MovementListener ml = new MovementListener();
         HealthUpdateListener hul = new HealthUpdateListener();
@@ -53,7 +55,6 @@ public class Game {
 
         createAbilityIO();
         
-        world = new World();
     }
     
     public void createAbilityIO() {

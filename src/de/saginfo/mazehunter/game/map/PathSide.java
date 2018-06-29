@@ -23,32 +23,17 @@ public class PathSide extends Tile {
     private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathside_closed.png"));
     private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathside_open.png"));
 
-    public PathSide(Block block, int x, int y, boolean b) {
-        super(block, x, y);
-        open = b;
-    }
-
-    @Override
-    public void draw() {
+    public PathSide(Block block, int x, int y, boolean open) {
+        super(block, x, y, open);
+        
         if (open) {
             visual = new SpriteVisual(new Sprite(TEXwhite));
-            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
             visual.setZIndex(20);
         } else {
             visual = new SpriteVisual(new Sprite(TEXblack));
-            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
             visual.setZIndex((int) (75 + Math.random() * 10));
         }
-        visual.setPosition(getVisualX(), getVisualY());
-    }
-
-    @Override
-    public float getVisualX() {
-        return getX() + ((Map.ecke - visual.getWidth()) / 2);
-    }
-
-    @Override
-    public float getVisualY() {
-        return getY() + ((Map.center - visual.getHeight()) / 2);
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
+        super.setVisible(false);
     }
 }

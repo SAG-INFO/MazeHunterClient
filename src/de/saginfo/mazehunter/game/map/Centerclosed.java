@@ -23,25 +23,11 @@ public class Centerclosed extends Tile {
     public static int height;
 
     public Centerclosed(Block block, int x, int y) {
-        super(block, x, y);
-        open = false;
-    }
-
-    @Override
-    public void draw() {
+        super(block, x, y, false);
+        
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(getVisualX(), getVisualY());
         visual.setZIndex((int) (75+Math.random()*10));
-    }
-    
-    @Override
-    public float getVisualX() {
-        return getX()+((Map.center-visual.getWidth())/2);
-    }
-
-    @Override
-    public float getVisualY() {
-        return getY()+((Map.center-visual.getHeight())/2);
+        super.setVisible(false);
     }
 }

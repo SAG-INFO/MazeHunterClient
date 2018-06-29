@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.game.map.pickups.AbilityPickup;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -19,29 +20,15 @@ public class Centeropen extends Tile {
 
     public static int width;
     public static int height;
-
+    
     private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\center_open.png"));
 
     public Centeropen(Block block, int x, int y) {
-        super(block, x, y);
-        open = true;
-    }
-
-    @Override
-    public void draw() {
+        super(block, x, y, true);
+        
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(getVisualX(), getVisualY());
         visual.setZIndex(20);
-    }
-
-    @Override
-    public float getVisualX() {
-        return getX() + ((Map.center - visual.getWidth()) / 2);
-    }
-
-    @Override
-    public float getVisualY() {
-        return getY()+((Map.center-visual.getHeight())/2);
+        setVisible(false);
     }
 }

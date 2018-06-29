@@ -23,25 +23,11 @@ public class Corner extends Tile {
     private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
 
     public Corner(Block block, int x, int y) {
-        super(block, x, y);
-        open = false;
-    }
-
-    @Override
-    public void draw() {
+        super(block, x, y, false);
+        
         visual = new SpriteVisual(new Sprite(TEX));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setPosition(getVisualX(), getVisualY());
         visual.setZIndex((int) (75 + Math.random() * 10));
-    }
-
-    @Override
-    public float getVisualX() {
-        return getX() + ((Map.ecke - visual.getWidth()) / 2);
-    }
-
-    @Override
-    public float getVisualY() {
-        return getY() + ((Map.ecke - visual.getHeight()) / 2);
+        setVisible(false);
     }
 }
