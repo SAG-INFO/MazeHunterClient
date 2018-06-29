@@ -20,42 +20,23 @@ import de.saginfo.mazehunter.game.map.Map;
 public class SlideListener extends Listener {
 
     @Override
-    public void received(Connection connection, Object object) {
-        if (object instanceof SlideResponse) {
-
-            Gdx.app.postRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println("SlideResponse received.");
-
-                    final Vector2 velocity = new Vector2(Map.blockbreite, 0);
-                    int tmp = 0;
-
-                    switch (((SlideResponse) object).direction) {
-                        case 'N':
-                            velocity.setAngle(90);
-                            tmp = 1;
-                            break;
-                        case 'O':
-                            velocity.setAngle(0);
-                            tmp = 2;
-                            break;
-                        case 'S':
-                            velocity.setAngle(180);
-                            tmp = 3;
-                            break;
-                        case 'W':
-                            velocity.setAngle(270);
-                            tmp = 4;
-                            break;
-                    }
-
-                    //GameScreen.GAMESCREEN_SINGLETON.game.world.map.movePlayers(velocity, ((SlideResponse) object).row);
-                    int r = GameScreen.GAMESCREEN_SINGLETON.game.world.map.translateCoordinateToBlock(((SlideResponse) object).row);
-                    System.out.println(" row:" + ((SlideResponse) object).row + "direction:" + r);
-                    GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(r, tmp);
-                }
-            });
+    public void received(Connection connection, Object object)  {
+        System.out.println(object);
+        if(object instanceof SlideResponse){
+            
+            System.out.println("SlideResponse received.");
+            
+            final Vector2 velocity = new Vector2(Map.blockbreite, 0);
+            int dir = 0;
+            
+            switch (((SlideResponse) object).direction) {
+                case 1:  velocity.setAngle(90); dir = 1; break; 
+                case 2:  velocity.setAngle(0); dir = 2; break;
+                case 3:  velocity.setAngle(180); dir = 3; break;
+                case 4:  velocity.setAngle(270); dir = 4; break;
+            }
+            
+            GameScreen.GAMESCREEN_SINGLETON.game.world.map.moveRow(((SlideResponse) object).row, dir);
         }
     }
 
