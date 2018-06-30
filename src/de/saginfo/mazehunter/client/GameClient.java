@@ -62,6 +62,7 @@ public class GameClient extends Client {
         getKryo().register(LobbyUpdate.class);
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
+        getKryo().register(Gameover.class);
         
         //Movement Stuff
         getKryo().register(MovementRequest.class);

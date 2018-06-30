@@ -2,6 +2,7 @@ package de.saginfo.mazehunter.game.map.pickups;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.GameScreen;
+import de.saginfo.mazehunter.game.map.Map;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
@@ -9,16 +10,13 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  * @author sreis
  */
 public class AbilityPickup {
-    public final Vector2 position;
     public SpriteVisual visual;
     public String abilityName;
 
-    public AbilityPickup(Vector2 position, String name) {
-        this.position = new Vector2(position);
+    public AbilityPickup(String name) {
         this.abilityName = name;
         
         visual = new SpriteVisual("assets\\abilities\\"+name+"\\pickup.png");
-        visual.setPosition(position.x-visual.getWidth()/2, position.y-visual.getHeight()/2);
         visual.setZIndex(70);
         
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
@@ -26,5 +24,9 @@ public class AbilityPickup {
     
     public void dispose(){
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(visual);
+    }
+    
+    public float getOffset(){
+        return Map.center/2f-visual.getWidth()/2f;
     }
 }
