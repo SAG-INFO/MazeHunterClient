@@ -90,13 +90,15 @@ public class SlideListener extends Listener {
     }
 
     private void moveRowLeft(int k) {
-        Block out = map.blocklist[0][k];
-        out.animatePosition(-1, out.getY());
-        out.disposeAfterDelay();
+        Block in = map.blocklist[0][k];
+        Block out = in.clone();
+        
+        in.setPosition(blockWorldwidth, k);
+        in.animatePosition(blockWorldwidth-1, in.getY());
 
-        Block in = out.clone();
-        in.setPosition(blockWorldwidth, in.getY());
-        in.animatePosition(blockWorldwidth - 1, in.getY());
+        out.setPosition(0, out.getY());
+        out.animatePosition(- 1, out.getY());
+        out.disposeAfterDelay();
 
         for (int i = 1; i < blockWorldwidth; i++) {
             Block block = map.blocklist[i][k];
@@ -107,13 +109,15 @@ public class SlideListener extends Listener {
     }
 
     private void moveRowUp(int k) {
-        Block out = map.blocklist[k][blockWorldwidth - 1];
+        Block in = map.blocklist[k][blockWorldwidth - 1];
+        Block out = in.clone();
+        
+        in.setPosition(k, -1);
+        in.animatePosition(in.getX(), 0);
+
+        out.setPosition(out.getX(), blockWorldwidth-1);
         out.animatePosition(out.getX(), blockWorldwidth);
         out.disposeAfterDelay();
-
-        Block in = out.clone();
-        in.setPosition(in.getX(), -1);
-        in.animatePosition(in.getX(), 0);
 
         for (int i = blockWorldwidth - 2; i >= 0; i--) {
             Block block = map.blocklist[k][i];
@@ -124,13 +128,15 @@ public class SlideListener extends Listener {
     }
 
     private void moveRowDown(int k) {
-        Block out = map.blocklist[k][0];
-        out.animatePosition(out.getX(), -1);
-        out.disposeAfterDelay();
+        Block in = map.blocklist[k][0];
+        Block out = in.clone();
+        
+        in.setPosition(k, blockWorldwidth);
+        in.animatePosition(in.getX(), blockWorldwidth-1);
 
-        Block in = out.clone();
-        in.setPosition(in.getX(), blockWorldwidth);
-        in.animatePosition(in.getX(), blockWorldwidth - 1);
+        out.setPosition(out.getX(), 0);
+        out.animatePosition(out.getX(), - 1);
+        out.disposeAfterDelay();
 
         for (int i = 1; i < blockWorldwidth; i++) {
             Block block = map.blocklist[k][i];
