@@ -19,20 +19,16 @@ public class SlideInput extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.UP) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(1));
-                System.out.println("N");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(1));
         }
         if (keycode == Input.Keys.RIGHT) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(2));
-                System.out.println("O");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(2));
         }
         if (keycode == Input.Keys.DOWN) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(3));
-                System.out.println("S");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(3));
         }
         if (keycode == Input.Keys.LEFT) {
-                GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(4));
-                System.out.println("W");
+            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(new SlideRequest(4));
         }
         return false;
     }

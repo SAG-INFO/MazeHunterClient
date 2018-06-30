@@ -6,6 +6,7 @@
 package de.saginfo.mazehunter.game.map;
 
 import aurelienribon.tweenengine.Tween;
+import com.badlogic.gdx.utils.Timer;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.grafik.VisualAccessor;
 
@@ -20,8 +21,8 @@ public class Block {
     boolean right;
     boolean down;
     boolean left;
-    int indexX;
-    int indexY;
+    private int indexX;
+    private int indexY;
 
     public Block(boolean u, boolean r, boolean d, boolean l, int x, int y) {
         up = u;
@@ -59,75 +60,58 @@ public class Block {
 
     }
 
-    public void update() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                        tilelist[i][j].update();
-            }
-        }
-    }
-
-    public int getX() {
+    public int getPixelX() {
         return indexX * Map.blockbreite;
     }
-
-    public int getY() {
+    public int getPixelY() {
         return indexY * Map.blockbreite;
     }
 
-    public void draw() {
+    public int getX() {
+        return indexX;
+    }
+    public int getY() {
+        return indexY;
+    }
+    
+    public void animatePosition(int x, int y) {
+        this.indexX = x;
+        this.indexY = y;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                tilelist[i][j].draw();
+                tilelist[i][j].animatePosition();
             }
-            
         }
     }
-    
-    public void clean() {
+    public void setPosition(int x, int y) {
+        this.indexX = x;
+        this.indexY = y;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                tilelist[i][j].clean();
+                tilelist[i][j].setPosition();
             }
         }
     }
-    
-    public void animateIn(float x, float y){
-        for (Tile[] tiles : tilelist) {
-            for (Tile tile : tiles) {
-                tile.animateIn(x, y);
-            }
-        }
-    }
-    
-    public void animateGrafXPosition() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                tilelist[i][j].animateGrafXPosition();
-            }
-        }
-    }
-    
-    public void fadeOut(){
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                tilelist[i][j].fadeOut();
-            }
-        }
-    }
-    
-    public void updateGrafXPosition() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                tilelist[i][j].updateGrafXPosition();
-            }
-        }
-    }
-    
-    public Block clone(){
+
+    public Block clone() {
         Block b = new Block(this.up, this.right, this.down, this.left, this.indexX, this.indexY);
-        b.draw();
         return b;
     }
 
+    public void dispose() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                tilelist[i][j].dispose();
+            }
+        }
+    }
+    public void disposeAfterDelay(){
+        Timer t = new Timer();
+        t.scheduleTask(new Timer.Task() {
+            @Override
+            public void run() {
+               dispose();
+            }
+        }, 1f);
+    }
 }

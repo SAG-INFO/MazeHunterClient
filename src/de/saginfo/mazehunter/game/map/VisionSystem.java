@@ -1,9 +1,9 @@
 package de.saginfo.mazehunter.game.map;
 
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
-import static de.saginfo.mazehunter.game.map.Map.BlockWorldwidth;
-import static de.saginfo.mazehunter.game.map.Map.CoordinateWorldwidth;
 import static de.saginfo.mazehunter.game.map.Map.TileWorldwidth;
+import static de.saginfo.mazehunter.game.map.Map.blockWorldwidth;
+import static de.saginfo.mazehunter.game.map.Map.coordinateWorldwidth;
 
 /**
  *
@@ -23,33 +23,31 @@ public class VisionSystem {
             Tile currentTile = map.talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
             if (currentTile != localPlayerTile) {
                 localPlayerTile = currentTile;
-                startVision(localPlayerTile, 0, 0, 1);
+                startVision();
             }
         }
     }
 
     private boolean playerOnMap() {
-        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
+        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= coordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= coordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
 
-    public void startVision(Tile t, int direction, int flags, int maxflags) {
+    public void startVision() {
         cleanVision();
-        markVision(t, direction, flags, maxflags);
+        markVision(localPlayerTile, -1, 0, 1);
     }
 
-    /*@param direction  0 = alle Richtungen  
-                        1 = Oben
-//                      2 = Rechts
-//                      3 = Unten
-//                      4 = Links
-    @param maxflags = Anzahl an Ecken um die man schauen kann
-//     */
+    /**
+     * @param direction 0 = alle Richtungen 1 = Oben 2 = Rechts 3 = Unten 4 =
+     * Links
+     * @param maxflags = Anzahl an Ecken um die man schauen kann
+     */
     public void markVision(Tile t, int direction, int flags, int maxflags) {
         if (t.open && flags < maxflags + 2) {
 
-            t.visible = true;
-            int x = t.WorldIndexX;
-            int y = t.WorldIndexY;
+            t.setVisible(true);
+            int x = t.getWorldIndexX();
+            int y = t.getWorldIndexY();
 
             if (direction != 2 && x != TileWorldwidth - 1) {
                 markVision(map.talktoNumber(x + 1, y), 4, direction == 4 ? flags : flags + 1, maxflags);
@@ -80,11 +78,11 @@ public class VisionSystem {
     }
 
     public void cleanVision() {
-        for (int i = 0; i < BlockWorldwidth; i++) {
-            for (int j = 0; j < BlockWorldwidth; j++) {
+        for (int i = 0; i < blockWorldwidth; i++) {
+            for (int j = 0; j < blockWorldwidth; j++) {
                 for (int k = 0; k < 3; k++) {
                     for (int l = 0; l < 3; l++) {
-                        map.blocklist[i][j].tilelist[k][l].visible = false;
+                        map.blocklist[i][j].tilelist[k][l].setVisible(false);
                     }
                 }
             }
