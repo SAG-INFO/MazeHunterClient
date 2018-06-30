@@ -102,8 +102,8 @@ public class Map {
     }
 
     public Block getRandomBlock() {
-        if (BlockWorldwidth > 1) {
-            return blocklist[getRandomInt(BlockWorldwidth - 1)][getRandomInt(BlockWorldwidth - 1)];
+        if (blockWorldwidth > 1) {
+            return blocklist[getRandomInt(blockWorldwidth - 1)][getRandomInt(blockWorldwidth - 1)];
         } else {
             return blocklist[0][0];
         }
