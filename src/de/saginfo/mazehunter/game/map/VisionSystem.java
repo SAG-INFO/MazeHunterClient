@@ -64,82 +64,19 @@ public class VisionSystem {
         }
     }
 
-//    public void markVision(Tile t) {
-//        cleanVision();
-//        if (t.open) {
-//            t.visible = true;
-//            int x = t.WorldIndexX;
-//            int y = t.WorldIndexY;
-//            if ((y + 1) < TileWorldwidth && map.talktoNumber(x, y + 1).open) {
-//                markVisionRow(map.talktoNumber(x, y + 1), 1);
-//            }
-//            if ((x + 1) < TileWorldwidth && map.talktoNumber(x + 1, y).open) {
-//                markVisionRow(map.talktoNumber(x + 1, y), 2);
-//            }
-//            if ((y - 1) >= 0 && map.talktoNumber(x, y - 1).open) {
-//                markVisionRow(map.talktoNumber(x, y - 1), 3);
-//            }
-//            if ((x - 1) >= 0 && map.talktoNumber(x - 1, y).open) {
-//                markVisionRow(map.talktoNumber(x - 1, y), 4);
-//            }
-//        }
-//
-//    }
-//  
-//    /*@param richtung   Oben = 1
-//                        Rechts = 2
-//                        Unten = 3
-//                        Links = 4
-//     */
-//    private void markVisionRow(Tile t, int richtung) {
-//        if (t.open == true) {
-//            t.visible = true;
-//            int x = t.IndexX + (t.parent.IndexX * 3);
-//            int y = t.IndexY + (t.parent.IndexY * 3);
-//            if (richtung == 1 || richtung == 3) {
-//                if ((x + 1) < TileWorldwidth && map.talktoNumber(x + 1, y).open) {
-//                    markVisionRow2(map.talktoNumber(x + 1, y), 2);
-//                }
-//                if ((x - 1) >= 0 && map.talktoNumber(x - 1, y).open) {
-//                    markVisionRow2(map.talktoNumber(x - 1, y), 4);
-//                }
-//            } else if (richtung == 2 || richtung == 4) {
-//                if ((y + 1) < TileWorldwidth && map.talktoNumber(x, y + 1).open) {
-//                    markVisionRow2(map.talktoNumber(x, y + 1), 1);
-//                }
-//                if ((y - 1) >= 0 && map.talktoNumber(x, y - 1).open) {
-//                    markVisionRow2(map.talktoNumber(x, y - 1), 3);
-//                }
-//            }
-//
-//            if (richtung == 1 && (y + 1) < TileWorldwidth) {
-//                markVisionRow(map.talktoNumber(x, y + 1), richtung);
-//            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
-//                markVisionRow(map.talktoNumber(x + 1, y), richtung);
-//            } else if (richtung == 3 && (y - 1) >= 0) {
-//                markVisionRow(map.talktoNumber(x, y - 1), richtung);
-//            } else if (richtung == 4 && (x - 1) >= 0) {
-//                markVisionRow(map.talktoNumber(x - 1, y), richtung);
-//            }
-//        }
-//    }
-//
-//    private void markVisionRow2(Tile t, int richtung) {
-//        if (t.open == true) {
-//            t.visible = true;
-//            int x = t.IndexX + (t.parent.IndexX * 3);
-//            int y = t.IndexY + (t.parent.IndexY * 3);
-//            if (richtung == 1 && (y + 1) < TileWorldwidth) {
-//                markVisionRow2(map.talktoNumber(x, y + 1), richtung);
-//            } else if (richtung == 2 && (x + 1) < TileWorldwidth) {
-//                markVisionRow2(map.talktoNumber(x + 1, y), richtung);
-//            } else if (richtung == 3 && (y - 1) >= 0) {
-//                markVisionRow2(map.talktoNumber(x, y - 1), richtung);
-//            } else if (richtung == 4 && (x - 1) >= 0) {
-//                markVisionRow2(map.talktoNumber(x - 1, y), richtung);
-//            }
-//        }
-//    }
+//  trag für radius 0 ein
+    public void setVisionRadius(Tile tile, int radius, int maxRadius) {
+        if (radius <= maxRadius) {
+            if (tile.open) {
+                tile.visible = true;
+            }
+            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX + 1, tile.WorldIndexY), radius++, maxRadius);
+            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX, tile.WorldIndexY + 1), radius++, maxRadius);
+            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX - 1, tile.WorldIndexY), radius++, maxRadius);
+            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX, tile.WorldIndexY - 1), radius++, maxRadius);
+        }
+    }
+
     public void cleanVision() {
         for (int i = 0; i < blockWorldwidth; i++) {
             for (int j = 0; j < blockWorldwidth; j++) {
