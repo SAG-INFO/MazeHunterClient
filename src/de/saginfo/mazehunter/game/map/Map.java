@@ -5,8 +5,6 @@
  */
 package de.saginfo.mazehunter.game.map;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
 /**
@@ -19,20 +17,11 @@ public class Map {
 
     public static int blockWorldwidth;
     public static int TileWorldwidth;
-    public static int CoordinateWorldwidth;
+    public static int coordinateWorldwidth;
 
     public static int ecke;
     public static int center;
     public static int blockbreite;
-
-    public Tile localPlayerTile;
-
-    private static final Texture centerTex = new Texture(Gdx.files.local("assets\\img\\map\\centerOpen.png"));
-    private static final Texture cornerTex = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
-
-    public Map() {
-        this(cornerTex.getWidth(), centerTex.getWidth());
-    }
 
     public Map(int e, int c) {
         ecke = e;
@@ -51,7 +40,7 @@ public class Map {
         if (b.length / 4 == 1 || b.length / 4 == 4 || b.length / 4 == 9 || b.length / 4 == 16 || b.length / 4 == 25 || b.length / 4 == 36 || b.length / 4 == 49 || b.length / 4 == 64 || b.length / 4 == 81 || b.length / 4 == 100) {
             blockWorldwidth = (int) Math.sqrt(b.length / 4);
             TileWorldwidth = blockWorldwidth * 3;
-            CoordinateWorldwidth = blockWorldwidth * (2 * ecke + center);
+            coordinateWorldwidth = blockWorldwidth * (2 * ecke + center);
             blocklist = new Block[blockWorldwidth][blockWorldwidth];
             int h = 0;
             for (int j = 0; j < blockWorldwidth; j++) {
@@ -61,7 +50,7 @@ public class Map {
                 }
             }
         }
-        
+
         for (Block[] blocks : blocklist) {
             for (Block block : blocks) {
                 block.setPosition(block.getX(), block.getY());
@@ -72,7 +61,7 @@ public class Map {
     public void makeTestMap(int k) {
         blockWorldwidth = k;
         TileWorldwidth = k * 3;
-        CoordinateWorldwidth = blockWorldwidth * (2 * ecke + center);
+        coordinateWorldwidth = blockWorldwidth * (2 * ecke + center);
         blocklist = new Block[blockWorldwidth][blockWorldwidth];
         for (int j = 0; j < blockWorldwidth; j++) {
             for (int i = 0; i < blockWorldwidth; i++) {
@@ -81,17 +70,8 @@ public class Map {
         }
     }
 
-    public void update() {
-        if (playerOnMap()) {
-            Tile currentTile = talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
-            if (currentTile != localPlayerTile) {
-                localPlayerTile = currentTile;
-            }
-        }
-    }
-    
-    private boolean playerOnMap() {
-        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
+    public boolean playerOnMap() {
+        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= coordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= coordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
 
     private int getIndex(float pixelCoordiante) {
@@ -130,6 +110,14 @@ public class Map {
             return blocklist[bx][by].tilelist[tx][ty];
         } else {
             throw new RuntimeException("talktonumberdoesntwork:(");
+        }
+    }
+
+    public float boundPosition(float position) {
+        if (position < 0) {
+            return coordinateWorldwidth + position;
+        } else {
+            return position % coordinateWorldwidth;
         }
     }
 }

@@ -5,17 +5,12 @@
  */
 package de.saginfo.mazehunter.game.map;
 
-import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.Timer;
-import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
+import de.saginfo.mazehunter.grafik.VectorAcessor;
 import de.saginfo.mazehunter.grafik.VisualAccessor;
 import java.util.stream.Stream;
 
@@ -54,7 +49,7 @@ public abstract class Tile {
     public void animatePosition() {
         this.worldIndexX = parent.getX() * 3 + blockIndexX;
         this.worldIndexY = parent.getY() * 3 + blockIndexY;
-        Tween t = Tween.to(this.visual, VisualAccessor.POSITION, 1).target(getPixelX(), getPixelY()).start(GAMESCREEN_SINGLETON.tweenManager);
+        Tween.to(this.visual, VisualAccessor.POSITION, 1).target(getPixelX(), getPixelY()).start(GAMESCREEN_SINGLETON.tweenManager);
     }
 
     public int getBlockIndexX() {

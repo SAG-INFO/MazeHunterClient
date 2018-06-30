@@ -1,9 +1,9 @@
 package de.saginfo.mazehunter.game.map;
 
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
-import static de.saginfo.mazehunter.game.map.Map.CoordinateWorldwidth;
 import static de.saginfo.mazehunter.game.map.Map.TileWorldwidth;
 import static de.saginfo.mazehunter.game.map.Map.blockWorldwidth;
+import static de.saginfo.mazehunter.game.map.Map.coordinateWorldwidth;
 
 /**
  *
@@ -29,7 +29,7 @@ public class VisionSystem {
     }
 
     private boolean playerOnMap() {
-        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
+        return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= coordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= coordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
 
     public void startVision() {

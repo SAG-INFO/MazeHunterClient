@@ -1,11 +1,7 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import de.saginfo.mazehunter.game.map.Map;
-import de.saginfo.mazehunter.game.map.pickups.PickupManager;
 import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
@@ -21,11 +17,10 @@ import de.saginfo.mazehunter.game.player.abilities.AbilityListener.SlideListener
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.TrapListener;
-import de.saginfo.mazehunter.game.player.abilities.Entity.EntityManager;
-import de.saginfo.mazehunter.game.player.abilities.Entity.EntityListener;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
+import de.saginfo.mazehunter.ui.gameoverscreen.GameoverListener;
 import java.util.ArrayList;
 
 /**
@@ -52,6 +47,7 @@ public class Game {
 
         StatusListener sL = new StatusListener();
         ConfigListener cL = new ConfigListener();
+        new GameoverListener();
 
         createAbilityIO();
         
@@ -108,6 +104,6 @@ public class Game {
      * called when the user closes the window
      */
     public void close() {
-
+        
     }
 }

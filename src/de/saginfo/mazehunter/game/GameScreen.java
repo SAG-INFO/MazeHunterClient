@@ -39,7 +39,6 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(GameClient client) {
         this.client = client;
         game = new Game();
-        
     }
 
     @Override
@@ -80,7 +79,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        renderSystem.dispose();
+//        renderSystem.dispose();
         game.close();
     }
     

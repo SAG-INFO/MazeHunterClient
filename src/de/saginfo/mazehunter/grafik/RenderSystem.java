@@ -5,6 +5,7 @@ import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.GameScreen;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.game.map.Block;
@@ -35,6 +36,7 @@ public class RenderSystem {
         batch = new SpriteBatch();
         Tween.registerAccessor(Visual.class, new VisualAccessor());
         Tween.registerAccessor(SpriteVisual.class, new VisualAccessor());
+        Tween.registerAccessor(Vector2.class, new VectorAcessor());
     }
 
     public void render(float delta) {

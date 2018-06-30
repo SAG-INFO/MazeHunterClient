@@ -32,7 +32,6 @@ public class World {
 
     public void update(float delta) {
         entityManager.update(delta);
-        map.update();
         visionSystem.update(delta);
         updateCam();
     }

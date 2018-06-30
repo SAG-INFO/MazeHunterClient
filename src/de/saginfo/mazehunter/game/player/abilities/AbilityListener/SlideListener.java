@@ -5,6 +5,7 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.esotericsoftware.kryonet.Connection;
@@ -14,8 +15,10 @@ import de.saginfo.mazehunter.game.GameScreen;
 import de.saginfo.mazehunter.game.map.Block;
 import de.saginfo.mazehunter.game.map.Map;
 import static de.saginfo.mazehunter.game.map.Map.blockWorldwidth;
+import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.grafik.VectorAcessor;
 
-/** 
+/**
  * @author paul kuschfeldt, julian mittermeier, seamuel reiser, karl huber
  */
 public class SlideListener extends Listener {
@@ -36,7 +39,7 @@ public class SlideListener extends Listener {
                     move(((SlideResponse) object).row, ((SlideResponse) object).direction);
                 }
             });
-            
+
             Timer.schedule(new Timer.Task() {
                 public void run() {
                     GameScreen.GAMESCREEN_SINGLETON.game.world.visionSystem.startVision();
@@ -48,15 +51,19 @@ public class SlideListener extends Listener {
     private void move(int row, int direction) {
         switch (direction) {
             case 1:
+                doRowY(row, direction);
                 moveRowUp(row);
                 break;
             case 2:
+                doRowX(row, direction);
                 moveRowRight(row);
                 break;
             case 3:
+                doRowY(row, direction);
                 moveRowDown(row);
                 break;
             case 4:
+                doRowX(row, direction);
                 moveRowLeft(row);
                 break;
         }
@@ -65,14 +72,13 @@ public class SlideListener extends Listener {
     private void moveRowRight(int k) {
         Block in = map.blocklist[blockWorldwidth - 1][k];
         Block out = in.clone();
-        
+
         in.setPosition(-1, in.getY());
         in.animatePosition(0, in.getY());
-        
-        out.setPosition(blockWorldwidth-1, out.getY());
+
+        out.setPosition(blockWorldwidth - 1, out.getY());
         out.animatePosition(blockWorldwidth, out.getY());
         out.disposeAfterDelay();
-
 
         for (int i = blockWorldwidth - 2; i >= 0; i--) {
             Block block = map.blocklist[i][k];
@@ -133,4 +139,23 @@ public class SlideListener extends Listener {
         }
         map.blocklist[k][blockWorldwidth - 1] = in;
     }
+
+        private void doRowX(int row, int direction) {
+        for (Player p : GameScreen.GAMESCREEN_SINGLETON.game.players) {
+            if (map.translateCoordinateToBlock(p.position.y) == row) {
+                float targetX = map.boundPosition(p.position.x+(Map.blockbreite*(direction==2?1:-1)));
+                Tween.to(p.position, VectorAcessor.POSITION_X, 1).target(targetX).start(GameScreen.GAMESCREEN_SINGLETON.tweenManager);
+            }
+        }
+    }
+
+    private void doRowY(int row, int direction) {
+        for (Player p : GameScreen.GAMESCREEN_SINGLETON.game.players) {
+            if (map.translateCoordinateToBlock(p.position.x) == row) {
+                float targetY = map.boundPosition(p.position.y+(Map.blockbreite*(direction==1?1:-1)));
+                Tween.to(p.position, VectorAcessor.POSITION_Y, 1).target(targetY).start(GameScreen.GAMESCREEN_SINGLETON.tweenManager);
+            }
+        }
+    }
+    
 }
