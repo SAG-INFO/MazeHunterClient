@@ -30,7 +30,7 @@ public abstract class Tile {
     public SpriteVisual visualNotVisible;
 
     private int tileIndexX;
-    private int blockIndexY;
+    private int tileIndexY;
     private int worldIndexX;
     private int worldIndexY;
 
@@ -39,20 +39,20 @@ public abstract class Tile {
         this.open = open;
         this.tileIndexX = x;
         this.worldIndexX = parent.getX() * 3 + x;
-        this.blockIndexY = y;
+        this.tileIndexY = y;
         this.worldIndexY = parent.getY() * 3 + y;
     }
 
     public void setPosition() {
         this.worldIndexX = parent.getX() * 3 + tileIndexX;
-        this.worldIndexY = parent.getY() * 3 + blockIndexY;
+        this.worldIndexY = parent.getY() * 3 + tileIndexY;
         visualVisible.setPosition(getPixelX(), getPixelY());
         visualNotVisible.setPosition(getPixelX(), getPixelY());
     }
 
     public void animatePosition() {
         this.worldIndexX = parent.getX() * 3 + tileIndexX;
-        this.worldIndexY = parent.getY() * 3 + blockIndexY;
+        this.worldIndexY = parent.getY() * 3 + tileIndexY;
         Tween.to(this.visualVisible, VisualAccessor.POSITION, 1).target(getPixelX(), getPixelY()).start(GAMESCREEN_SINGLETON.tweenManager);
         Tween.to(this.visualNotVisible, VisualAccessor.POSITION, 1).target(getPixelX(), getPixelY()).start(GAMESCREEN_SINGLETON.tweenManager);
     }
@@ -62,7 +62,7 @@ public abstract class Tile {
     }
 
     public int getBlockIndexY() {
-        return blockIndexY;
+        return tileIndexY;
     }
 
     public int getWorldIndexX() {
@@ -87,7 +87,7 @@ public abstract class Tile {
     }
 
     public int getPixelY() {
-        switch (blockIndexY) {
+        switch (tileIndexY) {
             case 0:
                 return parent.getPixelY() + (int) ((Map.ecke - visualVisible.getHeight()) / 2);
             case 1:
