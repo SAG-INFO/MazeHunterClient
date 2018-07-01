@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.MazeHunterMain;
 import de.saginfo.mazehunter.client.networkData.LobbyUpdate;
 import de.saginfo.mazehunter.client.networkData.PlayerLobby;
+import de.saginfo.mazehunter.client.networkData.PushMap;
 import de.saginfo.mazehunter.client.networkData.StartGameResponse;
 import de.saginfo.mazehunter.game.GameScreen;
 
@@ -19,6 +20,8 @@ import de.saginfo.mazehunter.game.GameScreen;
  */
 public class LobbyListener extends Listener{
     private final LobbyScreen lobbyScreen;
+    
+    public static boolean[] tmpBlnList;
 
     public LobbyListener(LobbyScreen lobbyScreen) {
         this.lobbyScreen = lobbyScreen;
@@ -36,6 +39,11 @@ public class LobbyListener extends Listener{
                     startGame();
                 }
             });
+        }
+        
+        else if (object instanceof PushMap) {
+            tmpBlnList = ((PushMap) object).booleanList;
+            System.out.println("Booleanlist received" + tmpBlnList.length);
         }
     }
     

@@ -37,7 +37,6 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(GameClient client) {
         this.client = client;
         game = new Game();
-        
     }
 
     @Override

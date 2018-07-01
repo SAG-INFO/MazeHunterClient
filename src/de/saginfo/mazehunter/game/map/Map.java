@@ -6,7 +6,6 @@
 package de.saginfo.mazehunter.game.map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 
@@ -16,7 +15,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
  */
 public class Map {
 
-    Block[][] blocklist;
+    public Block[][] blocklist;
 
     public static int BlockWorldwidth;
     public static int TileWorldwidth;
@@ -96,6 +95,14 @@ public class Map {
     private boolean playerOnMap() {
         return GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x >= 0 && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y <= CoordinateWorldwidth && GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y >= 0;
     }
+    
+    public void drawAll() {
+        for (int x = 0; x < BlockWorldwidth; x++) {
+            for (int y = 0; y < BlockWorldwidth; y++) {
+                blocklist[x][y].draw();
+            }
+        }
+    }
 
     private int getIndex(float k) {
         while (k >= blockbreite) {
@@ -168,7 +175,6 @@ public class Map {
 
     //moves row up; k is moved row
     private void moveRowUp(int k) {
-
         Block b = blocklist[k][BlockWorldwidth - 1];
         for (int i = BlockWorldwidth - 2; i >= 0; i--) {
             blocklist[k][i].IndexY = blocklist[k][i].IndexY + 1;

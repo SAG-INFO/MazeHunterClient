@@ -24,8 +24,7 @@ public class EntityManager {
                 return;
             }
         }
-        String s = "Entity with ID " + entityID + " doesn't exist.";
-        throw new EntityNotFoundException(s);
+        throw new EntityNotFoundException("Entity with ID " + entityID + " doesn't exist.");
     }
 
     public void update(float delta){

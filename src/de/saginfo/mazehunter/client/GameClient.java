@@ -29,6 +29,13 @@ import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowSho
 import de.saginfo.mazehunter.client.networkData.abilities.responses.TrapResponse;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.TrapShootResponse;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
+import de.saginfo.mazehunter.game.map.Block;
+import de.saginfo.mazehunter.game.map.Centerclosed;
+import de.saginfo.mazehunter.game.map.Centeropen;
+import de.saginfo.mazehunter.game.map.Corner;
+import de.saginfo.mazehunter.game.map.PathSide;
+import de.saginfo.mazehunter.game.map.PathUp;
+import de.saginfo.mazehunter.game.map.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -56,6 +63,7 @@ public class GameClient extends Client {
         //general Stuff
         getKryo().register(Vector2.class);
         getKryo().register(ArrayList.class);
+        getKryo().register(boolean[].class);
         
         //Lobby Stuff
         getKryo().register(ConnectResponse.class);
@@ -63,6 +71,9 @@ public class GameClient extends Client {
         getKryo().register(LobbyUpdate.class);
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
+        
+        //World Stuff
+        getKryo().register(PushMap.class);
         
         //Movement Stuff
         getKryo().register(MovementRequest.class);
