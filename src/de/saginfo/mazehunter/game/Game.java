@@ -2,7 +2,6 @@ package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import de.saginfo.mazehunter.game.player.HealthUpdateListener;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
@@ -42,7 +41,6 @@ public class Game {
         
         MovementInput movementInput = new MovementInput();
         MovementListener ml = new MovementListener();
-        HealthUpdateListener hul = new HealthUpdateListener();
         EquipAbilityListener eal = new EquipAbilityListener();
 
         StatusListener sL = new StatusListener();
@@ -77,8 +75,6 @@ public class Game {
         player.id = id;
         player.name = name;
         player.position.set(position);
-        player.maxHealth = 100; //TODO: get the Config from the server
-        player.health = player.maxHealth;
         players.add(player);
     }
 

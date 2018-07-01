@@ -5,7 +5,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -14,9 +13,7 @@ import de.saginfo.mazehunter.client.GameClient;
 import de.saginfo.mazehunter.client.networkData.PlayerLobby;
 import de.saginfo.mazehunter.client.networkData.StartGameRequest;
 import de.saginfo.mazehunter.ui.MenuButton;
-import de.saginfo.mazehunter.ui.connectScreen.ConnectSystem;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * 
