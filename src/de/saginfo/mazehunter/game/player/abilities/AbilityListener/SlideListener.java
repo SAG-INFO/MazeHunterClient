@@ -34,6 +34,7 @@ public class SlideListener extends Listener {
     public void received(Connection connection, final Object object) {
         if (object instanceof SlideResponse) {
             final SlideResponse rp = (SlideResponse) object;
+            
             Gdx.app.postRunnable(new Runnable() {
                 public void run() {
                     move(((SlideResponse) object).row, ((SlideResponse) object).direction);
@@ -44,26 +45,26 @@ public class SlideListener extends Listener {
                 public void run() {
                     GameScreen.GAMESCREEN_SINGLETON.game.world.visionSystem.startVision();
                 }
-            }, 0.75f);
+            }, 1f);
         }
     }
 
     private void move(int row, int direction) {
         switch (direction) {
             case 1:
-                doRowY(row, direction);
+                movePlayerVertical(row, direction);
                 moveRowUp(row);
                 break;
             case 2:
-                doRowX(row, direction);
+                movePlayerHorizontal(row, direction);
                 moveRowRight(row);
                 break;
             case 3:
-                doRowY(row, direction);
+                movePlayerVertical(row, direction);
                 moveRowDown(row);
                 break;
             case 4:
-                doRowX(row, direction);
+                movePlayerHorizontal(row, direction);
                 moveRowLeft(row);
                 break;
         }
@@ -146,7 +147,7 @@ public class SlideListener extends Listener {
         map.blocklist[k][blockWorldwidth - 1] = in;
     }
 
-        private void doRowX(int row, int direction) {
+        private void movePlayerHorizontal(int row, int direction) {
         for (Player p : GameScreen.GAMESCREEN_SINGLETON.game.players) {
             if (map.translateCoordinateToBlock(p.position.y) == row) {
                 float targetX = map.boundPosition(p.position.x+(Map.blockbreite*(direction==2?1:-1)));
@@ -155,7 +156,7 @@ public class SlideListener extends Listener {
         }
     }
 
-    private void doRowY(int row, int direction) {
+    private void movePlayerVertical(int row, int direction) {
         for (Player p : GameScreen.GAMESCREEN_SINGLETON.game.players) {
             if (map.translateCoordinateToBlock(p.position.x) == row) {
                 float targetY = map.boundPosition(p.position.y+(Map.blockbreite*(direction==1?1:-1)));

@@ -12,9 +12,7 @@ import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.grafik.RenderSystem;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
-import de.saginfo.mazehunter.grafik.VectorAcessor;
 import de.saginfo.mazehunter.grafik.VisualAccessor;
-import java.util.stream.Stream;
 
 /**
  *
@@ -22,13 +20,12 @@ import java.util.stream.Stream;
  */
 public abstract class Tile {
 
-    public boolean open;
+    public final boolean open;
     private boolean visible;
     public Block parent;
 
     public SpriteVisual visualVisible;
     public SpriteVisual visualNotVisible;
-
     private int tileIndexX;
     private int tileIndexY;
     private int worldIndexX;
