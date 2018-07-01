@@ -20,7 +20,7 @@ public class Corner extends Tile {
     public static int width;
     public static int height;
 
-    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\leaves.png"));
+    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\leaves_original.png"));
 
     public Corner(Block block, int x, int y) {
         super(block, x, y, false);

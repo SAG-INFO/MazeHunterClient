@@ -27,7 +27,7 @@ public class Centeropen extends Tile {
     public AbilityPickup pickup;
 
     private static final Texture TEXvisible = new Texture(Gdx.files.local("assets\\img\\map\\path.png"));
-    private static final Texture TEXnotvisible = new Texture(Gdx.files.local("assets\\img\\map\\fog_path.png"));
+    private static final Texture TEXnotvisible = new Texture(Gdx.files.local("assets\\img\\map\\path_fog.png"));
 
     public Centeropen(Block block, int x, int y) {
         super(block, x, y, true);
@@ -39,7 +39,7 @@ public class Centeropen extends Tile {
 
         visualNotVisible = new SpriteVisual(new Sprite(TEXnotvisible));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
-        visualNotVisible.setZIndex(10);
+        visualNotVisible.setZIndex(70);
         visualNotVisible.setPosition(getPixelX(), getPixelY());
 
         setVisible(false);

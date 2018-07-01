@@ -20,9 +20,9 @@ public class PathUp extends Tile {
     public static int width;
     public static int height;
 
-    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\leaves.png"));
-    private static final Texture TEXvisible = new Texture(Gdx.files.local("assets\\img\\map\\path.png"));
-    private static final Texture TEXnotvisible = new Texture(Gdx.files.local("assets\\img\\map\\fog_path.png"));
+    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\path_up_leaves.png"));
+    private static final Texture TEXvisible = new Texture(Gdx.files.local("assets\\img\\map\\path_up.png"));
+    private static final Texture TEXnotvisible = new Texture(Gdx.files.local("assets\\img\\map\\path_up_fog.png"));
 
     public PathUp(Block block, int x, int y, boolean open) {
         super(block, x, y, open);
@@ -35,7 +35,7 @@ public class PathUp extends Tile {
 
             visualNotVisible = new SpriteVisual(new Sprite(TEXnotvisible));
             GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
-            visualNotVisible.setZIndex(10);
+            visualNotVisible.setZIndex(70);
             visualNotVisible.setPosition(getPixelX(), getPixelY());
         } else {
             visualVisible = new SpriteVisual(new Sprite(TEXleaves));

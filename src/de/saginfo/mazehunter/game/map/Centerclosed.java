@@ -17,7 +17,7 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class Centerclosed extends Tile {
 
-    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\leaves.png"));
+    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\path_leaves.png"));
 
     public static int width;
     public static int height;

@@ -90,7 +90,7 @@ public abstract class Tile {
             case 1:
                 return parent.getPixelY() + Map.ecke + (int) ((Map.center - visualVisible.getHeight()) / 2);
             case 2:
-                return parent.getPixelY() + Map.ecke + Map.center + (int) ((Map.center - visualVisible.getHeight()) / 2);
+                return parent.getPixelY() + Map.ecke + Map.center + (int) ((Map.ecke - visualVisible.getHeight()) / 2);
             default:
                 throw new RuntimeException("getYvonTile");
         }
