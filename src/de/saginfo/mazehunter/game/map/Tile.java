@@ -47,12 +47,14 @@ public abstract class Tile {
         this.worldIndexX = parent.getX() * 3 + tileIndexX;
         this.worldIndexY = parent.getY() * 3 + blockIndexY;
         visualVisible.setPosition(getPixelX(), getPixelY());
+        visualNotVisible.setPosition(getPixelX(), getPixelY());
     }
 
     public void animatePosition() {
         this.worldIndexX = parent.getX() * 3 + tileIndexX;
         this.worldIndexY = parent.getY() * 3 + blockIndexY;
         Tween.to(this.visualVisible, VisualAccessor.POSITION, 1).target(getPixelX(), getPixelY()).start(GAMESCREEN_SINGLETON.tweenManager);
+        Tween.to(this.visualNotVisible, VisualAccessor.POSITION, 1).target(getPixelX(), getPixelY()).start(GAMESCREEN_SINGLETON.tweenManager);
     }
 
     public int getBlockIndexX() {
@@ -102,13 +104,9 @@ public abstract class Tile {
         if (visible) {
             visualVisible.setAlpha(1);
             visualNotVisible.setAlpha(0);
-            visualNotVisible.setPosition(getPixelX(), getPixelY());
-            visualVisible.setPosition(getPixelX(), getPixelY());
         } else {
             visualNotVisible.setAlpha(1);
             visualVisible.setAlpha(0);
-            visualNotVisible.setPosition(getPixelX(), getPixelY());
-            visualVisible.setPosition(getPixelX(), getPixelY());
         }
     }
 
@@ -118,5 +116,6 @@ public abstract class Tile {
 
     void dispose() {
         GAMESCREEN_SINGLETON.renderSystem.removeSprite(visualVisible);
+        GAMESCREEN_SINGLETON.renderSystem.removeSprite(visualNotVisible);
     }
 }
