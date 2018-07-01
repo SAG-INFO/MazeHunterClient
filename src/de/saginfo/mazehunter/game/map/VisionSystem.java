@@ -64,18 +64,18 @@ public class VisionSystem {
         }
     }
 
-//  trag für radius 0 ein
-    public void setVisionRadius(Tile tile, int radius, int maxRadius) {
-        if (radius <= maxRadius) {
-            if (tile.open) {
-                tile.visible = true;
-            }
-            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX + 1, tile.WorldIndexY), radius++, maxRadius);
-            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX, tile.WorldIndexY + 1), radius++, maxRadius);
-            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX - 1, tile.WorldIndexY), radius++, maxRadius);
-            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.WorldIndexX, tile.WorldIndexY - 1), radius++, maxRadius);
-        }
-    }
+////  trag für radius 0 ein
+//    public void setVisionRadius(Tile tile, int radius, int maxRadius) {
+//        if (radius <= maxRadius) {
+//            if (tile.open) {
+//                tile.setVisible(true);
+//            }
+//            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.getWorldIndexX() + 1, tile.getWorldIndexY()), radius++, maxRadius);
+//            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.getWorldIndexX(), tile.getWorldIndexY() + 1), radius++, maxRadius);
+//            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.getWorldIndexX() - 1, tile.getWorldIndexY()), radius++, maxRadius);
+//            setVisionRadius(GAMESCREEN_SINGLETON.game.world.map.talktoNumber(tile.getWorldIndexX(), tile.getWorldIndexY() - 1), radius++, maxRadius);
+//        }
+//    }
 
     public void cleanVision() {
         for (int i = 0; i < blockWorldwidth; i++) {
