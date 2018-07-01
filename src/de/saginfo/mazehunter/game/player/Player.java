@@ -22,9 +22,6 @@ public class Player {
     public final Vector2 position;
     public final Vector2 velocity;
     
-    public int health;
-    public int maxHealth;
-    
     public String attackAbility;
     public String utilityAbility;
     public String mobilityAbility;

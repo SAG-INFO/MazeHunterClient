@@ -8,11 +8,8 @@ package de.saginfo.mazehunter.game.map;
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.graphics.Color;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
-import de.saginfo.mazehunter.game.player.Player;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
-import de.saginfo.mazehunter.grafik.VectorAcessor;
 import de.saginfo.mazehunter.grafik.VisualAccessor;
-import java.util.stream.Stream;
 
 /**
  *
@@ -20,14 +17,15 @@ import java.util.stream.Stream;
  */
 public abstract class Tile {
 
-    public boolean open;
+    public final boolean open;
     private boolean visible;
     public Block parent;
 
     public SpriteVisual visual;
 
-    private int blockIndexX;
-    private int blockIndexY;
+    private final int blockIndexX;
+    private final int blockIndexY;
+    
     private int worldIndexX;
     private int worldIndexY;
 
