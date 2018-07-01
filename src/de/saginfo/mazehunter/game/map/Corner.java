@@ -20,14 +20,21 @@ public class Corner extends Tile {
     public static int width;
     public static int height;
 
-    private static final Texture TEX = new Texture(Gdx.files.local("assets\\img\\map\\corner.png"));
+    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\leaves.png"));
 
     public Corner(Block block, int x, int y) {
         super(block, x, y, false);
+
+        visualVisible = new SpriteVisual(new Sprite(TEXleaves));
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
+        visualVisible.setZIndex((int) (75 + Math.random() * 10));
+        visualVisible.setPosition(getPixelX(), getPixelY());
         
-        visual = new SpriteVisual(new Sprite(TEX));
-        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
-        visual.setZIndex((int) (75 + Math.random() * 10));
+        visualNotVisible = new SpriteVisual(new Sprite(TEXleaves));
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
+        visualNotVisible.setZIndex((int) (75 + Math.random() * 10));
+        visualNotVisible.setPosition(getPixelX(), getPixelY());
+        
         setVisible(false);
     }
 }

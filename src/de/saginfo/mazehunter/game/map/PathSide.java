@@ -20,20 +20,34 @@ public class PathSide extends Tile {
     public static int width;
     public static int height;
 
-    private static final Texture TEXblack = new Texture(Gdx.files.local("assets\\img\\map\\pathside_closed.png"));
-    private static final Texture TEXwhite = new Texture(Gdx.files.local("assets\\img\\map\\pathside_open.png"));
+    private static final Texture TEXleaves = new Texture(Gdx.files.local("assets\\img\\map\\leaves.png"));
+    private static final Texture TEXvisible = new Texture(Gdx.files.local("assets\\img\\map\\path.png"));
+    private static final Texture TEXnotvisible = new Texture(Gdx.files.local("assets\\img\\map\\fog_path.png"));
 
     public PathSide(Block block, int x, int y, boolean open) {
         super(block, x, y, open);
-        
+
         if (open) {
-            visual = new SpriteVisual(new Sprite(TEXwhite));
-            visual.setZIndex(20);
+            visualVisible = new SpriteVisual(new Sprite(TEXvisible));
+            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
+            visualVisible.setZIndex(10);
+            visualVisible.setPosition(getPixelX(), getPixelY());
+
+            visualNotVisible = new SpriteVisual(new Sprite(TEXnotvisible));
+            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
+            visualNotVisible.setZIndex((10));
+            visualNotVisible.setPosition(getPixelX(), getPixelY());
         } else {
-            visual = new SpriteVisual(new Sprite(TEXblack));
-            visual.setZIndex((int) (75 + Math.random() * 10));
+            visualVisible = new SpriteVisual(new Sprite(TEXleaves));
+            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
+            visualVisible.setZIndex((int) (75 + Math.random() * 10));
+            visualVisible.setPosition(getPixelX(), getPixelY());
+            
+            visualNotVisible = new SpriteVisual(new Sprite(TEXleaves));
+            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
+            visualNotVisible.setZIndex((int) (75 + Math.random() * 10));
+            visualNotVisible.setPosition(getPixelX(), getPixelY());
         }
-        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visual);
         super.setVisible(false);
     }
 }
