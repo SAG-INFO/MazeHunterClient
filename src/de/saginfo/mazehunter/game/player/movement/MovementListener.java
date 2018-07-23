@@ -5,6 +5,7 @@
  */
 package de.saginfo.mazehunter.game.player.movement;
 
+import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.MovementResponse;
@@ -20,12 +21,12 @@ import de.saginfo.mazehunter.game.player.Player;
 public class MovementListener extends Listener{
     @Override
     public void received(Connection connection, Object object) {
-        
         if(object instanceof MovementResponse) {
+            MovementResponse resp = (MovementResponse)object;
             
-            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((MovementResponse) object).id);
-            player.position.set(((MovementResponse) object).position);
-            player.velocity.set(((MovementResponse) object).velocity);
+            Player player = GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(resp.id);
+            player.position.set(resp.position);
+            player.velocity.set(resp.velocity);
         }
     }
 

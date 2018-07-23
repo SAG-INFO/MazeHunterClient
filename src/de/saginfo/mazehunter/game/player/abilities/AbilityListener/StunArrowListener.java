@@ -10,9 +10,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowResponse;
-import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowShootResponse;
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.player.Status;
 import de.saginfo.mazehunter.game.player.abilities.Entity.EntityNotFoundException;
 import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.StunArrowEntity;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
@@ -23,34 +21,24 @@ import java.util.logging.Logger;
  *
  * @author Karl Huber
  */
-public class StunArrowListener extends Listener{
-    
+public class StunArrowListener extends Listener {
+
     Sound sound = Gdx.audio.newSound(Gdx.files.local("assets\\abilities\\StunArrow\\stunArrowSound.mp3"));
-    
+
     @Override
-    public void received(Connection connection, Object object ) {
-        if (object instanceof StunArrowResponse) {
+    public void received(Connection connection, Object object) {
+        if(object instanceof StunArrowResponse) {
+            StunArrowResponse data = (StunArrowResponse) object;
+            
             Gdx.app.postRunnable(() -> {
-                sound.play(10.0f);
-                System.out.println("StunArrowResponse received.");
-                SpriteVisual visual = (new SpriteVisual("assets\\abilities\\StunArrow\\stunArrow.png"));
-                visual.rotate(((StunArrowResponse) object).rotation);
-
-                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(new StunArrowEntity(((StunArrowResponse)object).velocity, GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowResponse)object).connectionID).position.cpy(), visual, ((StunArrowResponse)object).entityID));
-
-            });} else if (object instanceof StunArrowShootResponse) {
-            //shootanimation
-            if (GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(((StunArrowShootResponse) object).playerID) == GameScreen.GAMESCREEN_SINGLETON.game.getLocalPlayer()) {
-                //update hp bar
-            }
-            try {
-                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((StunArrowShootResponse) object).entityID);
-            } catch (EntityNotFoundException ex) {
-                Logger.getLogger(StunArrowListener.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                StunArrowEntity ball = new StunArrowEntity(GameScreen.GAMESCREEN_SINGLETON.game.getPlayer(data.connectionID).position.cpy(), data.projectileID);
+                GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(ball);
+                ball.shoot(data.velocity);
+                sound.play(1.0f);
+            });
         }
     }
-    
+
     public StunArrowListener() {
         GameScreen.GAMESCREEN_SINGLETON.client.addListener(this);
     }

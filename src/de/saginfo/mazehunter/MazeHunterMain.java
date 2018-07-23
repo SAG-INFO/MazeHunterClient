@@ -6,6 +6,7 @@ import de.saginfo.mazehunter.ui.enterIpScreen.EnterIpScreen;
 public class MazeHunterMain extends Game {
 
     public static MazeHunterMain MAIN_SINGLETON;
+    public int NETWORK_ID;
     
     @Override
     public void create() {

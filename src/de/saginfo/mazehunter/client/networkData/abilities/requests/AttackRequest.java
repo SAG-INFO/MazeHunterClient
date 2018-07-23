@@ -5,17 +5,13 @@
  */
 package de.saginfo.mazehunter.client.networkData.abilities.requests;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  *
  * @author Karl Huber
  */
 public class AttackRequest {
-    public float angle;
-
-    public AttackRequest(float angle) {
-        this.angle = angle;
-    }
-
-    public AttackRequest() {
-    }
+    //in World coordinates
+    public final Vector2 cursorPosition = new Vector2();
 }

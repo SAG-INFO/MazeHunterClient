@@ -6,12 +6,12 @@
 package de.saginfo.mazehunter.game.player;
 
 import com.badlogic.gdx.math.Vector2;
+import de.saginfo.mazehunter.game.GameScreen;
 
 /**
  * 
  * @author karl.huber
  * 
- * parent class of Hunter and Runner holding the basic attributes.
  */
 public class Player {
     public int id;
@@ -26,15 +26,21 @@ public class Player {
     public String utilityAbility;
     public String mobilityAbility;
 
-    public Player() {
-        this.position = new Vector2();
+    public Player(int id, String name, Vector2 position) {
+        this.position = new Vector2(position);
         this.velocity = new Vector2();
-        visual = new PlayerVisual();
+        this.id = id;
+        this.name = name;
+        visual = new PlayerVisual(id==GameScreen.GAMESCREEN_SINGLETON.client.getID());
     }
     
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
         this.position.add(tmp.set(velocity).scl(delta));
         visual.lerpPosition(position.x, position.y);
+    }
+    
+    public boolean isLocal(){
+        return id == GameScreen.GAMESCREEN_SINGLETON.client.getID();
     }
 }

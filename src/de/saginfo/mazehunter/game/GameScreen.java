@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.client.GameClient;
 import de.saginfo.mazehunter.client.networkData.configs.PushConfig;
+import de.saginfo.mazehunter.game.map.camera.MazeCam;
 
 /**
  * Manages the main game (calles update, close, etc, ...)
@@ -24,7 +25,7 @@ public class GameScreen extends ScreenAdapter {
     public final Game game;
     public RenderSystem renderSystem;
     
-    public OrthographicCamera camera;
+    public MazeCam camera;
     public Viewport viewport;
     public GameClient client;
     public InputMultiplexer inputMultiplexer;
@@ -46,7 +47,7 @@ public class GameScreen extends ScreenAdapter {
         GAMESCREEN_SINGLETON = this;
         renderSystem = new RenderSystem();
         
-        camera = new OrthographicCamera();
+        camera = new MazeCam();
         camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
         viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
@@ -66,7 +67,7 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
         tweenManager.update(delta);
         game.update(delta);
-        camera.update();
+        camera.update(delta);
         renderSystem.render(delta);
         hud.update(delta);
     }

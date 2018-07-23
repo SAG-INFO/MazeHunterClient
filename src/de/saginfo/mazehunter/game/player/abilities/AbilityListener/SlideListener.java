@@ -5,9 +5,7 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.AbilityListener;
 
-import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.Timer;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.SlideResponse;
@@ -16,7 +14,6 @@ import de.saginfo.mazehunter.game.map.Block;
 import de.saginfo.mazehunter.game.map.Map;
 import static de.saginfo.mazehunter.game.map.Map.blockWorldwidth;
 import de.saginfo.mazehunter.game.player.Player;
-import de.saginfo.mazehunter.grafik.VectorAcessor;
 
 /**
  * @author paul kuschfeldt, julian mittermeier, seamuel reiser, karl huber
@@ -34,18 +31,10 @@ public class SlideListener extends Listener {
     public void received(Connection connection, final Object object) {
         if (object instanceof SlideResponse) {
             final SlideResponse rp = (SlideResponse) object;
-            
-            Gdx.app.postRunnable(new Runnable() {
-                public void run() {
-                    move(((SlideResponse) object).row, ((SlideResponse) object).direction);
-                }
+            Gdx.app.postRunnable(() -> {
+                move(((SlideResponse) object).row, ((SlideResponse) object).direction);
+                GameScreen.GAMESCREEN_SINGLETON.game.world.visionSystem.startVision();
             });
-
-            Timer.schedule(new Timer.Task() {
-                public void run() {
-                    GameScreen.GAMESCREEN_SINGLETON.game.world.visionSystem.startVision();
-                }
-            }, 1f);
         }
     }
 
@@ -93,9 +82,9 @@ public class SlideListener extends Listener {
     private void moveRowLeft(int k) {
         Block in = map.blocklist[0][k];
         Block out = in.clone();
-        
+
         in.setPosition(blockWorldwidth, k);
-        in.animatePosition(blockWorldwidth-1, in.getY());
+        in.animatePosition(blockWorldwidth - 1, in.getY());
 
         out.setPosition(0, out.getY());
         out.animatePosition(- 1, out.getY());
@@ -112,11 +101,11 @@ public class SlideListener extends Listener {
     private void moveRowUp(int k) {
         Block in = map.blocklist[k][blockWorldwidth - 1];
         Block out = in.clone();
-        
+
         in.setPosition(k, -1);
         in.animatePosition(in.getX(), 0);
 
-        out.setPosition(out.getX(), blockWorldwidth-1);
+        out.setPosition(out.getX(), blockWorldwidth - 1);
         out.animatePosition(out.getX(), blockWorldwidth);
         out.disposeAfterDelay();
 
@@ -131,9 +120,9 @@ public class SlideListener extends Listener {
     private void moveRowDown(int k) {
         Block in = map.blocklist[k][0];
         Block out = in.clone();
-        
+
         in.setPosition(k, blockWorldwidth);
-        in.animatePosition(in.getX(), blockWorldwidth-1);
+        in.animatePosition(in.getX(), blockWorldwidth - 1);
 
         out.setPosition(out.getX(), 0);
         out.animatePosition(out.getX(), - 1);
@@ -147,22 +136,23 @@ public class SlideListener extends Listener {
         map.blocklist[k][blockWorldwidth - 1] = in;
     }
 
-        private void movePlayerHorizontal(int row, int direction) {
-        for (Player p : GameScreen.GAMESCREEN_SINGLETON.game.players) {
-            if (map.translateCoordinateToBlock(p.position.y) == row) {
-                float targetX = map.boundPosition(p.position.x+(Map.blockbreite*(direction==2?1:-1)));
-                Tween.to(p.position, VectorAcessor.POSITION_X, 1).target(targetX).start(GameScreen.GAMESCREEN_SINGLETON.tweenManager);
-            }
-        }
+    private void movePlayerHorizontal(int row, int direction) {
+        GameScreen.GAMESCREEN_SINGLETON.game.players.stream().filter((p) -> (map.translateCoordinateToBlock(p.position.y) == row)).forEachOrdered((p) -> {
+            float relativeX = Map.blockbreite * (direction == 2 ? 1 : -1);
+            p.visual.playSlideAnimation(relativeX, 0);
+            
+            if(p.isLocal())
+                GameScreen.GAMESCREEN_SINGLETON.camera.slide(relativeX, 0);
+        });
     }
 
     private void movePlayerVertical(int row, int direction) {
-        for (Player p : GameScreen.GAMESCREEN_SINGLETON.game.players) {
-            if (map.translateCoordinateToBlock(p.position.x) == row) {
-                float targetY = map.boundPosition(p.position.y+(Map.blockbreite*(direction==1?1:-1)));
-                Tween.to(p.position, VectorAcessor.POSITION_Y, 1).target(targetY).start(GameScreen.GAMESCREEN_SINGLETON.tweenManager);
-            }
-        }
+        GameScreen.GAMESCREEN_SINGLETON.game.players.stream().filter((p) -> (map.translateCoordinateToBlock(p.position.x) == row)).forEachOrdered((p) -> {
+            float relativeY = Map.blockbreite * (direction == 1 ? 1 : -1);
+            p.visual.playSlideAnimation(0, relativeY);
+            if(p.isLocal())
+                GameScreen.GAMESCREEN_SINGLETON.camera.slide(0, relativeY);
+        });
     }
-    
+
 }

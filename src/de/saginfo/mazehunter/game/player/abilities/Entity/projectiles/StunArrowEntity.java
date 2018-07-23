@@ -14,7 +14,14 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class StunArrowEntity extends Projectile {
     
-    public StunArrowEntity(Vector2 velocity, Vector2 position, SpriteVisual visual, int id) {
-        super(velocity, position, visual, id);
+    public StunArrowEntity(Vector2 position, int entityId) {
+        super(position, new SpriteVisual("assets\\abilities\\StunArrow\\bullet.png"), entityId);
+        super.visual.setZIndex(100);
+    }
+
+    @Override
+    public void shoot(Vector2 velocity) {
+        super.shoot(velocity);
+        super.visual.setRotation(velocity.angle());
     }
 }

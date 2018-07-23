@@ -5,6 +5,9 @@
  */
 package de.saginfo.mazehunter.game.player.abilities.Entity;
 
+import com.badlogic.gdx.Gdx;
+import com.esotericsoftware.kryonet.Connection;
+import de.saginfo.mazehunter.client.networkData.abilities.entity.DisposeEntity;
 import de.saginfo.mazehunter.game.GameScreen;
 import java.util.ArrayList;
 
@@ -13,26 +16,32 @@ import java.util.ArrayList;
  * @author karl.huber
  */
 public class EntityManager {
-    
-    public ArrayList<Entity> entities;
 
-    public void disposeEntity(int entityID) throws EntityNotFoundException {
-        for (Entity e : entities) {
-            if (e.entityID == entityID) {
-                GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(e.visual);
-                entities.remove(e);
-                return;
-            }
-        }
-        String s = "Entity with ID " + entityID + " doesn't exist.";
-        throw new EntityNotFoundException(s);
-    }
+    public ArrayList<AbilityEntity> entities;
 
-    public void update(float delta){
-        entities.forEach((entity) -> {entity.update(delta);});
+    public void disposeEntity(int entityID) {
+        entities.removeIf((e) ->{e.dispose();return e.entityID==entityID;});
     }
     
+    public void disposeEntity(AbilityEntity e){
+        e.dispose();
+        entities.remove(e);
+    }
+
+    public void update(float delta) {
+        entities.forEach((entity) -> {
+            entity.update(delta);
+        });
+    }
+
     public EntityManager() {
         entities = new ArrayList<>();
+        GameScreen.GAMESCREEN_SINGLETON.client.addListener((Connection c, Object o) -> {
+            if(o instanceof  DisposeEntity){
+                Gdx.app.postRunnable(() -> {
+                    GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.disposeEntity(((DisposeEntity) o).entityID);
+                });
+            }
+        });
     }
 }

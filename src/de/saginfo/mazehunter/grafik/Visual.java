@@ -19,6 +19,8 @@ public interface Visual {
 
     public Color getColor();
     public float getRotation();
+    public float getWidth();
+    public float getHeight();
     public float getScaleX();
     public float getScaleY();
     public float getX();
@@ -28,4 +30,9 @@ public interface Visual {
     public void setPosition(float x, float y);
     public void setColor(float r, float g, float b, float a);
     
+    public void setFlip(boolean x, boolean y);
+    public void flip(boolean x, boolean y);
+
+    public void setAlpha(float alpha);
+    public float getAlpha();
 }

@@ -1,24 +1,28 @@
 package de.saginfo.mazehunter.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
+import de.saginfo.mazehunter.game.player.Hunter;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
 import de.saginfo.mazehunter.game.player.movement.MovementListener;
 import de.saginfo.mazehunter.game.player.Player;
+import de.saginfo.mazehunter.game.player.Runner;
+import de.saginfo.mazehunter.game.player.SpawnListener;
 import de.saginfo.mazehunter.game.player.StatusListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.AttackInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.MobilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.SlideInput;
-import de.saginfo.mazehunter.game.player.abilities.AbilityInputs.UtilityInput;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.DashListener;
-import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FrostBoltlListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.FireballListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.SatanListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.SlideListener;
-import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StandardHealListener;
+import de.saginfo.mazehunter.game.player.abilities.AbilityListener.SpeedBoostListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.StunArrowListener;
 import de.saginfo.mazehunter.game.player.abilities.AbilityListener.TrapListener;
 import de.saginfo.mazehunter.game.player.abilities.EquipAbilityListener;
+import de.saginfo.mazehunter.game.player.movement.VisualListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
-import de.saginfo.mazehunter.ui.LobbyScreen.LobbyListener;
 import de.saginfo.mazehunter.ui.gameoverscreen.GameoverListener;
 import java.util.ArrayList;
 
@@ -38,43 +42,43 @@ public class Game {
 
     public void startGame() {
         world = new World();
-        
-        MovementInput movementInput = new MovementInput();
+
+        createListeners();
+    }
+    
+    public void createListeners() {
+        new GameoverListener();
+        SpawnListener sl = new SpawnListener();
         MovementListener ml = new MovementListener();
         EquipAbilityListener eal = new EquipAbilityListener();
 
         StatusListener sL = new StatusListener();
         ConfigListener cL = new ConfigListener();
-        new GameoverListener();
-
-        createAbilityIO();
         
-    }
-    
-    public void createAbilityIO() {
-        AttackInput aI = new AttackInput();
-        UtilityInput uI = new UtilityInput();
-        MobilityInput mI = new MobilityInput();
-        SlideInput sI = new SlideInput();
         
+        FireballListener fl = new FireballListener();
+        GAMESCREEN_SINGLETON.client.addListener(new SpeedBoostListener());
+        GAMESCREEN_SINGLETON.client.addListener(new SatanListener());
         DashListener dL = new DashListener();
-        FrostBoltlListener fL = new FrostBoltlListener();
-        StandardHealListener shL = new StandardHealListener();
         StunArrowListener sAL = new StunArrowListener();
         TrapListener tL = new TrapListener();
-        SlideListener sL = new SlideListener();
+        SlideListener s = new SlideListener();
+        
+        VisualListener vl = new VisualListener();
+        
+//        Timer.schedule(new Timer.Task() {
+//            @Override
+//            public void run() {
+                MovementInput movementInput = new MovementInput();
+                AttackInput aI = new AttackInput();
+                MobilityInput mI = new MobilityInput();
+                SlideInput sI = new SlideInput();
+//            }
+//        }, 0.5f);
     }
 
-    /**
-     * this method is right now beeing called from
-     * {@link LobbyListener#createPlayers()} dunno if this is the best place to
-     * do it, but works for now
-     */
-    public void createPlayer(int id, String name, Vector2 position) {
-        Player player = new Player();
-        player.id = id;
-        player.name = name;
-        player.position.set(position);
+    public void createPlayer(int id, String name, Vector2 position, boolean hunter) {
+        Player player = hunter? new Hunter(id, name, position):new Runner(id, name, position);
         players.add(player);
     }
 
@@ -94,6 +98,10 @@ public class Game {
 
     public Player getLocalPlayer() {
         return getPlayer(GameScreen.GAMESCREEN_SINGLETON.client.getID());
+    }
+    
+    public boolean localPlayerExists(){
+        return players.stream().anyMatch((p) -> {return GAMESCREEN_SINGLETON.client.getID()==p.id;});
     }
 
     /**

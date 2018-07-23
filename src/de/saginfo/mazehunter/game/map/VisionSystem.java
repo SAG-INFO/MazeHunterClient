@@ -19,6 +19,8 @@ public class VisionSystem {
     }
 
     public void update(float delta) {
+        if(!GAMESCREEN_SINGLETON.game.localPlayerExists())
+            return;
         if (playerOnMap()) {
             Tile currentTile = map.talktoTile(GAMESCREEN_SINGLETON.game.getLocalPlayer().position.x, GAMESCREEN_SINGLETON.game.getLocalPlayer().position.y);
             if (currentTile != localPlayerTile) {

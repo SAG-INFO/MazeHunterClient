@@ -63,10 +63,8 @@ public class MovementInput extends InputAdapter {
     }
 
     public void sendMovementRequest(Vector2 requestedVector) {
-        if (Status.canMove) {
-            MovementRequest mr = new MovementRequest((int) requestedVector.angle(), !direction.isZero());
-            GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(mr);
-        }
+        MovementRequest mr = new MovementRequest((int) requestedVector.angle(), !direction.isZero());
+        GameScreen.GAMESCREEN_SINGLETON.client.sendUDP(mr);
     }
 
     public MovementInput() {

@@ -6,29 +6,32 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.saginfo.mazehunter.client.GameClient;
-import de.saginfo.mazehunter.client.networkData.PlayerLobby;
+import de.saginfo.mazehunter.client.networkData.lobby.PlayerLobby;
 import de.saginfo.mazehunter.client.networkData.StartGameRequest;
 import de.saginfo.mazehunter.ui.MenuButton;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 
- * @author sreis
+ *
+ * @author arein
  */
 public class LobbyScreen extends ScreenAdapter{
-
+    
     private Stage stage;
-    private Table labeltable;
     
     private Viewport viewport;
 
     public GameClient client;
 
-    public ArrayList<PlayerLobby> players = new ArrayList<>();
+    
+    public List<PlayerLobby> players = new ArrayList<>();
+    public ArrayList<TextButton> buttons = new ArrayList<>();
     
     public LobbyScreen(GameClient client) {
         this.client = client;
@@ -47,17 +50,24 @@ public class LobbyScreen extends ScreenAdapter{
 
         viewport = new FillViewport(1920, 1080);
         stage.setViewport(viewport);
-        
+
         Table root = new Table();
-        
-        root = new Table();
         root.setFillParent(true);
         stage.addActor(root);
         
-        labeltable = new Table();
-        root.add(labeltable).expand();
-        root.row();
+        Table up = new Table();
+        Table mid = new Table();
+        Table down = new Table();
         
+        buttons.add(new PlayerButton("Boss", true, 0, client));
+        buttons.add(new PlayerButton("Uno", false, 1, client));
+        buttons.add(new PlayerButton("Dos", false, 2, client));
+        buttons.add(new PlayerButton("Tres", false, 3, client));
+        
+        up.add(buttons.get(0)).width(350);
+        mid.add(buttons.get(1)).padRight(60).width(350);
+        mid.add(buttons.get(2)).padRight(60).width(350);
+        mid.add(buttons.get(3)).padRight(60).width(350);
         MenuButton startButton = new MenuButton("Start Game");
         startButton.addListener(new ClickListener(){
             @Override
@@ -65,19 +75,27 @@ public class LobbyScreen extends ScreenAdapter{
                 client.sendUDP(new StartGameRequest());
             }
         });
-        root.add(startButton).padBottom(100);
+        down.add(startButton).padBottom(100);
+        
+        root.add(up).padBottom(60);
+        root.row();
+        root.add(mid).padBottom(100);
+        root.row();
+        root.add(down);
+        
     }
     
     public void updatePlayers(ArrayList<PlayerLobby> players){
-        labeltable.clearChildren();
         this.players.clear();
+        this.players.addAll(players);
         
+        for (TextButton button : buttons) {
+            button.setText("free");
+        }
         
-        this.players  = players;
         for (PlayerLobby player : players) {
-            PlayerLabel l = new PlayerLabel(player.name);
-            labeltable.add(l);
-            labeltable.row();
+            if(player.slot != -1)
+                this.buttons.get(player.slot).setText(player.name);
         }
     }
 

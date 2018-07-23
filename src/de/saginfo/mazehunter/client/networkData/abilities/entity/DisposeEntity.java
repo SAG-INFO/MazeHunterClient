@@ -11,9 +11,9 @@ package de.saginfo.mazehunter.client.networkData.abilities.entity;
  */
 public class DisposeEntity {
     public int entityID;
-    
-    public DisposeEntity(int id) {
-        this.entityID = id;
+
+    public DisposeEntity(int entityID) {
+        this.entityID = entityID;
     }
 
     public DisposeEntity() {

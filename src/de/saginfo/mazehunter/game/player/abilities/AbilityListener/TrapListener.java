@@ -25,7 +25,6 @@ public class TrapListener extends Listener{
     public void received(Connection connection, Object object ) {
         if (object instanceof TrapResponse) {
             Gdx.app.postRunnable(() -> {
-                System.out.println("TrapResponse received.");
                 SpriteVisual visual = (new SpriteVisual("assets\\abilities\\Trap\\trap.png"));
 
                 GameScreen.GAMESCREEN_SINGLETON.game.world.entityManager.entities.add(new TrapEntity(((TrapResponse) object).position, ((TrapResponse)object).entityID, visual));

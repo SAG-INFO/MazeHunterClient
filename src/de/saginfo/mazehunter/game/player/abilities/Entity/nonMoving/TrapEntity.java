@@ -6,13 +6,14 @@
 package de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving;
 
 import com.badlogic.gdx.math.Vector2;
+import de.saginfo.mazehunter.game.player.abilities.Entity.AbilityEntity;
 import de.saginfo.mazehunter.grafik.Visual;
 
 /**
  *
  * @author karl.huber
  */
-public class TrapEntity extends NonMoving {
+public class TrapEntity extends AbilityEntity {
 
     public TrapEntity(Vector2 position, int entityID, Visual visual) {
         super(position, entityID, visual);

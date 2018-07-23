@@ -49,4 +49,9 @@ public class SpriteVisual extends Sprite implements Visual{
     public void dispose() {
         getTexture().dispose();
     }
+
+    @Override
+    public float getAlpha() {
+        return getColor().a;
+    }
 }

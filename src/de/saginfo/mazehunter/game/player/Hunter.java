@@ -5,11 +5,15 @@
  */
 package de.saginfo.mazehunter.game.player;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  *
  * @author karl.huber
  */
 public class Hunter extends Player {
     
-    
+    public Hunter(int id, String name, Vector2 position) {
+        super(id, name, position);
+    }
 }

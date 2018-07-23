@@ -5,17 +5,13 @@
  */
 package de.saginfo.mazehunter.client.networkData.abilities.responses;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  *
- * @author Karl Huber
+ * @author arein
  */
-public class StandardHealResponse {
-    int id;
-
-    public StandardHealResponse(int id) {
-        this.id = id;
-    }
-
-    public StandardHealResponse() {
-    }
+public class SatanResponse {
+    public final Vector2 position = new Vector2();
+    public int playerId;
 }

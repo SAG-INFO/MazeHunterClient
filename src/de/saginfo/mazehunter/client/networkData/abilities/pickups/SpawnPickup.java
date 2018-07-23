@@ -1,5 +1,6 @@
 package de.saginfo.mazehunter.client.networkData.abilities.pickups;
 
+
 /**
  *
  * @author sreis

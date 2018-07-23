@@ -5,10 +5,16 @@
  */
 package de.saginfo.mazehunter.game.player;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  *
  * @author karl.huber
  */
 public class Runner extends Player {
+    
+    public Runner(int id, String name, Vector2 position) {
+        super(id, name, position);
+    }
     
 }

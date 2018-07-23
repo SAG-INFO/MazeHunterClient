@@ -14,7 +14,15 @@ import de.saginfo.mazehunter.grafik.SpriteVisual;
  */
 public class FireballEntity extends Projectile {
     
-    public FireballEntity(Vector2 velocity, Vector2 position, SpriteVisual visual, int id) {
-        super(velocity, position, visual, id);
+    public FireballEntity(Vector2 position, int entityId) {
+        super(position, new SpriteVisual("assets\\abilities\\Fireball\\fireball.png"), entityId);
+        System.out.println(entityId);
+        super.visual.setZIndex(100);
+    }
+
+    @Override
+    public void shoot(Vector2 velocity) {
+        super.shoot(velocity);
+        super.visual.setRotation(velocity.angle());
     }
 }

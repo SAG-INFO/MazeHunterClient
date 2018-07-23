@@ -29,25 +29,20 @@ public class PathSide extends Tile {
 
         if (open) {
             visualVisible = new SpriteVisual(new Sprite(TEXvisible));
-            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
-            visualVisible.setZIndex(10);
-            visualVisible.setPosition(getPixelX(), getPixelY());
-
             visualNotVisible = new SpriteVisual(new Sprite(TEXnotvisible));
-            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
-            visualNotVisible.setZIndex((10));
-            visualNotVisible.setPosition(getPixelX(), getPixelY());
         } else {
             visualVisible = new SpriteVisual(new Sprite(TEXleaves));
-            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
-            visualVisible.setZIndex((int) (75 + Math.random() * 10));
-            visualVisible.setPosition(getPixelX(), getPixelY());
-            
             visualNotVisible = new SpriteVisual(new Sprite(TEXleaves));
-            GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
-            visualNotVisible.setZIndex((int) (75 + Math.random() * 10));
-            visualNotVisible.setPosition(getPixelX(), getPixelY());
         }
+        
+        visualVisible.setZIndex(10);
+        visualVisible.setPosition(getPixelX(), getPixelY());
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
+        
+        visualNotVisible.setPosition(getPixelX(), getPixelY());
+        visualNotVisible.setZIndex(100);
+        GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
+        
         super.setVisible(false);
     }
 }
