@@ -37,6 +37,7 @@ public class AbilityEntity implements Disposable{
     public void update(float delta) {}
 
     public void dispose() {
+        System.out.println("i got disposed "+entityID);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.removeSprite(visual);
     }
 }

@@ -1,7 +1,6 @@
 package de.saginfo.mazehunter.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import static de.saginfo.mazehunter.game.GameScreen.GAMESCREEN_SINGLETON;
 import de.saginfo.mazehunter.game.player.Hunter;
 import de.saginfo.mazehunter.game.player.movement.MovementInput;
@@ -25,6 +24,8 @@ import de.saginfo.mazehunter.game.player.movement.VisualListener;
 import de.saginfo.mazehunter.grafik.SpriteVisual;
 import de.saginfo.mazehunter.ui.gameoverscreen.GameoverListener;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -33,9 +34,9 @@ public class Game {
 
     public final ArrayList<Player> players;
     private SpriteVisual visual;
-    
+
     public World world;
-    
+
     public Game() {
         players = new ArrayList<>();
     }
@@ -45,7 +46,7 @@ public class Game {
 
         createListeners();
     }
-    
+
     public void createListeners() {
         new GameoverListener();
         SpawnListener sl = new SpawnListener();
@@ -54,8 +55,7 @@ public class Game {
 
         StatusListener sL = new StatusListener();
         ConfigListener cL = new ConfigListener();
-        
-        
+
         FireballListener fl = new FireballListener();
         GAMESCREEN_SINGLETON.client.addListener(new SpeedBoostListener());
         GAMESCREEN_SINGLETON.client.addListener(new SatanListener());
@@ -63,27 +63,24 @@ public class Game {
         StunArrowListener sAL = new StunArrowListener();
         TrapListener tL = new TrapListener();
         SlideListener s = new SlideListener();
-        
+
         VisualListener vl = new VisualListener();
-        
-//        Timer.schedule(new Timer.Task() {
-//            @Override
-//            public void run() {
-                MovementInput movementInput = new MovementInput();
-                AttackInput aI = new AttackInput();
-                MobilityInput mI = new MobilityInput();
-                SlideInput sI = new SlideInput();
-//            }
-//        }, 0.5f);
+
+        MovementInput movementInput = new MovementInput();
+        AttackInput aI = new AttackInput();
+        MobilityInput mI = new MobilityInput();
+        SlideInput sI = new SlideInput();
     }
 
     public void createPlayer(int id, String name, Vector2 position, boolean hunter) {
-        Player player = hunter? new Hunter(id, name, position):new Runner(id, name, position);
+        Player player = hunter ? new Hunter(id, name, position) : new Runner(id, name, position);
         players.add(player);
     }
 
     public void update(float delta) {
-        players.forEach((p) -> {p.update(delta);});
+        players.forEach((p) -> {
+            p.update(delta);
+        });
         world.update(delta);
     }
 
@@ -99,15 +96,17 @@ public class Game {
     public Player getLocalPlayer() {
         return getPlayer(GameScreen.GAMESCREEN_SINGLETON.client.getID());
     }
-    
-    public boolean localPlayerExists(){
-        return players.stream().anyMatch((p) -> {return GAMESCREEN_SINGLETON.client.getID()==p.id;});
+
+    public boolean localPlayerExists() {
+        return players.stream().anyMatch((p) -> {
+            return GAMESCREEN_SINGLETON.client.getID() == p.id;
+        });
     }
 
     /**
      * called when the user closes the window
      */
     public void close() {
-        
+
     }
 }

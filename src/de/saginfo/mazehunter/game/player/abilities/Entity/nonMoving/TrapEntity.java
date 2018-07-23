@@ -7,7 +7,7 @@ package de.saginfo.mazehunter.game.player.abilities.Entity.nonMoving;
 
 import com.badlogic.gdx.math.Vector2;
 import de.saginfo.mazehunter.game.player.abilities.Entity.AbilityEntity;
-import de.saginfo.mazehunter.grafik.Visual;
+import de.saginfo.mazehunter.grafik.SpriteVisual;
 
 /**
  *
@@ -15,7 +15,8 @@ import de.saginfo.mazehunter.grafik.Visual;
  */
 public class TrapEntity extends AbilityEntity {
 
-    public TrapEntity(Vector2 position, int entityID, Visual visual) {
-        super(position, entityID, visual);
+    public TrapEntity(Vector2 position, int entityID) {
+        super(position, entityID, new SpriteVisual("assets\\abilities\\trap\\trap.png"));
+        visual.setZIndex(95);
     }
 }

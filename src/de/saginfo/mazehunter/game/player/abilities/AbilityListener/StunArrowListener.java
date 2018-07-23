@@ -11,11 +11,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.saginfo.mazehunter.client.networkData.abilities.responses.StunArrowResponse;
 import de.saginfo.mazehunter.game.GameScreen;
-import de.saginfo.mazehunter.game.player.abilities.Entity.EntityNotFoundException;
 import de.saginfo.mazehunter.game.player.abilities.Entity.projectiles.StunArrowEntity;
-import de.saginfo.mazehunter.grafik.SpriteVisual;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -20,7 +20,7 @@ public class EntityManager {
     public ArrayList<AbilityEntity> entities;
 
     public void disposeEntity(int entityID) {
-        entities.removeIf((e) ->{e.dispose();return e.entityID==entityID;});
+        entities.removeIf((e) ->{e.dispose(); System.out.println("removed"+e); return e.entityID==entityID;});
     }
     
     public void disposeEntity(AbilityEntity e){
