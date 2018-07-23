@@ -30,7 +30,7 @@ public class MazeCam extends OrthographicCamera {
     
     public MazeCam() {
         shake = new Shake();
-        super.zoom = 0.7f;
+        super.zoom = 0.95f;
     }
 
     public void update(float delta) {

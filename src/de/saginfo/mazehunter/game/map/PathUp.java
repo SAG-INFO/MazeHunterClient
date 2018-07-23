@@ -30,9 +30,17 @@ public class PathUp extends Tile {
         if (open) {
             visualVisible = new SpriteVisual(new Sprite(TEXvisible));
             visualNotVisible = new SpriteVisual(new Sprite(TEXnotvisible));
+            visualNotVisible.setPosition(getPixelX(), getPixelY());
+            visualNotVisible.setZIndex(60);
+            visualVisible.setZIndex(10);
+            visualVisible.setPosition(getPixelX(), getPixelY());
         } else {
             visualVisible = new SpriteVisual(new Sprite(TEXleaves));
             visualNotVisible = new SpriteVisual(new Sprite(TEXleaves));
+            visualVisible.setZIndex(10);
+            visualVisible.setPosition(getPixelX(), getPixelY());
+            visualNotVisible.setPosition(getPixelX(), getPixelY());
+            visualNotVisible.setZIndex((int) (75 + Math.random() * 10));
         }
 
         visualVisible.setZIndex(10);
@@ -40,7 +48,7 @@ public class PathUp extends Tile {
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualVisible);
 
         visualNotVisible.setPosition(getPixelX(), getPixelY());
-        visualNotVisible.setZIndex(100);
+        visualNotVisible.setZIndex(60);
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
         super.setVisible(false);
     }

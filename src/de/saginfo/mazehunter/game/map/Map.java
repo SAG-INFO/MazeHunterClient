@@ -56,6 +56,8 @@ public class Map {
                 block.setPosition(block.getX(), block.getY());
             }
         }
+        
+//        Forest forest = new Forest(1);
     }
 
     public void makeTestMap(int k) {

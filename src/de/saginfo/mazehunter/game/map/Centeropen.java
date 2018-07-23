@@ -39,7 +39,7 @@ public class Centeropen extends Tile {
 
         visualNotVisible = new SpriteVisual(new Sprite(TEXnotvisible));
         GameScreen.GAMESCREEN_SINGLETON.renderSystem.addSprite(visualNotVisible);
-        visualNotVisible.setZIndex(100);
+        visualNotVisible.setZIndex(60);
         visualNotVisible.setPosition(getPixelX(), getPixelY());
 
         setVisible(false);

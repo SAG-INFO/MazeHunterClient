@@ -52,10 +52,10 @@ public class PlayerVisual {
         runs[3] = new AnimationVisual(fps, "assets\\img\\player\\walk_left", Animation.PlayMode.LOOP_PINGPONG);
 
         for (SpriteVisual idle : idles) {
-            idle.setZIndex(80);
+            idle.setZIndex(50);
         }
         for (AnimationVisual run : runs) {
-            run.setZIndex(80);
+            run.setZIndex(50);
         }
 
         currentVisual = idles[0];
